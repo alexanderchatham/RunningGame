@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class plank : MonoBehaviour {
 
-
     public GameObject ground;
     private GameObject startPoint;
     private GameObject endPoint;

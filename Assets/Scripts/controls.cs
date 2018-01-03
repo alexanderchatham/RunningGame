@@ -58,13 +58,15 @@ public class controls : MonoBehaviour {
 
 		if (OnGround && this.transform.position.x > startingPosition.x && moving  == false)
         {
-            m_Rigidbody.transform.Translate(GameMaster.groundMoveSpeed, 0, 0);
 			anim.SetBool ("idle", true);
         }
         if (OnGround && m_Rigidbody.velocity.y > 0)
         {
             m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, 0);
         }
+
+        if(m_Rigidbody.velocity.x <= 0)
+        m_Rigidbody.transform.Translate(GameMaster.groundMoveSpeed, 0, 0);
     }
 
     void jump()
@@ -132,6 +134,22 @@ public class controls : MonoBehaviour {
         {
             Coin coin = other.GetComponent<Coin>();
             coin.Collect();
+        }
+        if (other.gameObject.tag == "Slow")
+        {
+            GameMaster.Slow();
+        }
+        if (other.gameObject.tag == "Normal")
+        {
+            GameMaster.Normal();
+        }
+        if (other.gameObject.tag == "Fast")
+        {
+            GameMaster.Fast();
+        }
+        if (other.gameObject.tag == "Faster")
+        {
+            GameMaster.Faster();
         }
     }
 
