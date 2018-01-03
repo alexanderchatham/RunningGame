@@ -19,7 +19,7 @@ public class Ground : MonoBehaviour {
         //coroutines for movement
     }
     void Update () {
-		if(ground.transform.position.x <= endPoint.transform.position.x)
+		if(ground.transform.position.x <= -21f)
         {
             Destroy(ground);
         }
@@ -32,6 +32,6 @@ public class Ground : MonoBehaviour {
             
             newGround.transform.Translate( new Vector3(startPoint.transform.position.x,0,0));
         }
-        this.transform.Translate(-.025f,0,0);
+		this.transform.Translate(GameMaster.groundMoveSpeed,0,0);
 	}
 }

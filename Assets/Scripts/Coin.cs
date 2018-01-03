@@ -18,7 +18,7 @@ public class Coin : MonoBehaviour {
             Destroy(coin);
         }
       
-        this.transform.Translate(-.025f, 0, 0);
+        this.transform.Translate(GameMaster.groundMoveSpeed, 0, 0);
     }
     
     public void Collect()

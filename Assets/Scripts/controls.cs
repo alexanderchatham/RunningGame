@@ -79,9 +79,9 @@ public class controls : MonoBehaviour {
     void move()
     {
         if (Input.GetKey(KeyCode.LeftArrow))
-            m_Rigidbody.transform.Translate(-.075f, 0, 0);
+			m_Rigidbody.transform.Translate(-GameMaster.characterMoveSpeed, 0, 0);
         if (Input.GetKey(KeyCode.RightArrow))
-            m_Rigidbody.transform.Translate(.075f, 0, 0);
+            m_Rigidbody.transform.Translate(GameMaster.characterMoveSpeed, 0, 0);
     }
 
     void OnCollisionEnter2D(Collision2D coll)

@@ -13,6 +13,7 @@ public class Sky : MonoBehaviour {
     private void Awake()
     {
         endpoint = (GameObject)Instantiate(sky1);
+		endpoint.transform.position = new Vector3 (-21.1f, 1.8f, 0f);
         startpoint = (GameObject)Instantiate(sky4);
     }
 	
@@ -20,28 +21,26 @@ public class Sky : MonoBehaviour {
 	void Update () {
         positionResetter();
 
-        this.transform.Translate(-.01f, 0, 0);
+		this.transform.Translate(GameMaster.skyMoveSpeed, 0, 0);
     }
 
     
     void positionResetter()
     {
-        print("start position is:" + startpoint.transform.position);
-        print("end position is:" + endpoint.transform.position);
         if (sky1.transform.position.x <= endpoint.transform.position.x)
         {
             print("sky1 position is:" + sky1.transform.position);
-            sky1.transform.position = new Vector3(startpoint.transform.position.x, 2.817653f, -.25f);
+			sky1.transform.position = new Vector3(startpoint.transform.position.x, sky1.transform.position.y, -.25f);
         }
         if (sky2.transform.position.x <= endpoint.transform.position.x)
         {
             print("sky2 position is:" + sky2.transform.position);
-            sky2.transform.position = new Vector3(startpoint.transform.position.x, 2.817653f, -.25f);
+			sky2.transform.position = new Vector3(startpoint.transform.position.x,sky1.transform.position.y, -.25f);
         }
         if (sky3.transform.position.x <= endpoint.transform.position.x)
         {
             print("sky3 position is:" + sky3.transform.position);
-            sky3.transform.position = new Vector3(startpoint.transform.position.x, 2.817653f, -.25f);
+			sky3.transform.position = new Vector3(startpoint.transform.position.x,sky1.transform.position.y, -.25f);
         }
     }
 }

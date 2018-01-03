@@ -27,6 +27,6 @@ public class plank : MonoBehaviour {
         {
             Destroy(ground);
         }
-        this.transform.Translate(-.025f,0,0);
+		this.transform.Translate(GameMaster.groundMoveSpeed,0,0);
 	}
 }
