@@ -14,6 +14,7 @@ public class controls : MonoBehaviour {
     public bool dashing = false;
     public bool allTheWayLeft = true;
     public bool OnGround = true;
+	public bool moving = false;
 	public bool Alive = true;
     float m_Result;
 	Animator anim;
@@ -34,6 +35,7 @@ public class controls : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+		moving = false;
         jump();
         move();
         if (Input.GetKeyDown("x") && canDash == true && !OnGround)
@@ -54,9 +56,10 @@ public class controls : MonoBehaviour {
             allTheWayLeft = true;
         }
 
-        if (OnGround && this.transform.position.x > startingPosition.x)
+		if (OnGround && this.transform.position.x > startingPosition.x && moving  == false)
         {
             m_Rigidbody.transform.Translate(GameMaster.groundMoveSpeed, 0, 0);
+			anim.SetBool ("idle", true);
         }
         if (OnGround && m_Rigidbody.velocity.y > 0)
         {
@@ -81,16 +84,26 @@ public class controls : MonoBehaviour {
 
     void move()
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
-			m_Rigidbody.transform.Translate(-GameMaster.characterMoveSpeed, 0, 0);
-        if (Input.GetKey(KeyCode.RightArrow))
-            m_Rigidbody.transform.Translate(GameMaster.characterMoveSpeed, 0, 0);
+		if (Input.GetKey (KeyCode.LeftArrow))
+		{
+			anim.SetBool ("idle", false);
+			m_Rigidbody.transform.Translate (-GameMaster.characterMoveSpeed, 0, 0);
+			moving = true;
+		}
+		if (Input.GetKey (KeyCode.RightArrow))
+		{
+			anim.SetBool ("idle", false);
+			m_Rigidbody.transform.Translate (GameMaster.characterMoveSpeed, 0, 0);
+			moving = true;
+		}
     }
 
     void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.tag == "Ground")
         {
+			OnGround = false;
+			canDash = false;
 			anim.SetBool ("Dead", true);
 			Alive = false;
 			GameMaster.EndGame ();
