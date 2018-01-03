@@ -14,7 +14,9 @@ public class controls : MonoBehaviour {
     public bool dashing = false;
     public bool allTheWayLeft = true;
     public bool OnGround = true;
+	public bool Alive = true;
     float m_Result;
+	Animator anim;
 
 
 
@@ -22,6 +24,7 @@ public class controls : MonoBehaviour {
     {
         //You get the Rigidbody component you attach to the GameObject
         m_Rigidbody = GetComponent<Rigidbody2D>();
+		anim = GetComponent<Animator> ();
         startingPosition = this.transform.position;
         //Initialising the force which is used on GameObject in various ways
         m_JumpForce = new Vector3(0.0f, jumpStrength, 0.0f);
@@ -53,7 +56,7 @@ public class controls : MonoBehaviour {
 
         if (OnGround && this.transform.position.x > startingPosition.x)
         {
-            m_Rigidbody.transform.Translate(-.025f, 0, 0);
+            m_Rigidbody.transform.Translate(GameMaster.groundMoveSpeed, 0, 0);
         }
         if (OnGround && m_Rigidbody.velocity.y > 0)
         {
@@ -88,10 +91,9 @@ public class controls : MonoBehaviour {
     {
         if (coll.gameObject.tag == "Ground")
         {
-            dashing = false;
-            OnGround = true;
-            canDash = true;
-            m_Rigidbody.gravityScale = .3f;
+			anim.SetBool ("Dead", true);
+			Alive = false;
+			GameMaster.EndGame ();
            
         }
         if (coll.gameObject.tag == "Plank")
