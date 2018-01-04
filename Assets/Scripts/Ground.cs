@@ -4,34 +4,26 @@ using UnityEngine;
 
 public class Ground : MonoBehaviour {
 
-    public GameObject ground;
-    private GameObject startPoint;
-    private GameObject endPoint;
-    private bool tileSpawned;
-    private GameObject newGround;
+	private GameObject ground;
+	static bool keepAnimating = true;
+	private Animator animGround;
 
     // Update is called once per frame
-    private void Start()
+    private void Awake()
     {
-        endPoint = GameObject.FindGameObjectWithTag("End");
-
-        startPoint = GameObject.FindGameObjectWithTag("Start");
-        //coroutines for movement
+		ground = this.gameObject;
+		animGround = GetComponent<Animator> ();
     }
-    void Update () {
-		if(ground.transform.position.x <= -21f)
-        {
-            Destroy(ground);
-        }
 
-        
-        if(ground.transform.position.x <= 0 && tileSpawned == false)
-        {
-            tileSpawned = true;
-            newGround = (GameObject)Instantiate(ground);
-            
-            newGround.transform.Translate( new Vector3(startPoint.transform.position.x,0,0));
-        }
-		this.transform.Translate(GameMaster.groundMoveSpeed,0,0);
+	void Update() 
+	{
+		if (keepAnimating == false)
+			animGround.enabled = false;
+	}
+
+	public static void Stop() {
+
+
+		keepAnimating = false;
 	}
 }

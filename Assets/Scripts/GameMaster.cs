@@ -21,9 +21,9 @@ public class GameMaster : MonoBehaviour {
 
     public static void Slow()
     {
-        groundMoveSpeed = initialGroundSpeed/1.5f;
-        skyMoveSpeed = initialSkySpeed/1.5f;
-        characterMoveSpeed = initialCharacterSpeed/1.5f;
+        groundMoveSpeed = initialGroundSpeed/1.25f;
+        skyMoveSpeed = initialSkySpeed/1.25f;
+        characterMoveSpeed = initialCharacterSpeed/1.25f;
     }
     public static void Normal()
     {
@@ -33,14 +33,14 @@ public class GameMaster : MonoBehaviour {
     }
     public static void Fast()
     {
-        groundMoveSpeed = initialGroundSpeed * 1.5f;
-        skyMoveSpeed = initialSkySpeed * 1.5f;
-        characterMoveSpeed = initialCharacterSpeed * 1.5f;
+        groundMoveSpeed = initialGroundSpeed * 1.25f;
+        skyMoveSpeed = initialSkySpeed * 1.25f;
+        characterMoveSpeed = initialCharacterSpeed * 1.25f;
     }
     public static void Faster()
     {
-        groundMoveSpeed = initialGroundSpeed * 2f;
-        skyMoveSpeed = initialSkySpeed * 2f;
-        characterMoveSpeed = initialCharacterSpeed * 2f;
+        groundMoveSpeed = initialGroundSpeed * 1.75f;
+        skyMoveSpeed = initialSkySpeed * 1.75f;
+        characterMoveSpeed = initialCharacterSpeed * 1.75f;
     }
 }

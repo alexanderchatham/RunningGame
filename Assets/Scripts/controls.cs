@@ -16,6 +16,7 @@ public class controls : MonoBehaviour {
     public bool OnGround = true;
 	public bool moving = false;
 	public bool Alive = true;
+	public bool Gliding = false;
     float m_Result;
 	Animator anim;
 
@@ -77,11 +78,28 @@ public class controls : MonoBehaviour {
             m_Rigidbody.AddForce(m_JumpForce, ForceMode2D.Impulse);
             OnGround = false;
         }
+
+		if (Input.GetKeyDown (KeyCode.C) && !OnGround)
+		{
+			m_Rigidbody.velocity = new Vector3 (m_Rigidbody.velocity.x,0);
+			Gliding = true;
+
+		}
+		if (Gliding)
+		{
+			m_Rigidbody.velocity = new Vector3 (m_Rigidbody.velocity.x,0);
+			m_Rigidbody.transform.Translate(GameMaster.characterMoveSpeed , 0, 0);
+		}
       
-        if (Input.GetKeyUp(KeyCode.Space))
+		if (Input.GetKeyUp(KeyCode.C))
         {
+			Gliding = false;
             m_Rigidbody.gravityScale = 2f;
         }
+		if (Input.GetKeyUp(KeyCode.Space))
+		{
+			m_Rigidbody.gravityScale = 2f;
+		}
     }
 
     void move()
@@ -89,6 +107,7 @@ public class controls : MonoBehaviour {
 		if (Input.GetKey (KeyCode.LeftArrow))
 		{
 			anim.SetBool ("idle", false);
+			m_Rigidbody.velocity = new Vector3(0,m_Rigidbody.velocity.y);
 			m_Rigidbody.transform.Translate (-GameMaster.characterMoveSpeed, 0, 0);
 			moving = true;
 		}
@@ -109,8 +128,14 @@ public class controls : MonoBehaviour {
 			anim.SetBool ("Dead", true);
 			Alive = false;
 			GameMaster.EndGame ();
+			Ground.Stop ();
            
         }
+		if (coll.gameObject.tag == "Back")
+		{
+			print("hit back");
+			anim.SetBool ("idle", false);
+		}
         if (coll.gameObject.tag == "Plank")
         {
             print("hit plank");
@@ -134,22 +159,6 @@ public class controls : MonoBehaviour {
         {
             Coin coin = other.GetComponent<Coin>();
             coin.Collect();
-        }
-        if (other.gameObject.tag == "Slow")
-        {
-            GameMaster.Slow();
-        }
-        if (other.gameObject.tag == "Normal")
-        {
-            GameMaster.Normal();
-        }
-        if (other.gameObject.tag == "Fast")
-        {
-            GameMaster.Fast();
-        }
-        if (other.gameObject.tag == "Faster")
-        {
-            GameMaster.Faster();
         }
     }
 
