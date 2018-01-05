@@ -9,8 +9,8 @@ public class GameMaster : MonoBehaviour {
     public const float initialCharacterSpeed = 0.075f;
 
 
-    public static float groundMoveSpeed = -0.04f;
-	public static float skyMoveSpeed = -0.02f;
+    public static float groundMoveSpeed = -0.00f;
+	public static float skyMoveSpeed = -0.00f;
 	public static float characterMoveSpeed = 0.075f;
 
 	public static void EndGame(){

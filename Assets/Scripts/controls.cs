@@ -17,6 +17,7 @@ public class controls : MonoBehaviour {
 	public bool moving = false;
 	public bool Alive = true;
 	public bool Gliding = false;
+	public bool Starting = true;
     float m_Result;
 	Animator anim;
 
@@ -83,6 +84,11 @@ public class controls : MonoBehaviour {
 		{
 			m_Rigidbody.velocity = new Vector3 (m_Rigidbody.velocity.x,0);
 			Gliding = true;
+			if (Starting)
+			{
+				GameMaster.Normal ();
+				Starting = false;
+			}
 
 		}
 		if (Gliding)
@@ -95,7 +101,7 @@ public class controls : MonoBehaviour {
         {
 			Gliding = false;
             m_Rigidbody.gravityScale = 2f;
-        }
+		}
 		if (Input.GetKeyUp(KeyCode.Space))
 		{
 			m_Rigidbody.gravityScale = 2f;
@@ -113,6 +119,11 @@ public class controls : MonoBehaviour {
 		}
 		if (Input.GetKey (KeyCode.RightArrow))
 		{
+			if (Starting)
+			{
+				GameMaster.Normal ();
+				Starting = false;
+			}
 			anim.SetBool ("idle", false);
 			m_Rigidbody.transform.Translate (GameMaster.characterMoveSpeed, 0, 0);
 			moving = true;
@@ -143,7 +154,30 @@ public class controls : MonoBehaviour {
             dashing = false;
             canDash = true;
         }
-
+		if (coll.gameObject.tag == "Column1")
+		{
+			print("hit Column1");
+			OnGround = true;
+			dashing = false;
+			canDash = true;
+			GameMaster.EndGame ();
+		}
+		if (coll.gameObject.tag == "Column2")
+		{
+			print("hit Column2");
+			OnGround = true;
+			dashing = false;
+			canDash = true;
+			GameMaster.EndGame ();
+		}
+		if (coll.gameObject.tag == "Column3")
+		{
+			print("hit Column3");
+			OnGround = true;
+			dashing = false;
+			canDash = true;
+			GameMaster.EndGame ();
+		}
      
     }
 
@@ -165,6 +199,11 @@ public class controls : MonoBehaviour {
     void dash()
     {
         m_Rigidbody.AddForce(m_DashForce, ForceMode2D.Impulse);
-        
+
+		if (Starting)
+		{
+			GameMaster.Normal ();
+			Starting = false;
+		}
     }
 }
