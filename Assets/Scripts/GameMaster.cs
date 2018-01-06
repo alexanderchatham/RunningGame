@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour {
 
@@ -12,6 +13,8 @@ public class GameMaster : MonoBehaviour {
     public static float groundMoveSpeed = -0.00f;
 	public static float skyMoveSpeed = -0.00f;
 	public static float characterMoveSpeed = 0.075f;
+
+
 
 	public static void EndGame(){
 		groundMoveSpeed = 0f;
@@ -43,4 +46,14 @@ public class GameMaster : MonoBehaviour {
         skyMoveSpeed = initialSkySpeed * 1.75f;
         characterMoveSpeed = initialCharacterSpeed * 1.75f;
     }
+
+    public void RestartGame()
+    {
+        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 0;
+        GameMaster.EndGame();
+    }
+
+    
 }

@@ -16,7 +16,7 @@
     <CompilerResponseFile>
     </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
-    <UnityBuildTarget>StandaloneOSXIntel:4</UnityBuildTarget>
+    <UnityBuildTarget>StandaloneOSXUniversal:2</UnityBuildTarget>
     <UnityVersion>5.6.1f1</UnityVersion>
     <RootNamespace>
     </RootNamespace>
@@ -89,10 +89,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\GameMaster.cs" />
-    <Compile Include="Assets\Scripts\Group.cs" />
+    <Compile Include="Assets\Scripts\DeathPanel.cs" />
     <Compile Include="Assets\Scripts\Coin.cs" />
+    <Compile Include="Assets\Scripts\FlashingText.cs" />
+    <Compile Include="Assets\Scripts\GameMaster.cs" />
     <Compile Include="Assets\Scripts\Ground.cs" />
+    <Compile Include="Assets\Scripts\Group.cs" />
     <Compile Include="Assets\Scripts\Sky.cs" />
     <Compile Include="Assets\Scripts\controls.cs" />
     <Compile Include="Assets\Scripts\plank.cs" />

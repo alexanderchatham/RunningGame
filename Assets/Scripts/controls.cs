@@ -19,6 +19,7 @@ public class controls : MonoBehaviour {
 	public bool Gliding = false;
 	public bool Starting = true;
 	FlashingText ft;
+    DeathPanel DP;
     float m_Result;
 	Animator anim;
 
@@ -32,6 +33,7 @@ public class controls : MonoBehaviour {
 		anim = GetComponent<Animator> ();
         startingPosition = this.transform.position;
 		ft = FlashingText.ft;
+        DP = DeathPanel.instance;
         //Initialising the force which is used on GameObject in various ways
         m_JumpForce = new Vector3(0.0f, jumpStrength, 0.0f);
         m_DashForce = new Vector3(dashStrength, 0.0f, 0.0f);
@@ -63,6 +65,7 @@ public class controls : MonoBehaviour {
 
 		if (OnGround && this.transform.position.x > startingPosition.x && moving  == false)
         {
+            if(!allTheWayLeft)
 			anim.SetBool ("idle", true);
         }
         if (OnGround && m_Rigidbody.velocity.y > 0)
@@ -70,7 +73,7 @@ public class controls : MonoBehaviour {
             m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, 0);
         }
 
-        if(m_Rigidbody.velocity.x <= 0)
+        if(m_Rigidbody.velocity.x <= 0 && !allTheWayLeft)
         m_Rigidbody.transform.Translate(GameMaster.groundMoveSpeed, 0, 0);
     }
 
@@ -128,6 +131,7 @@ public class controls : MonoBehaviour {
 			anim.SetBool ("idle", false);
 			m_Rigidbody.transform.Translate (GameMaster.characterMoveSpeed, 0, 0);
 			moving = true;
+            allTheWayLeft = false;
 		}
     }
 
@@ -140,6 +144,7 @@ public class controls : MonoBehaviour {
 			anim.SetBool ("Dead", true);
 			Alive = false;
 			GameMaster.EndGame ();
+            DP.show();
 			Ground.Stop ();
            
         }
@@ -147,6 +152,7 @@ public class controls : MonoBehaviour {
 		{
 			print("hit back");
 			anim.SetBool ("idle", false);
+            allTheWayLeft = true;
 		}
         if (coll.gameObject.tag == "Plank")
         {
