@@ -18,6 +18,7 @@ public class controls : MonoBehaviour {
 	public bool Alive = true;
 	public bool Gliding = false;
 	public bool Starting = true;
+	FlashingText ft;
     float m_Result;
 	Animator anim;
 
@@ -25,10 +26,12 @@ public class controls : MonoBehaviour {
 
     void Start()
     {
+		Time.timeScale = 0;
         //You get the Rigidbody component you attach to the GameObject
         m_Rigidbody = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator> ();
         startingPosition = this.transform.position;
+		ft = FlashingText.ft;
         //Initialising the force which is used on GameObject in various ways
         m_JumpForce = new Vector3(0.0f, jumpStrength, 0.0f);
         m_DashForce = new Vector3(dashStrength, 0.0f, 0.0f);
@@ -86,8 +89,7 @@ public class controls : MonoBehaviour {
 			Gliding = true;
 			if (Starting)
 			{
-				GameMaster.Normal ();
-				Starting = false;
+				startUp ();
 			}
 
 		}
@@ -121,8 +123,7 @@ public class controls : MonoBehaviour {
 		{
 			if (Starting)
 			{
-				GameMaster.Normal ();
-				Starting = false;
+				startUp ();
 			}
 			anim.SetBool ("idle", false);
 			m_Rigidbody.transform.Translate (GameMaster.characterMoveSpeed, 0, 0);
@@ -160,6 +161,7 @@ public class controls : MonoBehaviour {
 			OnGround = true;
 			dashing = false;
 			canDash = true;
+			anim.SetBool ("idle", false);
 			GameMaster.EndGame ();
 		}
 		if (coll.gameObject.tag == "Column2")
@@ -168,6 +170,7 @@ public class controls : MonoBehaviour {
 			OnGround = true;
 			dashing = false;
 			canDash = true;
+			anim.SetBool ("idle", false);
 			GameMaster.EndGame ();
 		}
 		if (coll.gameObject.tag == "Column3")
@@ -176,6 +179,7 @@ public class controls : MonoBehaviour {
 			OnGround = true;
 			dashing = false;
 			canDash = true;
+			anim.SetBool ("idle", false);
 			GameMaster.EndGame ();
 		}
      
@@ -202,8 +206,14 @@ public class controls : MonoBehaviour {
 
 		if (Starting)
 		{
-			GameMaster.Normal ();
-			Starting = false;
+			startUp ();
 		}
     }
+	void startUp()
+	{
+		GameMaster.Normal ();
+		Starting = false;
+		ft.hide ();
+		Time.timeScale = 1;
+	}
 }
