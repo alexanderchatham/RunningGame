@@ -120,6 +120,7 @@ public class controls : MonoBehaviour {
 		if (Input.GetKey (KeyCode.LeftArrow))
 		{
 			anim.SetBool ("idle", false);
+
 			m_Rigidbody.velocity = new Vector3(0,m_Rigidbody.velocity.y);
 			m_Rigidbody.transform.Translate (-GameMaster.characterMoveSpeed, 0, 0);
 			moving = true;
@@ -171,6 +172,7 @@ public class controls : MonoBehaviour {
 			canDash = true;
 			anim.SetBool ("idle", false);
             WP.show();
+			PlayerStats.Scored (300);
             GameMaster.EndGame ();
 		}
 		if (coll.gameObject.tag == "Column2")
@@ -181,6 +183,7 @@ public class controls : MonoBehaviour {
 			canDash = true;
 			anim.SetBool ("idle", false);
             WP.show();
+			PlayerStats.Scored (500);
             GameMaster.EndGame ();
 		}
 		if (coll.gameObject.tag == "Column3")
@@ -190,6 +193,7 @@ public class controls : MonoBehaviour {
 			dashing = false;
 			canDash = true;
 			anim.SetBool ("idle", false);
+			PlayerStats.Scored (1000);
             WP.show();
             GameMaster.EndGame ();
 		}
@@ -208,6 +212,7 @@ public class controls : MonoBehaviour {
         {
             Coin coin = other.GetComponent<Coin>();
             coin.Collect();
+			PlayerStats.getCoin();
         }
     }
 
