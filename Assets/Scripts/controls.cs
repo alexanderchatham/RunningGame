@@ -20,6 +20,7 @@ public class controls : MonoBehaviour {
 	public bool Starting = true;
 	FlashingText ft;
     DeathPanel DP;
+    WinPanel WP;
     float m_Result;
 	Animator anim;
 
@@ -34,6 +35,7 @@ public class controls : MonoBehaviour {
         startingPosition = this.transform.position;
 		ft = FlashingText.ft;
         DP = DeathPanel.instance;
+        WP = WinPanel.instance;
         //Initialising the force which is used on GameObject in various ways
         m_JumpForce = new Vector3(0.0f, jumpStrength, 0.0f);
         m_DashForce = new Vector3(dashStrength, 0.0f, 0.0f);
@@ -168,7 +170,8 @@ public class controls : MonoBehaviour {
 			dashing = false;
 			canDash = true;
 			anim.SetBool ("idle", false);
-			GameMaster.EndGame ();
+            WP.show();
+            GameMaster.EndGame ();
 		}
 		if (coll.gameObject.tag == "Column2")
 		{
@@ -177,7 +180,8 @@ public class controls : MonoBehaviour {
 			dashing = false;
 			canDash = true;
 			anim.SetBool ("idle", false);
-			GameMaster.EndGame ();
+            WP.show();
+            GameMaster.EndGame ();
 		}
 		if (coll.gameObject.tag == "Column3")
 		{
@@ -186,7 +190,8 @@ public class controls : MonoBehaviour {
 			dashing = false;
 			canDash = true;
 			anim.SetBool ("idle", false);
-			GameMaster.EndGame ();
+            WP.show();
+            GameMaster.EndGame ();
 		}
      
     }
