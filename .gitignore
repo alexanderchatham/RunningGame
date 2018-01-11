@@ -5,6 +5,33 @@
 [Bb]uilds/
 Assets/AssetStoreTools*
 
+<<<<<<< HEAD
+Library/metadata/f7/f7b54ff4a43d4fcf81b4538b678e0bcc
+Library/metadata/f7/f7b54ff4a43d4fcf81b4538b678e0bcc.info
+Library/metadata/4f/4f234578336894dc081edf696f2ff5f2
+Library/metadata/4e/4e7c9ab97e5884e4eaa5967e9024f39c.info
+Library/metadata/4e/4e7c9ab97e5884e4eaa5967e9024f39c
+Library/metadata/4c/4c6fe94acbb24417c988bab18cbd5209.info
+Library/metadata/4c/4c6fe94acbb24417c988bab18cbd5209
+Library/metadata/4b/4ba2329b63d54f0187bcaa12486b1b0f
+Library/metadata/4b/4b3fa4bde7f1451a8218c03ee6a8ded8.info
+Library/metadata/4b/4b3fa4bde7f1451a8218c03ee6a8ded8
+Library/metadata/4a/4a3ecb1425d14502837abea459cf2b70
+Library/metadata/49/49f5766d0d4954f44b85d4bbd7131677
+Library/metadata/48/48986928cc2a449dbaecdd1654bc9bf6
+Library/metadata/00/00000000000000001000000000000000
+Library/metadata/00/00000000000000002000000000000000
+Library/metadata/00/00000000000000003000000000000000
+Library/metadata/00/00000000000000003000000000000000.info
+Library/metadata/00/00000000000000004000000000000000
+Library/metadata/00/00000000000000004100000000000000
+*.info
+Library/assetDatabase3
+
+Assets/Scripts/TouchControls.cs
+
+Assets/Scripts/TouchControls.cs.meta
+=======
 # Visual Studio 2015 cache directory
 /.vs/
 
@@ -33,3 +60,4 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+>>>>>>> master
