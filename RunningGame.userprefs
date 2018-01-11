@@ -4,9 +4,12 @@
     <Files>
       <File FileName="Assets/Scripts/plank.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Sky.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Coin.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/controls.cs" Line="80" Column="10" />
-      <File FileName="Assets/Scripts/Ground.cs" Line="22" Column="41" />
+      <File FileName="Assets/Scripts/Coin.cs" Line="21" Column="60" />
+      <File FileName="Assets/Scripts/controls.cs" Line="123" Column="4" />
+      <File FileName="Assets/Scripts/Ground.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PlayerStats.cs" Line="25" Column="16" />
+      <File FileName="Assets/Scripts/GameMaster.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/UIPanel.cs" Line="12" Column="21" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
