@@ -59,7 +59,10 @@
      <Compile Include="Assets\Scripts\Ground.cs" />
      <Compile Include="Assets\Scripts\Group.cs" />
      <Compile Include="Assets\Scripts\plank.cs" />
+     <Compile Include="Assets\Scripts\PlayerStats.cs" />
      <Compile Include="Assets\Scripts\Sky.cs" />
+     <Compile Include="Assets\Scripts\UIPanel.cs" />
+     <Compile Include="Assets\Scripts\WinPanel.cs" />
  <Reference Include="Facebook.Unity.Settings">
  <HintPath>/Users/alexchatham/Developer/Unity/RunningGame/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
  </Reference>
