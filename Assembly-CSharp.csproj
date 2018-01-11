@@ -61,7 +61,6 @@
      <Compile Include="Assets\Scripts\plank.cs" />
      <Compile Include="Assets\Scripts\PlayerStats.cs" />
      <Compile Include="Assets\Scripts\Sky.cs" />
-     <Compile Include="Assets\Scripts\TouchControls.cs" />
      <Compile Include="Assets\Scripts\UIPanel.cs" />
      <Compile Include="Assets\Scripts\WinPanel.cs" />
  <Reference Include="Facebook.Unity.Settings">
