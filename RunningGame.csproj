@@ -93,7 +93,9 @@
     <Compile Include="Assets\Scripts\GameMaster.cs" />
     <Compile Include="Assets\Scripts\Ground.cs" />
     <Compile Include="Assets\Scripts\Group.cs" />
+    <Compile Include="Assets\Scripts\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Sky.cs" />
+    <Compile Include="Assets\Scripts\UIPanel.cs" />
     <Compile Include="Assets\Scripts\WinPanel.cs" />
     <Compile Include="Assets\Scripts\controls.cs" />
     <Compile Include="Assets\Scripts\plank.cs" />
