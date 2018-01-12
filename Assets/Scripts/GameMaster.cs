@@ -10,6 +10,7 @@ public class GameMaster : MonoBehaviour {
     public const float initialCharacterSpeed = 0.075f;
 
 
+    public static int Level = 1;
     public static float groundMoveSpeed = -0.00f;
 	public static float skyMoveSpeed = -0.00f;
 	public static float characterMoveSpeed = 0.075f;
@@ -52,6 +53,18 @@ public class GameMaster : MonoBehaviour {
         
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 0;
+        GameMaster.EndGame();
+    }
+
+    public void nextLevel()
+    {
+        Level++;
+        print("Next Level button. Level is: "+ Level);
+        if(Level < 4)
+            SceneManager.LoadScene("Level " + Level, LoadSceneMode.Single);
+        else
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
         GameMaster.EndGame();
     }
 
