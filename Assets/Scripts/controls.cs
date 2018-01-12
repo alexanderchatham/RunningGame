@@ -23,6 +23,10 @@ public class controls : MonoBehaviour {
     WinPanel WP;
     float m_Result;
 	Animator anim;
+	public static bool jumpStart;
+	public static bool tRight;
+	public static bool tLeft;
+
 
 
 
@@ -75,17 +79,22 @@ public class controls : MonoBehaviour {
             m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, 0);
         }
 
-        if(m_Rigidbody.velocity.x <= 0 && !allTheWayLeft)
+		if(m_Rigidbody.velocity.x <= 0 && !allTheWayLeft && (!tRight||!Input.GetKeyDown (KeyCode.RightArrow)))
         m_Rigidbody.transform.Translate(GameMaster.groundMoveSpeed, 0, 0);
     }
 
-    void jump()
+
+
+
+	public void jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && OnGround)
+		if ((Input.GetKeyDown (KeyCode.Space) || jumpStart) && OnGround)
         {
             m_Rigidbody.gravityScale = .5f;
             m_Rigidbody.AddForce(m_JumpForce, ForceMode2D.Impulse);
             OnGround = false;
+			if (Starting)
+				startUp ();
         }
 
 		if (Input.GetKeyDown (KeyCode.C) && !OnGround)
@@ -109,15 +118,18 @@ public class controls : MonoBehaviour {
 			Gliding = false;
             m_Rigidbody.gravityScale = 2f;
 		}
-		if (Input.GetKeyUp(KeyCode.Space))
+		if (Input.GetKeyUp (KeyCode.Space))
 		{
 			m_Rigidbody.gravityScale = 2f;
 		}
     }
 
+
+
+
     void move()
     {
-		if (Input.GetKey (KeyCode.LeftArrow))
+		if (Input.GetKey (KeyCode.LeftArrow) || tLeft)
 		{
 			anim.SetBool ("idle", false);
 
@@ -125,7 +137,7 @@ public class controls : MonoBehaviour {
 			m_Rigidbody.transform.Translate (-GameMaster.characterMoveSpeed, 0, 0);
 			moving = true;
 		}
-		if (Input.GetKey (KeyCode.RightArrow))
+		if (Input.GetKey (KeyCode.RightArrow) || tRight)
 		{
 			if (Starting)
 			{
@@ -138,12 +150,15 @@ public class controls : MonoBehaviour {
 		}
     }
 
+
+
     void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.tag == "Ground")
         {
 			OnGround = false;
 			canDash = false;
+			PlayerStats.clearCoin ();
 			anim.SetBool ("Dead", true);
 			Alive = false;
 			GameMaster.EndGame ();
@@ -232,4 +247,17 @@ public class controls : MonoBehaviour {
 		ft.hide ();
 		Time.timeScale = 1;
 	}
+
+	/*public static void touchJump(bool started)
+	{
+		jumpStart = started;
+	}
+	public static void touchRight(bool a)
+	{
+		tRight = a;
+	}
+	public static void touchLeft(bool a)
+	{
+		tLeft = a;
+	}*/
 }
