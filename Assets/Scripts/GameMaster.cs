@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour {
 
-    public const float initialGroundSpeed = -0.04f;
+    public const float initialGroundSpeed = -0.06f;
     public const float initialSkySpeed = -0.02f;
-    public const float initialCharacterSpeed = 0.075f;
+    public const float initialCharacterSpeed = 0.1f;
 
 
     public static int Level = 1;

@@ -25,4 +25,8 @@ public class PlayerStats : MonoBehaviour {
 		Score += 100;
 	}
 
+	public static void clearCoin(){
+		Coins = 0;
+	}
+
 }
