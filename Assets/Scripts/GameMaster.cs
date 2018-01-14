@@ -2,18 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameMaster : MonoBehaviour {
 
     public const float initialGroundSpeed = -0.06f;
     public const float initialSkySpeed = -0.02f;
-    public const float initialCharacterSpeed = 0.1f;
+    public const float initialCharacterSpeed = 0.2f;
 
 
-    public static int Level = 1;
+    public static int Level = 0;
+	private int MaxLevel = 6;
     public static float groundMoveSpeed = -0.00f;
 	public static float skyMoveSpeed = -0.00f;
 	public static float characterMoveSpeed = 0.075f;
+	private string currentLevel;
+	private string Levelnumber;
+
+	public void Start()
+	{
+		currentLevel = SceneManager.GetActiveScene ().name;
+		Levelnumber = currentLevel.Substring (currentLevel.Length - 1);
+		print (Levelnumber);
+		Level = int.Parse(Levelnumber);
+	}
 
 
 
@@ -58,15 +70,34 @@ public class GameMaster : MonoBehaviour {
 
     public void nextLevel()
     {
-        Level++;
-        print("Next Level button. Level is: "+ Level);
-        if(Level < 4)
-            SceneManager.LoadScene("Level " + Level, LoadSceneMode.Single);
-        else
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		if (Level < MaxLevel)
+		{
+
+			Level++;
+			print ("Next Level button. Level is: " + Level);
+			SceneManager.LoadScene ("Level " + Level, LoadSceneMode.Single);
+		} else
+		{
+			print ("At Max Level");
+			SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
+		}
         
         GameMaster.EndGame();
     }
+	public void menu()
+	{
+		SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+		GameMaster.EndGame ();
+		Level = 0;
+	}
+	public void loadLevel(int i)
+	{
+		if (i <= MaxLevel)
+		{
+			Level = i;
+			SceneManager.LoadScene ("Level " + i, LoadSceneMode.Single);
+		}
+	}
 
     
 }

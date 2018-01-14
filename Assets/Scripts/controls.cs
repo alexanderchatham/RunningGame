@@ -1,18 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class controls : MonoBehaviour {
     
     Vector3 m_JumpForce;
     Vector3 m_DashForce;
-    public float jumpStrength = 5f;
+    public float jumpStrength = 10f;
     public float dashStrength = 7f;
     Rigidbody2D m_Rigidbody;
-    Vector3 startingPosition;
     public bool canDash = true;
     public bool dashing = false;
-    public bool allTheWayLeft = true;
+    public bool allTheWayLeft = false;
     public bool OnGround = true;
 	public bool moving = false;
 	public bool Alive = true;
@@ -21,11 +21,15 @@ public class controls : MonoBehaviour {
 	FlashingText ft;
     DeathPanel DP;
     WinPanel WP;
+	UIPanel UIP;
     float m_Result;
 	Animator anim;
 	public static bool jumpStart;
 	public static bool tRight;
 	public static bool tLeft;
+    public Button JumpBtn;
+    public Button RightBtn;
+    public Button LeftBtn;
 
 
 
@@ -36,10 +40,10 @@ public class controls : MonoBehaviour {
         //You get the Rigidbody component you attach to the GameObject
         m_Rigidbody = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator> ();
-        startingPosition = this.transform.position;
 		ft = FlashingText.ft;
         DP = DeathPanel.instance;
         WP = WinPanel.instance;
+		UIP = UIPanel.instance;
         //Initialising the force which is used on GameObject in various ways
         m_JumpForce = new Vector3(0.0f, jumpStrength, 0.0f);
         m_DashForce = new Vector3(dashStrength, 0.0f, 0.0f);
@@ -61,15 +65,12 @@ public class controls : MonoBehaviour {
         }
         
         
-        if (this.transform.position.x <= startingPosition.x && canDash == false && dashing == false)
+        if ( canDash == false && dashing == false)
         {
-            m_Rigidbody.MovePosition(new Vector2(startingPosition.x, this.transform.position.y));
-            m_Rigidbody.velocity = new Vector3(0, 0);
             canDash = true;
-            allTheWayLeft = true;
         }
 
-		if (OnGround && this.transform.position.x > startingPosition.x && moving  == false)
+		if (OnGround  && moving  == false)
         {
             if(!allTheWayLeft)
 			anim.SetBool ("idle", true);
@@ -83,12 +84,10 @@ public class controls : MonoBehaviour {
         m_Rigidbody.transform.Translate(GameMaster.groundMoveSpeed, 0, 0);
     }
 
-
-
-
+    
 	public void jump()
     {
-		if ((Input.GetKeyDown (KeyCode.Space) || jumpStart) && OnGround)
+		if ((Input.GetKeyDown (KeyCode.Space) || jumpStart) && OnGround && m_Rigidbody.velocity.y <= 0)
         {
             m_Rigidbody.gravityScale = .5f;
             m_Rigidbody.AddForce(m_JumpForce, ForceMode2D.Impulse);
@@ -97,28 +96,8 @@ public class controls : MonoBehaviour {
 				startUp ();
         }
 
-		if (Input.GetKeyDown (KeyCode.C) && !OnGround)
-		{
-			m_Rigidbody.velocity = new Vector3 (m_Rigidbody.velocity.x,0);
-			Gliding = true;
-			if (Starting)
-			{
-				startUp ();
-			}
-
-		}
-		if (Gliding)
-		{
-			m_Rigidbody.velocity = new Vector3 (m_Rigidbody.velocity.x,0);
-			m_Rigidbody.transform.Translate(GameMaster.characterMoveSpeed , 0, 0);
-		}
-      
-		if (Input.GetKeyUp(KeyCode.C))
-        {
-			Gliding = false;
-            m_Rigidbody.gravityScale = 2f;
-		}
-		if (Input.GetKeyUp (KeyCode.Space))
+		
+		if (Input.GetKeyUp (KeyCode.Space) || !jumpStart)
 		{
 			m_Rigidbody.gravityScale = 2f;
 		}
@@ -131,26 +110,62 @@ public class controls : MonoBehaviour {
     {
 		if (Input.GetKey (KeyCode.LeftArrow) || tLeft)
 		{
-			anim.SetBool ("idle", false);
-
-			m_Rigidbody.velocity = new Vector3(0,m_Rigidbody.velocity.y);
-			m_Rigidbody.transform.Translate (-GameMaster.characterMoveSpeed, 0, 0);
-			moving = true;
+            moveLeft();
+			
 		}
 		if (Input.GetKey (KeyCode.RightArrow) || tRight)
 		{
-			if (Starting)
-			{
-				startUp ();
-			}
-			anim.SetBool ("idle", false);
-			m_Rigidbody.transform.Translate (GameMaster.characterMoveSpeed, 0, 0);
-			moving = true;
-            allTheWayLeft = false;
+            moveRight();
+			
 		}
     }
 
+    public void setLeft()
+    {
+		tRight = false;
+        if (tLeft == false)
+            tLeft = true;
+        else
+            tLeft = false;
+    }
 
+    public void setRight()
+    {
+		tLeft = false;
+        if (tRight == false)
+            tRight = true;
+        else
+            tRight = false;
+    }
+
+    public void setJump()
+    {
+        if (jumpStart == false)
+            jumpStart = true;
+        else
+            jumpStart = false;
+    }
+
+    public void moveLeft()
+    {
+        anim.SetBool("idle", false);
+
+        m_Rigidbody.velocity = new Vector3(0, m_Rigidbody.velocity.y);
+        m_Rigidbody.transform.Translate(-GameMaster.characterMoveSpeed, 0, 0);
+        moving = true;
+    }
+
+    public void moveRight()
+    {
+        if (Starting)
+        {
+            startUp();
+        }
+        anim.SetBool("idle", false);
+        m_Rigidbody.transform.Translate(GameMaster.characterMoveSpeed, 0, 0);
+        moving = true;
+        allTheWayLeft = false;
+    }
 
     void OnCollisionEnter2D(Collision2D coll)
     {
@@ -158,11 +173,15 @@ public class controls : MonoBehaviour {
         {
 			OnGround = false;
 			canDash = false;
+			jumpStart = false;
+			tRight = false;
+			tLeft = false;
 			PlayerStats.clearCoin ();
 			anim.SetBool ("Dead", true);
 			Alive = false;
 			GameMaster.EndGame ();
-            DP.show();
+			DP.show();
+			UIP.hide ();
 			Ground.Stop ();
            
         }
@@ -172,7 +191,11 @@ public class controls : MonoBehaviour {
 			anim.SetBool ("idle", false);
             allTheWayLeft = true;
 		}
-        if (coll.gameObject.tag == "Plank")
+		if (coll.gameObject.tag == "Wall")
+		{
+			m_Rigidbody.gravityScale = 3f;
+		}
+		if (coll.gameObject.tag == "Plank" )
         {
             print("hit plank");
             OnGround = true;
@@ -185,8 +208,12 @@ public class controls : MonoBehaviour {
 			OnGround = true;
 			dashing = false;
 			canDash = true;
+			jumpStart = false;
+			tRight = false;
+			tLeft = false;
 			anim.SetBool ("idle", false);
-            WP.show();
+			WP.show();
+			UIP.hide ();
 			PlayerStats.Scored (300);
             GameMaster.EndGame ();
 		}
@@ -196,8 +223,12 @@ public class controls : MonoBehaviour {
 			OnGround = true;
 			dashing = false;
 			canDash = true;
+			jumpStart = false;
+			tRight = false;
+			tLeft = false;
 			anim.SetBool ("idle", false);
-            WP.show();
+			WP.show();
+			UIP.hide ();
 			PlayerStats.Scored (500);
             GameMaster.EndGame ();
 		}
@@ -207,9 +238,13 @@ public class controls : MonoBehaviour {
 			OnGround = true;
 			dashing = false;
 			canDash = true;
+			jumpStart = false;
+			tRight = false;
+			tLeft = false;
 			anim.SetBool ("idle", false);
 			PlayerStats.Scored (1000);
             WP.show();
+			UIP.hide ();
             GameMaster.EndGame ();
 		}
      
@@ -240,12 +275,13 @@ public class controls : MonoBehaviour {
 			startUp ();
 		}
     }
-	void startUp()
+	public void startUp()
 	{
 		GameMaster.Normal ();
 		Starting = false;
 		ft.hide ();
 		Time.timeScale = 1;
+		UIP.show ();
 	}
 
 	/*public static void touchJump(bool started)
@@ -261,3 +297,27 @@ public class controls : MonoBehaviour {
 		tLeft = a;
 	}*/
 }
+
+//GLIDING CODE
+////////////////////////////////////////////////////////////////////////////////////////
+/*if (Input.GetKeyDown (KeyCode.C) && !OnGround)
+		{
+			m_Rigidbody.velocity = new Vector3 (m_Rigidbody.velocity.x,0);
+			Gliding = true;
+			if (Starting)
+			{
+				startUp ();
+			}
+
+		}
+		if (Gliding)
+		{
+			m_Rigidbody.velocity = new Vector3 (m_Rigidbody.velocity.x,0);
+			m_Rigidbody.transform.Translate(GameMaster.characterMoveSpeed , 0, 0);
+		}
+      
+		if (Input.GetKeyUp(KeyCode.C))
+        {
+			Gliding = false;
+            m_Rigidbody.gravityScale = 2f;
+		}*/
