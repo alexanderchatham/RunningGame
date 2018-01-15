@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour {
 
-	public static int Lives = 3;
+	public static int Deaths = 0;
 	public static int Score = 0;
 	public static int Coins = 0;
 
-
+    public static void Save()
+    {
+        PlayerPrefs.SetInt("Coins", Coins);
+        PlayerPrefs.SetInt("Score", Score);
+        PlayerPrefs.SetInt("Deaths", Deaths);
+    }
 
 
 	public static void Scored(int i){
@@ -16,8 +21,7 @@ public class PlayerStats : MonoBehaviour {
 	}
 
 	public static void loseLife(){
-		if (Lives > 1)
-			Lives--;
+        Deaths++;
 	}
 
 	public static void getCoin(){
