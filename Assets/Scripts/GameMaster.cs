@@ -19,13 +19,15 @@ public class GameMaster : MonoBehaviour {
 	private string currentLevel;
 	private string Levelnumber;
 
-	public void Start()
-	{
-		currentLevel = SceneManager.GetActiveScene ().name;
-		Levelnumber = currentLevel.Substring (currentLevel.Length - 1);
-		print (Levelnumber);
-		Level = int.Parse(Levelnumber);
-	}
+    public void Start()
+    {
+        if(SceneManager.GetActiveScene().name != "Menu"){
+            currentLevel = SceneManager.GetActiveScene().name;
+            Levelnumber = currentLevel.Substring(currentLevel.Length - 1);
+            print(Levelnumber);
+            Level = int.Parse(Levelnumber);
+        }
+    }
 
 
 
@@ -75,7 +77,7 @@ public class GameMaster : MonoBehaviour {
 
 			Level++;
 			print ("Next Level button. Level is: " + Level);
-			SceneManager.LoadScene ("Level " + Level, LoadSceneMode.Single);
+			SceneManager.LoadScene (Level, LoadSceneMode.Single);
 		} else
 		{
 			print ("At Max Level");
