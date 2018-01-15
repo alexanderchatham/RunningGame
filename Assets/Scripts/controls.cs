@@ -171,19 +171,17 @@ public class controls : MonoBehaviour {
     {
         if (coll.gameObject.tag == "Ground")
         {
-			OnGround = false;
-			canDash = false;
-			jumpStart = false;
-			tRight = false;
-			tLeft = false;
-			PlayerStats.clearCoin ();
-			anim.SetBool ("Dead", true);
-			Alive = false;
-			GameMaster.EndGame ();
-			DP.show();
-			UIP.hide ();
-			Ground.Stop ();
-           
+            print("Hit ground");
+            anim.SetBool("Dead", true);
+            OnGround = false;
+            canDash = false;
+            jumpStart = false;
+            tRight = false;
+            tLeft = false;
+            GameMaster.EndGame();
+            PlayerStats.clearCoin();
+            Alive = false;
+            Ground.Stop();
         }
 		if (coll.gameObject.tag == "Back")
 		{
@@ -250,6 +248,13 @@ public class controls : MonoBehaviour {
      
     }
 
+    void die()
+    {
+
+        DP.show();
+        UIP.hide();
+    }
+   
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Gravity" && m_Rigidbody.velocity.y < 0)
@@ -284,18 +289,6 @@ public class controls : MonoBehaviour {
 		UIP.show ();
 	}
 
-	/*public static void touchJump(bool started)
-	{
-		jumpStart = started;
-	}
-	public static void touchRight(bool a)
-	{
-		tRight = a;
-	}
-	public static void touchLeft(bool a)
-	{
-		tLeft = a;
-	}*/
 }
 
 //GLIDING CODE
