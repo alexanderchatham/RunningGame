@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TouchControls : MonoBehaviour {
 
-	bool left = false;
+	/*bool left = false;
 	bool right = false;
 	Rect jumpRect;
 	Rect rightRect;
@@ -68,5 +68,5 @@ public class TouchControls : MonoBehaviour {
 		
 		}
 	
-	}
+	}*/
 }
