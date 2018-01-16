@@ -12,6 +12,7 @@ public class PlayerStats : MonoBehaviour {
 
     public static void Save()
     {
+		print ("Saving!");
         PlayerPrefs.SetInt("Coins", totalCoins + Coins);
 		Coins = 0;
         PlayerPrefs.SetInt("Score", totalScore + Score);

@@ -62,6 +62,7 @@
      <Compile Include="Assets\Scripts\PausePanel.cs" />
      <Compile Include="Assets\Scripts\plank.cs" />
      <Compile Include="Assets\Scripts\PlayerStats.cs" />
+     <Compile Include="Assets\Scripts\Settings.cs" />
      <Compile Include="Assets\Scripts\Sky.cs" />
      <Compile Include="Assets\Scripts\StartPanel.cs" />
      <Compile Include="Assets\Scripts\Store.cs" />

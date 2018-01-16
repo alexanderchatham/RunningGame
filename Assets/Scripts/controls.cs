@@ -190,6 +190,7 @@ public class controls : MonoBehaviour {
 			tRight = false;
 			tLeft = false;
 			dying = true;
+			GameMaster.EndGame ();
 			if(!winning)
 				PlayerStats.clear ();
 			anim.SetBool ("Dead", true);
@@ -217,24 +218,18 @@ public class controls : MonoBehaviour {
 		{
 			print("hit Column1");
 			PlayerStats.Scored (300);
-
-            PlayerStats.Save();
             win ();
 		}
 		if (coll.gameObject.tag == "Column2")
 		{
 			print("hit Column2");
 			PlayerStats.Scored (500);
-
-            PlayerStats.Save();
             win ();
 		}
 		if (coll.gameObject.tag == "Column3")
 		{
 			print("hit Column3");
 			PlayerStats.Scored (1000);
-
-            PlayerStats.Save();
             win ();
 		}
      
@@ -255,6 +250,7 @@ public class controls : MonoBehaviour {
 	}
 	public void win()
 	{
+		PlayerStats.Save ();
 		Ground.Stop ();
 		winning = true;
 		OnGround = true;
@@ -298,7 +294,7 @@ public class controls : MonoBehaviour {
 
 	public void startUp()
 	{
-		GameMaster.Normal ();
+		GameMaster.GetSpeed ();
 		Starting = false;
 		ft.hide ();
 		Time.timeScale = 1;

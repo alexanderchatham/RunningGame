@@ -23,12 +23,11 @@ public class StartPanel : MonoBehaviour {
 		score.text = PlayerPrefs.GetInt("Score", 0).ToString();
 		LP = LevelPanel.instance;
 	}
+	void Update(){
 
-    private void OnPreRender()
-    {
-        numberOfCoins.text = PlayerPrefs.GetInt("Coins", 0).ToString();
-        score.text = PlayerPrefs.GetInt("Score", 0).ToString();
-    }
+		numberOfCoins.text = PlayerPrefs.GetInt("Coins", 0).ToString();
+		score.text = PlayerPrefs.GetInt("Score", 0).ToString();
+	}
 
     public void show()
 	{
