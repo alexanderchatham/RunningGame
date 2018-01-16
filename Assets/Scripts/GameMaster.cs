@@ -78,10 +78,12 @@ public class GameMaster : MonoBehaviour {
 			Level++;
 			print ("Next Level button. Level is: " + Level);
 			SceneManager.LoadScene (Level, LoadSceneMode.Single);
+            PlayerStats.Load();
 		} else
 		{
 			print ("At Max Level");
 			SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
+            PlayerStats.Load();
 		}
         
         GameMaster.EndGame();
@@ -91,6 +93,7 @@ public class GameMaster : MonoBehaviour {
 		SceneManager.LoadScene("Menu", LoadSceneMode.Single);
 		GameMaster.EndGame ();
 		Level = 0;
+        PlayerStats.clearCoin();
 	}
 	public void loadLevel(int i)
 	{
@@ -98,6 +101,7 @@ public class GameMaster : MonoBehaviour {
 		{
 			Level = i;
 			SceneManager.LoadScene ("Level " + i, LoadSceneMode.Single);
+            PlayerStats.Load();
 		}
 	}
 

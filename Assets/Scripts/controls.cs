@@ -203,49 +203,37 @@ public class controls : MonoBehaviour {
 		if (coll.gameObject.tag == "Column1")
 		{
 			print("hit Column1");
-			OnGround = true;
-			dashing = false;
-			canDash = true;
-			jumpStart = false;
-			tRight = false;
-			tLeft = false;
-			anim.SetBool ("idle", false);
-			WP.show();
-			UIP.hide ();
 			PlayerStats.Scored (300);
-            GameMaster.EndGame ();
+            win();
 		}
 		if (coll.gameObject.tag == "Column2")
 		{
 			print("hit Column2");
-			OnGround = true;
-			dashing = false;
-			canDash = true;
-			jumpStart = false;
-			tRight = false;
-			tLeft = false;
-			anim.SetBool ("idle", false);
-			WP.show();
-			UIP.hide ();
 			PlayerStats.Scored (500);
-            GameMaster.EndGame ();
+            win();
 		}
 		if (coll.gameObject.tag == "Column3")
 		{
 			print("hit Column3");
-			OnGround = true;
-			dashing = false;
-			canDash = true;
-			jumpStart = false;
-			tRight = false;
-			tLeft = false;
-			anim.SetBool ("idle", false);
 			PlayerStats.Scored (1000);
-            WP.show();
-			UIP.hide ();
-            GameMaster.EndGame ();
+            win();
 		}
      
+    }
+
+    void win()
+    {
+        PlayerStats.Save();
+        OnGround = true;
+        dashing = false;
+        canDash = true;
+        jumpStart = false;
+        tRight = false;
+        tLeft = false;
+        anim.SetBool("idle", false);
+        WP.show();
+        UIP.hide();
+        GameMaster.EndGame();
     }
 
     void die()

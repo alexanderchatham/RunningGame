@@ -15,8 +15,15 @@ public class PlayerStats : MonoBehaviour {
         PlayerPrefs.SetInt("Deaths", Deaths);
     }
 
+    public static void Load()
+    {
+        Coins = PlayerPrefs.GetInt("Coins", 0);
+        Score = PlayerPrefs.GetInt("Score", 0);
+        Deaths = PlayerPrefs.GetInt("Deaths", 0);
+    }
 
-	public static void Scored(int i){
+
+    public static void Scored(int i){
 		Score += i;
 	}
 
@@ -32,5 +39,9 @@ public class PlayerStats : MonoBehaviour {
 	public static void clearCoin(){
 		Coins = 0;
 	}
+    public static void clearScore()
+    {
+        Score = 0;
+    }
 
 }
