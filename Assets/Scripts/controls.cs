@@ -27,10 +27,8 @@ public class controls : MonoBehaviour {
 	public static bool jumpStart;
 	public static bool tRight;
 	public static bool tLeft;
-    public Button JumpBtn;
-    public Button RightBtn;
-    public Button LeftBtn;
 	public bool dying = false;
+	public bool winning = false;
 
 
 
@@ -188,7 +186,8 @@ public class controls : MonoBehaviour {
 			tRight = false;
 			tLeft = false;
 			dying = true;
-			PlayerStats.clearCoin ();
+			if(!winning)
+				PlayerStats.clear ();
 			anim.SetBool ("Dead", true);
 
            
@@ -213,20 +212,20 @@ public class controls : MonoBehaviour {
 		if (coll.gameObject.tag == "Column1")
 		{
 			print("hit Column1");
-			win ();
 			PlayerStats.Scored (300);
+			win ();
 		}
 		if (coll.gameObject.tag == "Column2")
 		{
 			print("hit Column2");
-			win ();
 			PlayerStats.Scored (500);
+			win ();
 		}
 		if (coll.gameObject.tag == "Column3")
 		{
 			print("hit Column3");
-			win ();
 			PlayerStats.Scored (1000);
+			win ();
 		}
      
     }
@@ -241,16 +240,19 @@ public class controls : MonoBehaviour {
 	public void win()
 	{
 		Ground.Stop ();
+		winning = true;
 		OnGround = true;
 		dashing = false;
 		canDash = true;
 		jumpStart = false;
 		tRight = false;
 		tLeft = false;
+		PlayerStats.Save ();
 		GameMaster.EndGame ();
 		WP.show();
 		UIP.hide ();
 		anim.SetBool ("idle", false);
+
 	}
 
     private void OnTriggerEnter2D(Collider2D other)

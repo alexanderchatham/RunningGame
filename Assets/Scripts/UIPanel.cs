@@ -9,19 +9,13 @@ public class UIPanel : MonoBehaviour {
 	public Text numberOfCoins;
     public Text Score;
 	public GameObject Panel;
-    public bool mainMenu = false;
 
-	private void Awake()
+	 void Awake()
 	{
 		if (instance == null)
 			instance = this;
 	}
 
-    private void Start()
-    {
-        if (mainMenu)
-            PlayerStats.Load();
-    }
 
     // Update is called once per frame
     void Update () {

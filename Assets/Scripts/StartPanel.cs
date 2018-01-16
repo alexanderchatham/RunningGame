@@ -8,6 +8,8 @@ public class StartPanel : MonoBehaviour {
 	public static StartPanel instance;
 	public GameObject Panel;
 	LevelPanel LP;
+	public Text numberOfCoins;
+	public Text score;
 
 	private void Awake()
 	{
@@ -17,16 +19,15 @@ public class StartPanel : MonoBehaviour {
 
 	void Start() 
 	{
+		numberOfCoins.text = PlayerPrefs.GetInt("Coins", 0).ToString();
+		score.text = PlayerPrefs.GetInt("Score", 0).ToString();
 		LP = LevelPanel.instance;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 
 	public void show()
 	{
+		numberOfCoins.text = PlayerPrefs.GetInt("Coins", 0).ToString();
+		score.text = PlayerPrefs.GetInt("Score", 0).ToString();
 		LP.hide ();
 		Panel.SetActive(true);
 	}
