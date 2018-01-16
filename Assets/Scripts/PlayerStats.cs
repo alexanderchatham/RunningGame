@@ -12,7 +12,9 @@ public class PlayerStats : MonoBehaviour {
 
     public static void Save()
     {
-		print ("Saving!");
+		print ("Loading old data then Saving!");
+		Load ();
+		print("Saving!");
         PlayerPrefs.SetInt("Coins", totalCoins + Coins);
 		Coins = 0;
         PlayerPrefs.SetInt("Score", totalScore + Score);
@@ -22,6 +24,7 @@ public class PlayerStats : MonoBehaviour {
 
     public static void Load()
     {
+		print ("Loading old data");
         totalCoins = PlayerPrefs.GetInt("Coins", 0);
         totalScore = PlayerPrefs.GetInt("Score", 0);
         Deaths = PlayerPrefs.GetInt("Deaths", 0);
