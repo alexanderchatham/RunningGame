@@ -24,6 +24,7 @@ public class controls : MonoBehaviour {
 	UIPanel UIP;
     float m_Result;
 	Animator anim;
+    SpriteRenderer rend;
 	public static bool jumpStart;
 	public static bool tRight;
 	public static bool tLeft;
@@ -39,6 +40,7 @@ public class controls : MonoBehaviour {
         //You get the Rigidbody component you attach to the GameObject
         m_Rigidbody = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator> ();
+        rend = GetComponent<SpriteRenderer>();
 		ft = FlashingText.ft;
         DP = DeathPanel.instance;
         WP = WinPanel.instance;
@@ -119,11 +121,13 @@ public class controls : MonoBehaviour {
     {
 		if (Input.GetKey (KeyCode.LeftArrow) || tLeft)
 		{
+            rend.flipX = true;
             moveLeft();
 			
 		}
 		if (Input.GetKey (KeyCode.RightArrow) || tRight)
 		{
+            rend.flipX = false;
             moveRight();
 			
 		}
@@ -213,19 +217,25 @@ public class controls : MonoBehaviour {
 		{
 			print("hit Column1");
 			PlayerStats.Scored (300);
-			win ();
+
+            PlayerStats.Save();
+            win ();
 		}
 		if (coll.gameObject.tag == "Column2")
 		{
 			print("hit Column2");
 			PlayerStats.Scored (500);
-			win ();
+
+            PlayerStats.Save();
+            win ();
 		}
 		if (coll.gameObject.tag == "Column3")
 		{
 			print("hit Column3");
 			PlayerStats.Scored (1000);
-			win ();
+
+            PlayerStats.Save();
+            win ();
 		}
      
     }
@@ -233,7 +243,13 @@ public class controls : MonoBehaviour {
 	public void die()
 	{
 		Alive = false;
-		GameMaster.EndGame ();
+        OnGround = true;
+        dashing = false;
+        canDash = true;
+        jumpStart = false;
+        tRight = false;
+        tLeft = false;
+        GameMaster.EndGame ();
 		DP.show();
 		UIP.hide ();
 	}
@@ -247,7 +263,6 @@ public class controls : MonoBehaviour {
 		jumpStart = false;
 		tRight = false;
 		tLeft = false;
-		PlayerStats.Save ();
 		GameMaster.EndGame ();
 		WP.show();
 		UIP.hide ();
@@ -280,6 +295,7 @@ public class controls : MonoBehaviour {
 			startUp ();
 		}
     }
+
 	public void startUp()
 	{
 		GameMaster.Normal ();
