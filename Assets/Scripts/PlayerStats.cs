@@ -6,19 +6,23 @@ public class PlayerStats : MonoBehaviour {
 
 	public static int Deaths = 0;
 	public static int Score = 0;
+	public static int totalScore = 0;
 	public static int Coins = 0;
+	public static int totalCoins = 0;
 
     public static void Save()
     {
-        PlayerPrefs.SetInt("Coins", Coins);
-        PlayerPrefs.SetInt("Score", Score);
+        PlayerPrefs.SetInt("Coins", totalCoins + Coins);
+		Coins = 0;
+        PlayerPrefs.SetInt("Score", totalScore + Score);
+		Score = 0;
         PlayerPrefs.SetInt("Deaths", Deaths);
     }
 
     public static void Load()
     {
-        Coins = PlayerPrefs.GetInt("Coins", 0);
-        Score = PlayerPrefs.GetInt("Score", 0);
+        totalCoins = PlayerPrefs.GetInt("Coins", 0);
+        totalScore = PlayerPrefs.GetInt("Score", 0);
         Deaths = PlayerPrefs.GetInt("Deaths", 0);
     }
 
@@ -36,12 +40,17 @@ public class PlayerStats : MonoBehaviour {
 		Score += 100;
 	}
 
-	public static void clearCoin(){
+	public static void clearCoin()
+	{
 		Coins = 0;
 	}
     public static void clearScore()
     {
         Score = 0;
     }
-
+	public static void clear()
+	{
+		clearCoin ();
+		clearScore ();
+	}
 }

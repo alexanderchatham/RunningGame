@@ -12,18 +12,19 @@ public class GameMaster : MonoBehaviour {
 
 
     public static int Level = 0;
-	private int MaxLevel = 6;
+	private static int MaxLevel = 6;
     public static float groundMoveSpeed = -0.00f;
 	public static float skyMoveSpeed = -0.00f;
 	public static float characterMoveSpeed = 0.075f;
 	private string currentLevel;
 	private string Levelnumber;
+	private string gameSpeed;
 
     public void Start()
     {
         if(SceneManager.GetActiveScene().name != "Menu"){
             currentLevel = SceneManager.GetActiveScene().name;
-            Levelnumber = currentLevel.Substring(currentLevel.Length - 1);
+            Levelnumber = currentLevel.Substring(currentLevel.Length - 2);
             print(Levelnumber);
             Level = int.Parse(Levelnumber);
         }
@@ -78,12 +79,12 @@ public class GameMaster : MonoBehaviour {
 			Level++;
 			print ("Next Level button. Level is: " + Level);
 			SceneManager.LoadScene (Level, LoadSceneMode.Single);
-            PlayerStats.Load();
+            PlayerStats.clear();
 		} else
 		{
 			print ("At Max Level");
 			SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
-            PlayerStats.Load();
+            PlayerStats.clear();
 		}
         
         GameMaster.EndGame();
@@ -93,7 +94,7 @@ public class GameMaster : MonoBehaviour {
 		SceneManager.LoadScene("Menu", LoadSceneMode.Single);
 		GameMaster.EndGame ();
 		Level = 0;
-        PlayerStats.clearCoin();
+		PlayerStats.Load ();
 	}
 	public void loadLevel(int i)
 	{
@@ -101,9 +102,15 @@ public class GameMaster : MonoBehaviour {
 		{
 			Level = i;
 			SceneManager.LoadScene ("Level " + i, LoadSceneMode.Single);
-            PlayerStats.Load();
 		}
 	}
-
+	public void beatLevel(int i)
+	{
+		if (i <= MaxLevel)
+		{
+			PlayerPrefs.SetInt("Level "+i, 1);
+			PlayerPrefs.SetInt("Level "+i+" coins",PlayerStats.Coins);
+		}
+	}
     
 }

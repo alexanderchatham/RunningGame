@@ -30,6 +30,7 @@ public class controls : MonoBehaviour {
     public Button JumpBtn;
     public Button RightBtn;
     public Button LeftBtn;
+	public bool dying = false;
 
 
 
@@ -53,8 +54,14 @@ public class controls : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 		moving = false;
-        jump();
-        move();
+		if (!dying)
+		{
+			jump ();
+			move ();
+		}
+
+		//code for dashing 
+		/*
         if (Input.GetKeyDown("x") && canDash == true && !OnGround)
         {
             canDash = false;
@@ -68,18 +75,22 @@ public class controls : MonoBehaviour {
         if ( canDash == false && dashing == false)
         {
             canDash = true;
-        }
+        }*/
 
+		//code that makes it so that runs the idle animation
 		if (OnGround  && moving  == false)
         {
             if(!allTheWayLeft)
 			anim.SetBool ("idle", true);
         }
+
+		//this code makes it so the character doesn't bounce and sticks his landings
         if (OnGround && m_Rigidbody.velocity.y > 0)
         {
             m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, 0);
         }
 
+		//this code pushes the character back constantly
 		if(m_Rigidbody.velocity.x <= 0 && !allTheWayLeft && (!tRight||!Input.GetKeyDown (KeyCode.RightArrow)))
         m_Rigidbody.transform.Translate(GameMaster.groundMoveSpeed, 0, 0);
     }
@@ -171,17 +182,16 @@ public class controls : MonoBehaviour {
     {
         if (coll.gameObject.tag == "Ground")
         {
-            print("Hit ground");
-            anim.SetBool("Dead", true);
-            OnGround = false;
-            canDash = false;
-            jumpStart = false;
-            tRight = false;
-            tLeft = false;
-            GameMaster.EndGame();
-            PlayerStats.clearCoin();
-            Alive = false;
-            Ground.Stop();
+			OnGround = false;
+			canDash = false;
+			jumpStart = false;
+			tRight = false;
+			tLeft = false;
+			dying = true;
+			PlayerStats.clearCoin ();
+			anim.SetBool ("Dead", true);
+
+           
         }
 		if (coll.gameObject.tag == "Back")
 		{
@@ -203,46 +213,46 @@ public class controls : MonoBehaviour {
 		if (coll.gameObject.tag == "Column1")
 		{
 			print("hit Column1");
+			win ();
 			PlayerStats.Scored (300);
-            win();
 		}
 		if (coll.gameObject.tag == "Column2")
 		{
 			print("hit Column2");
+			win ();
 			PlayerStats.Scored (500);
-            win();
 		}
 		if (coll.gameObject.tag == "Column3")
 		{
 			print("hit Column3");
+			win ();
 			PlayerStats.Scored (1000);
-            win();
 		}
      
     }
 
-    void win()
-    {
-        PlayerStats.Save();
-        OnGround = true;
-        dashing = false;
-        canDash = true;
-        jumpStart = false;
-        tRight = false;
-        tLeft = false;
-        anim.SetBool("idle", false);
-        WP.show();
-        UIP.hide();
-        GameMaster.EndGame();
-    }
+	public void die()
+	{
+		Alive = false;
+		GameMaster.EndGame ();
+		DP.show();
+		UIP.hide ();
+	}
+	public void win()
+	{
+		Ground.Stop ();
+		OnGround = true;
+		dashing = false;
+		canDash = true;
+		jumpStart = false;
+		tRight = false;
+		tLeft = false;
+		GameMaster.EndGame ();
+		WP.show();
+		UIP.hide ();
+		anim.SetBool ("idle", false);
+	}
 
-    void die()
-    {
-
-        DP.show();
-        UIP.hide();
-    }
-   
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Gravity" && m_Rigidbody.velocity.y < 0)
@@ -277,6 +287,18 @@ public class controls : MonoBehaviour {
 		UIP.show ();
 	}
 
+	/*public static void touchJump(bool started)
+	{
+		jumpStart = started;
+	}
+	public static void touchRight(bool a)
+	{
+		tRight = a;
+	}
+	public static void touchLeft(bool a)
+	{
+		tLeft = a;
+	}*/
 }
 
 //GLIDING CODE
