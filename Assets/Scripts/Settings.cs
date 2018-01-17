@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Settings : MonoBehaviour {
 
@@ -58,6 +59,7 @@ public class Settings : MonoBehaviour {
 	}
 	public void DeleteData(){
 		PlayerPrefs.DeleteAll ();
+		SceneManager.LoadScene (0);
 	}
 
 }
