@@ -4,20 +4,39 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour {
 
-	public static int Lives = 3;
+	public static int Deaths = 0;
 	public static int Score = 0;
+	public static int totalScore = 0;
 	public static int Coins = 0;
+	public static int totalCoins = 0;
+
+    public static void Save()
+    {
+		print ("Loading old data then Saving!");
+		Load ();
+		print("Saving!");
+        PlayerPrefs.SetInt("Coins", totalCoins + Coins);
+		Coins = 0;
+        PlayerPrefs.SetInt("Score", totalScore + Score);
+		Score = 0;
+        PlayerPrefs.SetInt("Deaths", Deaths);
+    }
+
+    public static void Load()
+    {
+		print ("Loading old data");
+        totalCoins = PlayerPrefs.GetInt("Coins", 0);
+        totalScore = PlayerPrefs.GetInt("Score", 0);
+        Deaths = PlayerPrefs.GetInt("Deaths", 0);
+    }
 
 
-
-
-	public static void Scored(int i){
+    public static void Scored(int i){
 		Score += i;
 	}
 
 	public static void loseLife(){
-		if (Lives > 1)
-			Lives--;
+        Deaths++;
 	}
 
 	public static void getCoin(){
@@ -25,8 +44,17 @@ public class PlayerStats : MonoBehaviour {
 		Score += 100;
 	}
 
-	public static void clearCoin(){
+	public static void clearCoin()
+	{
 		Coins = 0;
 	}
-
+    public static void clearScore()
+    {
+        Score = 0;
+    }
+	public static void clear()
+	{
+		clearCoin ();
+		clearScore ();
+	}
 }

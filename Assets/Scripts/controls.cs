@@ -24,12 +24,12 @@ public class controls : MonoBehaviour {
 	UIPanel UIP;
     float m_Result;
 	Animator anim;
+    SpriteRenderer rend;
 	public static bool jumpStart;
 	public static bool tRight;
 	public static bool tLeft;
-    public Button JumpBtn;
-    public Button RightBtn;
-    public Button LeftBtn;
+	public bool dying = false;
+	public bool winning = false;
 
 
 
@@ -40,6 +40,7 @@ public class controls : MonoBehaviour {
         //You get the Rigidbody component you attach to the GameObject
         m_Rigidbody = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator> ();
+        rend = GetComponent<SpriteRenderer>();
 		ft = FlashingText.ft;
         DP = DeathPanel.instance;
         WP = WinPanel.instance;
@@ -53,8 +54,14 @@ public class controls : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 		moving = false;
-        jump();
-        move();
+		if (!dying)
+		{
+			jump ();
+			move ();
+		}
+
+		//code for dashing 
+		/*
         if (Input.GetKeyDown("x") && canDash == true && !OnGround)
         {
             canDash = false;
@@ -68,18 +75,22 @@ public class controls : MonoBehaviour {
         if ( canDash == false && dashing == false)
         {
             canDash = true;
-        }
+        }*/
 
+		//code that makes it so that runs the idle animation
 		if (OnGround  && moving  == false)
         {
             if(!allTheWayLeft)
 			anim.SetBool ("idle", true);
         }
+
+		//this code makes it so the character doesn't bounce and sticks his landings
         if (OnGround && m_Rigidbody.velocity.y > 0)
         {
             m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, 0);
         }
 
+		//this code pushes the character back constantly
 		if(m_Rigidbody.velocity.x <= 0 && !allTheWayLeft && (!tRight||!Input.GetKeyDown (KeyCode.RightArrow)))
         m_Rigidbody.transform.Translate(GameMaster.groundMoveSpeed, 0, 0);
     }
@@ -110,11 +121,13 @@ public class controls : MonoBehaviour {
     {
 		if (Input.GetKey (KeyCode.LeftArrow) || tLeft)
 		{
+            rend.flipX = true;
             moveLeft();
 			
 		}
 		if (Input.GetKey (KeyCode.RightArrow) || tRight)
 		{
+            rend.flipX = false;
             moveRight();
 			
 		}
@@ -176,13 +189,12 @@ public class controls : MonoBehaviour {
 			jumpStart = false;
 			tRight = false;
 			tLeft = false;
-			PlayerStats.clearCoin ();
-			anim.SetBool ("Dead", true);
-			Alive = false;
+			dying = true;
 			GameMaster.EndGame ();
-			DP.show();
-			UIP.hide ();
-			Ground.Stop ();
+			if(!winning)
+				PlayerStats.clear ();
+			anim.SetBool ("Dead", true);
+
            
         }
 		if (coll.gameObject.tag == "Back")
@@ -205,50 +217,54 @@ public class controls : MonoBehaviour {
 		if (coll.gameObject.tag == "Column1")
 		{
 			print("hit Column1");
-			OnGround = true;
-			dashing = false;
-			canDash = true;
-			jumpStart = false;
-			tRight = false;
-			tLeft = false;
-			anim.SetBool ("idle", false);
-			WP.show();
-			UIP.hide ();
 			PlayerStats.Scored (300);
-            GameMaster.EndGame ();
+            win ();
 		}
 		if (coll.gameObject.tag == "Column2")
 		{
 			print("hit Column2");
-			OnGround = true;
-			dashing = false;
-			canDash = true;
-			jumpStart = false;
-			tRight = false;
-			tLeft = false;
-			anim.SetBool ("idle", false);
-			WP.show();
-			UIP.hide ();
 			PlayerStats.Scored (500);
-            GameMaster.EndGame ();
+            win ();
 		}
 		if (coll.gameObject.tag == "Column3")
 		{
 			print("hit Column3");
-			OnGround = true;
-			dashing = false;
-			canDash = true;
-			jumpStart = false;
-			tRight = false;
-			tLeft = false;
-			anim.SetBool ("idle", false);
 			PlayerStats.Scored (1000);
-            WP.show();
-			UIP.hide ();
-            GameMaster.EndGame ();
+            win ();
 		}
      
     }
+
+	public void die()
+	{
+		Alive = false;
+        OnGround = true;
+        dashing = false;
+        canDash = true;
+        jumpStart = false;
+        tRight = false;
+        tLeft = false;
+        GameMaster.EndGame ();
+		DP.show();
+		UIP.hide ();
+	}
+	public void win()
+	{
+		PlayerStats.Save ();
+		Ground.Stop ();
+		winning = true;
+		OnGround = true;
+		dashing = false;
+		canDash = true;
+		jumpStart = false;
+		tRight = false;
+		tLeft = false;
+		GameMaster.EndGame ();
+		WP.show();
+		UIP.hide ();
+		anim.SetBool ("idle", false);
+
+	}
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -275,9 +291,10 @@ public class controls : MonoBehaviour {
 			startUp ();
 		}
     }
+
 	public void startUp()
 	{
-		GameMaster.Normal ();
+		GameMaster.GetSpeed ();
 		Starting = false;
 		ft.hide ();
 		Time.timeScale = 1;
