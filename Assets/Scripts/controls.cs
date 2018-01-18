@@ -48,6 +48,10 @@ public class controls : MonoBehaviour {
         //Initialising the force which is used on GameObject in various ways
         m_JumpForce = new Vector3(0.0f, jumpStrength, 0.0f);
         m_DashForce = new Vector3(dashStrength, 0.0f, 0.0f);
+
+		jumpStart = false;
+		tRight = false;
+		tLeft = false;
     }
 
 

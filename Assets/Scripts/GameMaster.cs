@@ -132,7 +132,7 @@ public class GameMaster : MonoBehaviour {
 			Level++;
 			print ("Next Level button. Level is: " + Level);
 			SceneManager.LoadScene (Level, LoadSceneMode.Single);
-			GetSpeed ();
+			EndGame ();
 			PlayerStats.Save ();
             PlayerStats.clear();
 		} else
