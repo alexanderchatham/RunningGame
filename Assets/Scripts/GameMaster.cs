@@ -19,6 +19,11 @@ public class GameMaster : MonoBehaviour {
 	private string currentLevel;
 	private string Levelnumber;
 	public static int gameSpeed;
+    public GameObject Orangedude;
+    public GameObject FireGuy;
+    public GameObject TreeGuy;
+    public GameObject startingPlayer;
+    public GameObject player;
 
     public void Start()
     {
@@ -28,6 +33,33 @@ public class GameMaster : MonoBehaviour {
             print(Levelnumber);
             Level = int.Parse(Levelnumber);
 			gameSpeed = PlayerPrefs.GetInt ("speed", 1);
+            loadCharacter(PlayerPrefs.GetInt("Character",0));
+        }
+    }
+
+    public void loadCharacter(int i)
+    {
+        print("loading character");
+        startingPlayer = GameObject.FindGameObjectWithTag("Player");
+        Transform startingplace = startingPlayer.transform;
+        switch (i)
+        {
+            case 0:
+                player = Instantiate<GameObject>(Orangedude,startingplace);
+                print("loading character 0");
+                break;
+            case 1:
+                player = Instantiate<GameObject>(FireGuy, startingplace);
+                print("loading character 1");
+                break;
+            case 2:
+                player = Instantiate<GameObject>(TreeGuy, startingplace);
+                print("loading character 2");
+                break;
+            default:
+                player = Instantiate<GameObject>(Orangedude, startingplace);
+                print("loading character default");
+                break;
         }
     }
 

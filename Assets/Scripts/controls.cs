@@ -103,7 +103,8 @@ public class controls : MonoBehaviour {
             m_Rigidbody.gravityScale = .5f;
             m_Rigidbody.AddForce(m_JumpForce, ForceMode2D.Impulse);
             OnGround = false;
-			if (Starting)
+            anim.SetBool("jump", true);
+            if (Starting)
 				startUp ();
         }
 
@@ -211,6 +212,8 @@ public class controls : MonoBehaviour {
         {
             print("hit plank");
             OnGround = true;
+
+            anim.SetBool("jump", false);
             dashing = false;
             canDash = true;
         }
@@ -239,6 +242,7 @@ public class controls : MonoBehaviour {
 	{
 		Alive = false;
         OnGround = true;
+        anim.SetBool("jump", false);
         dashing = false;
         canDash = true;
         jumpStart = false;
@@ -254,7 +258,8 @@ public class controls : MonoBehaviour {
 		Ground.Stop ();
 		winning = true;
 		OnGround = true;
-		dashing = false;
+        anim.SetBool("jump", false);
+        dashing = false;
 		canDash = true;
 		jumpStart = false;
 		tRight = false;
