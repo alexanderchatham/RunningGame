@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\Ground.cs" />
      <Compile Include="Assets\Scripts\Group.cs" />
      <Compile Include="Assets\Scripts\LevelPanel.cs" />
+     <Compile Include="Assets\Scripts\LevelStartPanel.cs" />
      <Compile Include="Assets\Scripts\PausePanel.cs" />
      <Compile Include="Assets\Scripts\plank.cs" />
      <Compile Include="Assets\Scripts\PlayerStats.cs" />

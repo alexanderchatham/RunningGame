@@ -125,6 +125,7 @@ public class GameMaster : MonoBehaviour {
 
     public void nextLevel()
     {
+		
 		if (Level < MaxLevel)
 		{
 
@@ -138,7 +139,7 @@ public class GameMaster : MonoBehaviour {
 		{
 			print ("At Max Level");
 			SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
-			GetSpeed ();
+			EndGame ();
 			PlayerStats.Save ();
             PlayerStats.clear();
 		}
@@ -157,8 +158,8 @@ public class GameMaster : MonoBehaviour {
 		if (i <= MaxLevel)
 		{
 			Level = i;
-			SceneManager.LoadScene ("Level " + i, LoadSceneMode.Single);
-			GetSpeed ();
+			SceneManager.LoadScene (i, LoadSceneMode.Single);
+			GameMaster.EndGame ();
 		}
 	}
 	public void beatLevel(int i)
