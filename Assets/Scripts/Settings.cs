@@ -10,7 +10,8 @@ public class Settings : MonoBehaviour {
     public GameObject Panel;
     StartPanel SP;
 	public Text speedText;
- 	
+	public GameObject ConfirmationPanel;
+	public Slider slide;
 
     private void Awake()
     {
@@ -21,6 +22,24 @@ public class Settings : MonoBehaviour {
     void Start()
     {
         SP = StartPanel.instance;
+		slide.value = PlayerPrefs.GetInt("speed", 0);
+		switch ((int)slide.value)
+		{
+			case 0:
+				speedText.text = "Slow";
+				break;
+			case 1:
+				speedText.text = "Normal";
+				break;
+			case 2:
+				speedText.text = "Fast";
+				break;
+			case 3:
+				speedText.text = "Faster";
+				break;
+			default:
+				break;
+		}
     }
 
 
@@ -62,4 +81,11 @@ public class Settings : MonoBehaviour {
 		SceneManager.LoadScene (0);
 	}
 
+	public void confirmation(){
+		ConfirmationPanel.SetActive (true);
+	}
+
+	public void confirmationHide(){
+		ConfirmationPanel.SetActive (false);
+	}
 }

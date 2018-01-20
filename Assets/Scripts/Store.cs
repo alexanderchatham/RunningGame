@@ -23,6 +23,7 @@ public class Store : MonoBehaviour {
 	void Start() 
 	{
 		SP = StartPanel.instance;
+		selectCharacter (PlayerPrefs.GetInt("Character",0));
 	}
 
     public void selectCharacter(int i)

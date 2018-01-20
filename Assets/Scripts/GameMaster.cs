@@ -12,7 +12,7 @@ public class GameMaster : MonoBehaviour {
 
 
     public static int Level = 0;
-	private static int MaxLevel = 6;
+	public static int MaxLevel = 6;
     public static float groundMoveSpeed = -0.00f;
 	public static float skyMoveSpeed = -0.00f;
 	public static float characterMoveSpeed = 0.075f;
@@ -24,7 +24,6 @@ public class GameMaster : MonoBehaviour {
     public GameObject TreeGuy;
     public GameObject startingPlayer;
     public GameObject player;
-
     public void Start()
     {
         if(SceneManager.GetActiveScene().name != "Menu"){
@@ -115,9 +114,16 @@ public class GameMaster : MonoBehaviour {
         characterMoveSpeed = initialCharacterSpeed * 1.25f;
     }
 
-    public void RestartGame()
+	public void RestartGame()
+	{
+		
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		Time.timeScale = 0;
+		GameMaster.EndGame();
+	}
+
+	public void RestartGame(bool win)
     {
-        
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 0;
         GameMaster.EndGame();
@@ -128,7 +134,6 @@ public class GameMaster : MonoBehaviour {
 		
 		if (Level < MaxLevel)
 		{
-
 			Level++;
 			print ("Next Level button. Level is: " + Level);
 			SceneManager.LoadScene (Level, LoadSceneMode.Single);
@@ -148,10 +153,21 @@ public class GameMaster : MonoBehaviour {
     }
 	public void menu()
 	{
+		
 		SceneManager.LoadScene("Menu", LoadSceneMode.Single);
-		GameMaster.EndGame ();
+		EndGame ();
+		Time.timeScale = 1;
 		Level = 0;
 		PlayerStats.Load ();
+	}
+	public void menu(bool win)
+	{
+		SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+		EndGame ();
+		Time.timeScale = 1;
+		Level = 0;
+		PlayerStats.Load ();
+
 	}
 	public void loadLevel(int i)
 	{
@@ -162,12 +178,17 @@ public class GameMaster : MonoBehaviour {
 			GameMaster.EndGame ();
 		}
 	}
-	public void beatLevel(int i)
+	public static void beatLevel(int i)
 	{
 		if (i <= MaxLevel)
 		{
-			PlayerPrefs.SetInt("Level "+i, 1);
-			PlayerPrefs.SetInt("Level "+i+" coins",PlayerStats.Coins);
+			PlayerPrefs.SetInt("Level " + i, 1);
+			print ("coins is " + PlayerStats.Coins);
+			print ("score is " + PlayerStats.Score);
+			if(PlayerPrefs.GetInt("Level " + i +" coins",0) < PlayerStats.Coins)
+				PlayerPrefs.SetInt("Level " + i +" coins",PlayerStats.Coins);
+			if(PlayerPrefs.GetInt("Level " + i +" score",0) < PlayerStats.Score)
+				PlayerPrefs.SetInt ("Level " + i + " score", PlayerStats.Score);
 		}
 	}
     

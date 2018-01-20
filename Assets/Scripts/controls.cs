@@ -256,9 +256,9 @@ public class controls : MonoBehaviour {
 		DP.show();
 		UIP.hide ();
 	}
+
 	public void win()
 	{
-		PlayerStats.Save ();
 		Ground.Stop ();
 		winning = true;
 		OnGround = true;
@@ -272,6 +272,8 @@ public class controls : MonoBehaviour {
 		WP.show();
 		UIP.hide ();
 		anim.SetBool ("idle", false);
+		GameMaster.beatLevel (GameMaster.Level);
+		PlayerStats.Save ();
 
 	}
 

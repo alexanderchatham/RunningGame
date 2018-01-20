@@ -59,7 +59,9 @@
      <Compile Include="Assets\Scripts\Ground.cs" />
      <Compile Include="Assets\Scripts\Group.cs" />
      <Compile Include="Assets\Scripts\LevelPanel.cs" />
+     <Compile Include="Assets\Scripts\LevelSelectButton.cs" />
      <Compile Include="Assets\Scripts\LevelStartPanel.cs" />
+     <Compile Include="Assets\Scripts\numberbuttons.cs" />
      <Compile Include="Assets\Scripts\PausePanel.cs" />
      <Compile Include="Assets\Scripts\plank.cs" />
      <Compile Include="Assets\Scripts\PlayerStats.cs" />
@@ -67,6 +69,7 @@
      <Compile Include="Assets\Scripts\Sky.cs" />
      <Compile Include="Assets\Scripts\StartPanel.cs" />
      <Compile Include="Assets\Scripts\Store.cs" />
+     <Compile Include="Assets\Scripts\TitleScreen.cs" />
      <Compile Include="Assets\Scripts\TouchControls.cs" />
      <Compile Include="Assets\Scripts\UIPanel.cs" />
      <Compile Include="Assets\Scripts\WinPanel.cs" />
