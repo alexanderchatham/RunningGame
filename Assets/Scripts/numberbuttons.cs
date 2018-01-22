@@ -12,6 +12,7 @@ public class numberbuttons : MonoBehaviour {
 	public Sprite fourButton;
 	public Sprite fiveButton;
 	public Sprite SixButton;
+    public Sprite sevenButton;
 
 	public static Sprite _oneButton;
 	public static Sprite _twoButton;
@@ -19,8 +20,9 @@ public class numberbuttons : MonoBehaviour {
 	public static Sprite _fourButton;
 	public static Sprite _fiveButton;
 	public static Sprite _SixButton;
+    public static Sprite _sevenButton;
 
-	private void Awake()
+    private void Awake()
 	{
 		if (instance == null)
 			instance = this;
@@ -35,7 +37,8 @@ public class numberbuttons : MonoBehaviour {
 	_fourButton  =fourButton;
 	_fiveButton  =fiveButton;
     _SixButton   =SixButton;
-	}
+    _sevenButton = sevenButton;
+    }
 
 	public Sprite getButton(int i)
 	{
@@ -60,7 +63,10 @@ public class numberbuttons : MonoBehaviour {
 			case 6:
 				return _SixButton;
 				break;
-			default:
+            case 7:
+                return _sevenButton;
+                break;
+            default:
 				return _oneButton;
 				break;
 		}

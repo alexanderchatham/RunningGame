@@ -30,6 +30,7 @@ public class controls : MonoBehaviour {
 	public static bool tLeft;
 	public bool dying = false;
 	public bool winning = false;
+    public bool onMovingPlatform;
 
 
 
@@ -95,7 +96,7 @@ public class controls : MonoBehaviour {
         }
 
 		//this code pushes the character back constantly
-		if(m_Rigidbody.velocity.x <= 0 && !allTheWayLeft && (!tRight||!Input.GetKeyDown (KeyCode.RightArrow)))
+		if(m_Rigidbody.velocity.x <= 0 && !allTheWayLeft && (!tRight||!Input.GetKeyDown (KeyCode.RightArrow)) && !onMovingPlatform)
         m_Rigidbody.transform.Translate(GameMaster.groundMoveSpeed, 0, 0);
     }
 
