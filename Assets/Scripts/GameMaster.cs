@@ -12,7 +12,7 @@ public class GameMaster : MonoBehaviour {
 
 
     public static int Level = 0;
-	public static int MaxLevel = 7;
+	public static int MaxLevel = 8;
     public static float groundMoveSpeed = -0.00f;
 	public static float skyMoveSpeed = -0.00f;
 	public static float characterMoveSpeed = 0.075f;
@@ -22,6 +22,7 @@ public class GameMaster : MonoBehaviour {
     public GameObject Orangedude;
     public GameObject FireGuy;
     public GameObject TreeGuy;
+    public GameObject IceGuy;
     public GameObject startingPlayer;
     public GameObject player;
     public void Start()
@@ -54,6 +55,10 @@ public class GameMaster : MonoBehaviour {
             case 2:
                 player = Instantiate<GameObject>(TreeGuy, startingplace);
                 print("loading character 2");
+                break;
+            case 3:
+                player = Instantiate<GameObject>(IceGuy, startingplace);
+                print("loading character 3");
                 break;
             default:
                 player = Instantiate<GameObject>(Orangedude, startingplace);

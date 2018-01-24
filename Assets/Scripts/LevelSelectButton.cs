@@ -9,14 +9,12 @@ public class LevelSelectButton : MonoBehaviour {
 	public Text coinText;
 	Image numberImage;
 	public int number = 1;
-	numberbuttons nb;
 	Sprite numberSprite;
 
 	// Use this for initialization
 
 	void Start()
 	{
-		nb = numberbuttons.instance;
 		numberImage = this.GetComponent<Image> ();
 	}
 

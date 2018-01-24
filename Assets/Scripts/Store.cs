@@ -13,6 +13,7 @@ public class Store : MonoBehaviour {
     public Button Orange;
     public Button fire;
     public Button tree;
+    public Button ice;
 
     private void Awake()
 	{
@@ -24,6 +25,7 @@ public class Store : MonoBehaviour {
 	{
 		SP = StartPanel.instance;
 		selectCharacter (PlayerPrefs.GetInt("Character",0));
+        checkUnlocked();
 	}
 
     public void selectCharacter(int i)
@@ -35,27 +37,41 @@ public class Store : MonoBehaviour {
                 cost = 0;
                 break;
             case 1:
-                cost = 0;
+                cost = 20;
                 break;
             case 2:
-                cost = 0;
+                cost = 30;
+                break;
+            case 3:
+                cost = 40;
                 break;
             default:
                 break;
         }
-        if (PlayerStats.totalCoins >= cost || 1 == PlayerPrefs.GetInt("Character " + i + " unlocked", 0))
+        if (PlayerPrefs.GetInt("Coins", 0) >= cost || 1 == PlayerPrefs.GetInt("Character " + i + " unlocked", 0))
         {
             shadowFunction(i);
-            PlayerStats.spendCoin(cost);
-            PlayerPrefs.SetInt("Character " + i + " unlocked" , 1);
+            unlockPlayer(i);
+            if (0 == PlayerPrefs.GetInt("Character " + i + " unlocked", 0))
+            {
+                print("subtracting cost");
+                numberOfCoins.text = (PlayerPrefs.GetInt("Coins", 0) - cost).ToString();
+                int temp = PlayerPrefs.GetInt("Coins", 0) - cost;
+                PlayerPrefs.SetInt("Coins", temp);
+                PlayerPrefs.SetInt("Character " + i + " unlocked", 1);
+            }
+            else
+            {
+            }
             print("Selecting Character: " + i);
             PlayerPrefs.SetInt("Character", i);
+
+
+            
         }
         else
         {
-            notEnough.enabled = false;
-            print("enabling not enough");
-            notEnough.enabled = true;
+            print("Not enough coins");
         }
     }
 
@@ -67,16 +83,25 @@ public class Store : MonoBehaviour {
                 activateShadows(Orange);
                 deactivateShadows(fire);
                 deactivateShadows(tree);
+                deactivateShadows(ice);
                 break;
             case 1:
                 activateShadows(fire);
                 deactivateShadows(Orange);
                 deactivateShadows(tree);
+                deactivateShadows(ice);
                 break;
             case 2:
                 activateShadows(tree);
                 deactivateShadows(fire);
                 deactivateShadows(Orange);
+                deactivateShadows(ice);
+                break;
+            case 3:
+                activateShadows(ice);
+                deactivateShadows(fire);
+                deactivateShadows(Orange);
+                deactivateShadows(tree);
                 break;
         }
     }
@@ -99,7 +124,48 @@ public class Store : MonoBehaviour {
         }
     }
 
+    void checkUnlocked()
+    {
+        for(int i = 0; i <= 3; i++)
+        {
+            if(PlayerPrefs.GetInt("Character " + i + " unlocked", 0) == 1)
+            {
+                print("marking "+i+" unlocked");
+                switch (i)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        fire.GetComponentInChildren<Text>().text = "Fire Guy\nUnlocked!";
+                        break;
+                    case 2:
+                        tree.GetComponentInChildren<Text>().text = "Tree Guy\nUnlocked!";
+                        break;
+                    case 3:
+                        ice.GetComponentInChildren<Text>().text = "Ice Guy\nUnlocked!";
+                        break;
+                }
+            }
+        }
+    }
 
+    void unlockPlayer(int i)
+    {
+        switch (i)
+        {
+            case 0:
+                break;
+            case 1:
+                fire.GetComponentInChildren<Text>().text = "Fire Guy\nUnlocked!";
+                break;
+            case 2:
+                tree.GetComponentInChildren<Text>().text = "Tree Guy\nUnlocked!";
+                break;
+            case 3:
+                ice.GetComponentInChildren<Text>().text = "Ice Guy\nUnlocked!";
+                break;
+        }
+    }
 
 
 

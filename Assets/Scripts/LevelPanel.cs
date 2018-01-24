@@ -12,7 +12,6 @@ public class LevelPanel : MonoBehaviour {
 	StartPanel SP;
 	public GameObject content;
 	public GameObject numberButtonPrefab;
-	numberbuttons nb;
 	LevelSelectButton LSB;
 	bool filled = false;
 
@@ -25,11 +24,11 @@ public class LevelPanel : MonoBehaviour {
 	void Start() 
 	{
 		SP = StartPanel.instance;
-		nb = numberbuttons.instance;
 	}
 	
 	void fillButtons()
 	{
+        int numberOfButtons = 0;
 		if(!filled)
 		for (int i = 1; i <= GameMaster.MaxLevel; i++)
 		{
@@ -37,10 +36,11 @@ public class LevelPanel : MonoBehaviour {
 				GameObject numberButton = (GameObject)Instantiate (numberButtonPrefab,content.transform);
 				LSB = numberButton.GetComponent<LevelSelectButton> ();
 				LSB.getNumber (i);
-				numberButton.GetComponent<Image> ().sprite = nb.getButton(i);
+                numberButton.GetComponent<Image>().sprite = Resources.Load<Sprite>(i+"button");
 				numberButton.name = i.ToString();
 				print ("adding listener to : "+i);
 				numberButton.GetComponent<Button> ().onClick.AddListener (() => onClickLevelSelect (numberButton));
+                numberOfButtons++;
 			}
 		}
 		filled = true;

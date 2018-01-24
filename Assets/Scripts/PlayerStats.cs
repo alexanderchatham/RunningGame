@@ -44,11 +44,6 @@ public class PlayerStats : MonoBehaviour {
 		Score += 100;
 	}
 
-    public static void spendCoin(int i)
-    {
-        totalCoins -= i;
-    }
-
 	public static void clearCoin()
 	{
 		Coins = 0;
