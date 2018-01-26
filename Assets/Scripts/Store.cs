@@ -37,13 +37,13 @@ public class Store : MonoBehaviour {
                 cost = 0;
                 break;
             case 1:
-                cost = 20;
+                cost = 200;
                 break;
             case 2:
-                cost = 30;
+                cost = 300;
                 break;
             case 3:
-                cost = 40;
+                cost = 400;
                 break;
             default:
                 break;
