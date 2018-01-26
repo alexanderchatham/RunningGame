@@ -203,6 +203,20 @@ public class controls : MonoBehaviour {
 
            
         }
+        if (coll.gameObject.tag == "fireball")
+        {
+            print("hit fireball");
+            OnGround = false;
+            canDash = false;
+            jumpStart = false;
+            tRight = false;
+            tLeft = false;
+            dying = true;
+            GameMaster.EndGame();
+            if (!winning)
+                PlayerStats.clear();
+            anim.SetBool("Dead", true);
+        }
 		if (coll.gameObject.tag == "Back")
 		{
 			print("hit back");

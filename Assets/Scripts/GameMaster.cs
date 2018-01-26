@@ -171,6 +171,7 @@ public class GameMaster : MonoBehaviour {
 		EndGame ();
 		Time.timeScale = 1;
 		Level = 0;
+        PlayerStats.clear();
 		PlayerStats.Load ();
 
 	}

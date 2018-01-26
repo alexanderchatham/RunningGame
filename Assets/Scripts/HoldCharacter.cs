@@ -14,11 +14,12 @@ public class HoldCharacter : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        print("hit moving platform");
-        other.transform.parent = gameObject.transform;
-        mP.startMoving();
+        
         if(other.tag == "Player")
         {
+            print("hit moving platform");
+            other.transform.parent = gameObject.transform;
+            mP.startMoving();
             c = other.GetComponent<controls>();
             c.onMovingPlatform = true;
             print(c.onMovingPlatform);
