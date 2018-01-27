@@ -7,6 +7,7 @@ public class fireball : MonoBehaviour {
     SpriteRenderer sr;
     public Vector2 dir = new Vector2(0, .5f);
     private float startingHeight;
+    public float pause = 0;
 
     public float jumpStrength = 10f;
     Vector3 m_JumpForce;
@@ -18,10 +19,17 @@ public class fireball : MonoBehaviour {
         sr = GetComponent<SpriteRenderer>();
         startingHeight = rb.position.y;
         m_JumpForce = new Vector3(0.0f, jumpStrength, 0.0f);
+        rb.gravityScale = 0f;
     }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+        if(pause > 0)
+        {
+            pause -= Time.deltaTime;
+            return;
+        }
+        rb.gravityScale = 1f;
         if (rb.position.y < startingHeight && rb.velocity.y<0 && killedPlayer == false)
             bounce();
         if (rb.velocity.y < 0)
