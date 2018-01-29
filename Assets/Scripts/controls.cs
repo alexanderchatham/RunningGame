@@ -30,6 +30,7 @@ public class controls : MonoBehaviour {
 	public static bool tLeft;
 	public bool dying = false;
 	public bool winning = false;
+    public bool onMovingPlatform;
 
 
 
@@ -48,6 +49,10 @@ public class controls : MonoBehaviour {
         //Initialising the force which is used on GameObject in various ways
         m_JumpForce = new Vector3(0.0f, jumpStrength, 0.0f);
         m_DashForce = new Vector3(dashStrength, 0.0f, 0.0f);
+
+		jumpStart = false;
+		tRight = false;
+		tLeft = false;
     }
 
 
@@ -91,7 +96,7 @@ public class controls : MonoBehaviour {
         }
 
 		//this code pushes the character back constantly
-		if(m_Rigidbody.velocity.x <= 0 && !allTheWayLeft && (!tRight||!Input.GetKeyDown (KeyCode.RightArrow)))
+		if(m_Rigidbody.velocity.x <= 0 && !allTheWayLeft && (!tRight||!Input.GetKeyDown (KeyCode.RightArrow)) && !onMovingPlatform)
         m_Rigidbody.transform.Translate(GameMaster.groundMoveSpeed, 0, 0);
     }
 
@@ -103,7 +108,8 @@ public class controls : MonoBehaviour {
             m_Rigidbody.gravityScale = .5f;
             m_Rigidbody.AddForce(m_JumpForce, ForceMode2D.Impulse);
             OnGround = false;
-			if (Starting)
+            anim.SetBool("jump", true);
+            if (Starting)
 				startUp ();
         }
 
@@ -197,6 +203,20 @@ public class controls : MonoBehaviour {
 
            
         }
+        if (coll.gameObject.tag == "fireball")
+        {
+            print("hit fireball");
+            OnGround = false;
+            canDash = false;
+            jumpStart = false;
+            tRight = false;
+            tLeft = false;
+            dying = true;
+            GameMaster.EndGame();
+            if (!winning)
+                PlayerStats.clear();
+            anim.SetBool("Dead", true);
+        }
 		if (coll.gameObject.tag == "Back")
 		{
 			print("hit back");
@@ -211,6 +231,8 @@ public class controls : MonoBehaviour {
         {
             print("hit plank");
             OnGround = true;
+
+            anim.SetBool("jump", false);
             dashing = false;
             canDash = true;
         }
@@ -239,6 +261,7 @@ public class controls : MonoBehaviour {
 	{
 		Alive = false;
         OnGround = true;
+        anim.SetBool("jump", false);
         dashing = false;
         canDash = true;
         jumpStart = false;
@@ -248,13 +271,14 @@ public class controls : MonoBehaviour {
 		DP.show();
 		UIP.hide ();
 	}
+
 	public void win()
 	{
-		PlayerStats.Save ();
 		Ground.Stop ();
 		winning = true;
 		OnGround = true;
-		dashing = false;
+        anim.SetBool("jump", false);
+        dashing = false;
 		canDash = true;
 		jumpStart = false;
 		tRight = false;
@@ -263,6 +287,8 @@ public class controls : MonoBehaviour {
 		WP.show();
 		UIP.hide ();
 		anim.SetBool ("idle", false);
+		GameMaster.beatLevel (GameMaster.Level);
+		PlayerStats.Save ();
 
 	}
 

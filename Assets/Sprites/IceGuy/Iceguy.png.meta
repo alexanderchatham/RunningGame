@@ -1,0 +1,464 @@
+fileFormatVersion: 2
+guid: 5f99ad6c09588ca46a743c8e0494d748
+timeCreated: 1516828901
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Iceguy_0
+    21300002: Iceguy_1
+    21300004: Iceguy_2
+    21300006: Iceguy_3
+    21300008: Iceguy_4
+    21300010: Iceguy_5
+    21300012: Iceguy_6
+    21300014: Iceguy_7
+    21300016: Iceguy_8
+    21300018: Iceguy_9
+    21300020: Iceguy_10
+    21300022: Iceguy_11
+    21300024: Iceguy_12
+    21300026: Iceguy_13
+    21300028: Iceguy_14
+    21300030: Iceguy_15
+    21300032: Iceguy_16
+    21300034: Iceguy_17
+    21300036: Iceguy_18
+    21300038: Iceguy_19
+    21300040: Iceguy_20
+    21300042: Iceguy_21
+    21300044: Iceguy_22
+    21300046: Iceguy_23
+    21300048: Iceguy_24
+    21300050: Iceguy_25
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Iceguy_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 1
+        width: 8
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Iceguy_1
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 1
+        width: 8
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Iceguy_2
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 1
+        width: 8
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Iceguy_3
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 1
+        width: 9
+        height: 26
+      alignment: 9
+      pivot: {x: 0.5536389, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Iceguy_4
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 1
+        width: 11
+        height: 26
+      alignment: 9
+      pivot: {x: 0.37791997, y: 0.005738749}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Iceguy_5
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 1
+        width: 15
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Iceguy_6
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 1
+        width: 12
+        height: 27
+      alignment: 9
+      pivot: {x: 0.4521993, y: 0.0016341828}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Iceguy_7
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 1
+        width: 9
+        height: 27
+      alignment: 9
+      pivot: {x: 0.54973346, y: 0.000000013245477}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Iceguy_8
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 1
+        width: 11
+        height: 28
+      alignment: 9
+      pivot: {x: 0.5542547, y: 0.0026644256}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Iceguy_9
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 1
+        width: 12
+        height: 28
+      alignment: 9
+      pivot: {x: 0.6119029, y: 0.0053288382}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Iceguy_10
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 1
+        width: 8
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Iceguy_11
+      rect:
+        serializedVersion: 2
+        x: 361
+        y: 2
+        width: 12
+        height: 25
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Iceguy_12
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 3
+        width: 13
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Iceguy_13
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 3
+        width: 16
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Iceguy_14
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 3
+        width: 16
+        height: 23
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Iceguy_15
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 3
+        width: 17
+        height: 21
+      alignment: 9
+      pivot: {x: 0.47976506, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Iceguy_16
+      rect:
+        serializedVersion: 2
+        x: 518
+        y: 3
+        width: 16
+        height: 20
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Iceguy_17
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 3
+        width: 17
+        height: 18
+      alignment: 9
+      pivot: {x: 0.48651123, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Iceguy_18
+      rect:
+        serializedVersion: 2
+        x: 579
+        y: 3
+        width: 20
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5429962, y: 0.0071661174}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Iceguy_19
+      rect:
+        serializedVersion: 2
+        x: 598
+        y: 10
+        width: 4
+        height: 5
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Iceguy_20
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 3
+        width: 24
+        height: 14
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Iceguy_21
+      rect:
+        serializedVersion: 2
+        x: 643
+        y: 3
+        width: 27
+        height: 12
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Iceguy_22
+      rect:
+        serializedVersion: 2
+        x: 675
+        y: 3
+        width: 27
+        height: 10
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Iceguy_23
+      rect:
+        serializedVersion: 2
+        x: 710
+        y: 3
+        width: 16
+        height: 7
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Iceguy_24
+      rect:
+        serializedVersion: 2
+        x: 742
+        y: 3
+        width: 16
+        height: 7
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Iceguy_25
+      rect:
+        serializedVersion: 2
+        x: 775
+        y: 3
+        width: 16
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

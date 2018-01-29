@@ -31,7 +31,7 @@ public class PausePanel : MonoBehaviour {
 	{
 		Panel.SetActive(false);
 		Time.timeScale = 1;
-		GameMaster.Normal ();
+		GameMaster.GetSpeed ();
 		UIP.show ();
 	}
 }

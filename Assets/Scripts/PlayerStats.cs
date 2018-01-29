@@ -12,13 +12,13 @@ public class PlayerStats : MonoBehaviour {
 
     public static void Save()
     {
-		print ("Loading old data then Saving!");
-		Load ();
-		print("Saving!");
+        print("Loading old data then Saving!");
+        Load();
+        print("Saving!");
         PlayerPrefs.SetInt("Coins", totalCoins + Coins);
-		Coins = 0;
+        Coins = 0;
         PlayerPrefs.SetInt("Score", totalScore + Score);
-		Score = 0;
+        Score = 0;
         PlayerPrefs.SetInt("Deaths", Deaths);
     }
 
