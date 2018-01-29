@@ -28,11 +28,14 @@ public class LevelPanel : MonoBehaviour {
 	
 	void fillButtons()
 	{
+		bool addAnotherButton = true;
         int numberOfButtons = 0;
 		if(!filled)
 		for (int i = 1; i <= GameMaster.MaxLevel; i++)
 		{
-			if(PlayerPrefs.GetInt("Level " + i, 0) == 1){
+			if(PlayerPrefs.GetInt("Level " + i, 0) == 1 || addAnotherButton){
+					if (PlayerPrefs.GetInt ("Level " + i, 0) == 0)
+						addAnotherButton = false;
 				GameObject numberButton = (GameObject)Instantiate (numberButtonPrefab,content.transform);
 				LSB = numberButton.GetComponent<LevelSelectButton> ();
 				LSB.getNumber (i);
