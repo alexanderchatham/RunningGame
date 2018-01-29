@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\Coin.cs" />
      <Compile Include="Assets\Scripts\controls.cs" />
      <Compile Include="Assets\Scripts\DeathPanel.cs" />
+     <Compile Include="Assets\Scripts\fireball.cs" />
      <Compile Include="Assets\Scripts\FlashingText.cs" />
      <Compile Include="Assets\Scripts\GameMaster.cs" />
      <Compile Include="Assets\Scripts\Ground.cs" />
@@ -63,7 +64,6 @@
      <Compile Include="Assets\Scripts\LevelSelectButton.cs" />
      <Compile Include="Assets\Scripts\LevelStartPanel.cs" />
      <Compile Include="Assets\Scripts\movingPlank.cs" />
-     <Compile Include="Assets\Scripts\numberbuttons.cs" />
      <Compile Include="Assets\Scripts\PausePanel.cs" />
      <Compile Include="Assets\Scripts\plank.cs" />
      <Compile Include="Assets\Scripts\PlayerStats.cs" />
