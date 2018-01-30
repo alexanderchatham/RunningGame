@@ -172,7 +172,9 @@ public class GameMaster : MonoBehaviour {
 		SceneManager.LoadScene("Menu", LoadSceneMode.Single);
 		EndGame ();
 		Time.timeScale = 1;
-		Level = 0;
+        if(Level + 1 <= MaxLevel && win)
+            PlayerPrefs.SetInt("Current Level", Level +1);
+        Level = 0;
         PlayerStats.clear();
 		PlayerStats.Load ();
 
