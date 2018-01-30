@@ -32,6 +32,7 @@ public class GameMaster : MonoBehaviour {
             Levelnumber = currentLevel.Substring(currentLevel.Length - 2);
             print(Levelnumber);
             Level = int.Parse(Levelnumber);
+            PlayerPrefs.SetInt("Current Level", Level);
 			gameSpeed = PlayerPrefs.GetInt ("speed", 1);
             loadCharacter(PlayerPrefs.GetInt("Character",0));
         }
@@ -140,7 +141,8 @@ public class GameMaster : MonoBehaviour {
 		if (Level < MaxLevel)
 		{
 			Level++;
-			print ("Next Level button. Level is: " + Level);
+            PlayerPrefs.SetInt("Current Level", Level);
+            print ("Next Level button. Level is: " + Level);
 			SceneManager.LoadScene (Level, LoadSceneMode.Single);
 			EndGame ();
 			PlayerStats.Save ();
@@ -180,11 +182,21 @@ public class GameMaster : MonoBehaviour {
 		if (i <= MaxLevel)
 		{
 			Level = i;
-			SceneManager.LoadScene (i, LoadSceneMode.Single);
+            
+            SceneManager.LoadScene (i, LoadSceneMode.Single);
 			GameMaster.EndGame ();
 		}
 	}
-	public static void beatLevel(int i)
+    public void loadLevel()
+    {
+            SceneManager.LoadScene
+            (
+            PlayerPrefs.GetInt("Current Level", 1), LoadSceneMode.Single
+            );
+            GameMaster.EndGame();
+        
+    }
+    public static void beatLevel(int i)
 	{
 		if (i <= MaxLevel)
 		{
