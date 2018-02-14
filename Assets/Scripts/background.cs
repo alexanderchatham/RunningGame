@@ -11,6 +11,6 @@ public class background : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        this.transform.Translate(GameMaster.skyMoveSpeed, 0, 0);
+        this.transform.Translate(GameMaster.skyMoveSpeed/2, 0, 0);
     }
 }

@@ -2,28 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coin : MonoBehaviour {
+public class ring : MonoBehaviour {
 
-    public GameObject coin;
+
+    public GameObject Ring;
     private GameObject endPoint;
     private void Start()
     {
+        Ring = this.gameObject;
         endPoint = GameObject.FindGameObjectWithTag("End");
-        coin = this.gameObject;
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
         if (this.transform.position.x <= endPoint.transform.position.x)
         {
-            Destroy(coin);
+            Destroy(Ring);
         }
-      
-        this.transform.Translate(GameMaster.groundMoveSpeed, 0, 0);
+        
     }
-    
+
     public void Collect()
     {
-        Destroy(coin);
+        Destroy(Ring);
     }
 }

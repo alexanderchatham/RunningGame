@@ -11,10 +11,7 @@ public class DisappearingPlatform : MonoBehaviour {
 		plank = GetComponent<BoxCollider2D> ();
         anim = GetComponent<Animator>();
     }
-    void OnCollisionEnter2D(Collision2D coll)
-    {
-        anim.SetBool("disappear",true);
-    }
+    
 
     public void drop()
     {

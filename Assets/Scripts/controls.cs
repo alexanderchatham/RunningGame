@@ -203,6 +203,15 @@ public class controls : MonoBehaviour {
 
            
         }
+        if (coll.gameObject.tag == "ring")
+        {
+            print("hit ring");
+
+            PlayerStats.Scored(500);
+            Destroy(coll.gameObject.GetComponent<BoxCollider2D>());
+            coll.gameObject.GetComponentInParent<Animator>().SetBool("hit",true);
+
+        }
         if (coll.gameObject.tag == "fireball")
         {
             print("hit fireball");
@@ -231,7 +240,8 @@ public class controls : MonoBehaviour {
         {
             print("hit plank");
             OnGround = true;
-
+            if (coll.gameObject.GetComponent<DisappearingPlatform>())
+                coll.gameObject.GetComponent<Animator>().SetBool("disappear", true);
             anim.SetBool("jump", false);
             dashing = false;
             canDash = true;
