@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Advertisements;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -120,19 +121,23 @@ public class GameMaster : MonoBehaviour {
         characterMoveSpeed = initialCharacterSpeed * 1.25f;
     }
 
+ 
+
 	public void RestartGame()
 	{
 		
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 		Time.timeScale = 0;
 		GameMaster.EndGame();
-	}
+        runAd();
+    }
 
 	public void RestartGame(bool win)
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 0;
         GameMaster.EndGame();
+        runAd();
     }
 
     public void nextLevel()
@@ -158,15 +163,16 @@ public class GameMaster : MonoBehaviour {
         
         GameMaster.EndGame();
     }
-	public void menu()
-	{
-		
-		SceneManager.LoadScene("Menu", LoadSceneMode.Single);
-		EndGame ();
-		Time.timeScale = 1;
-		Level = 0;
-		PlayerStats.Load ();
-	}
+    public void menu()
+    {
+
+        SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+        EndGame();
+        Time.timeScale = 1;
+        Level = 0;
+        PlayerStats.Load();
+        runAd();
+    }
 	public void menu(bool win)
 	{
 		SceneManager.LoadScene("Menu", LoadSceneMode.Single);
@@ -175,6 +181,7 @@ public class GameMaster : MonoBehaviour {
         if(Level + 1 <= MaxLevel && win)
             PlayerPrefs.SetInt("Current Level", Level +1);
         Level = 0;
+        runAd();
         PlayerStats.clear();
 		PlayerStats.Load ();
 
@@ -211,5 +218,34 @@ public class GameMaster : MonoBehaviour {
 				PlayerPrefs.SetInt ("Level " + i + " score", PlayerStats.Score);
 		}
 	}
-    
+
+    public void runAd()
+    {
+        int ad = PlayerPrefs.GetInt("Ad counter", 0);
+        if (ad <= 0)
+        {
+            ad = 3;
+            if(Advertisement.IsReady())
+                Advertisement.Show("", new ShowOptions(){ resultCallback = HandleAdResult});
+        }
+
+        PlayerPrefs.SetInt("Ad counter", ad - 1);
+    }
+
+    private void HandleAdResult(ShowResult result)
+    {
+        switch (result)
+        {
+            case ShowResult.Finished:
+                Debug.Log("Player Watched ad");
+                break;
+            case ShowResult.Skipped:
+                Debug.Log("Player did not fully watch the ad");
+                break;
+            case ShowResult.Failed:
+                Debug.Log("Player failed to launch the ad ?Internet?");
+                break;
+        }
+    }
+
 }
