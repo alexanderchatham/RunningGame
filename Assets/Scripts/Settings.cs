@@ -10,10 +10,12 @@ public class Settings : MonoBehaviour {
     public GameObject Panel;
     StartPanel SP;
 	public Text speedText;
+    public Text volumeText;
 	public GameObject ConfirmationPanel;
     public Text ConfirmationText;
     public GameObject deleteYes;
-	public Slider slide;
+	public Slider fslide;
+    public Slider vslide;
 
     private void Awake()
     {
@@ -24,8 +26,8 @@ public class Settings : MonoBehaviour {
     void Start()
     {
         SP = StartPanel.instance;
-		slide.value = PlayerPrefs.GetInt("speed", 1);
-		switch ((int)slide.value)
+		fslide.value = PlayerPrefs.GetInt("speed", 1);
+		switch ((int)fslide.value)
 		{
 			case 0:
 				speedText.text = "Slow";
@@ -42,6 +44,8 @@ public class Settings : MonoBehaviour {
 			default:
 				break;
 		}
+        vslide.value = PlayerPrefs.GetInt("Volume", 20);
+        VolumeSelect(PlayerPrefs.GetInt("Volume", 20));
     }
 
 
@@ -77,11 +81,27 @@ public class Settings : MonoBehaviour {
 			default:
 				break;
 		}
+        VolumeSelect(PlayerPrefs.GetInt("Volume",20));
 	}
-	public void DeleteData(){
-       // int ads = PlayerPrefs.GetInt("No Ads", 0);
+
+   public void InitializeVolume()
+    {
+        int i = PlayerPrefs.GetInt("Volume", 20);
+        GameObject.FindGameObjectWithTag("music").GetComponent<AudioSource>().volume = ((float)(i*5))/100;
+    }
+
+    public void VolumeSelect(float speed)
+    {
+        int i = (int)speed;
+        print("Volume select: " + i);
+        PlayerPrefs.SetInt("Volume", i);
+        volumeText.text = "" + i * 5;
+        InitializeVolume();
+    }
+    public void DeleteData(){
+       int ads = PlayerPrefs.GetInt("No Ads", 0);
 		PlayerPrefs.DeleteAll ();
-        //PlayerPrefs.SetInt("No Ads", ads);
+        PlayerPrefs.SetInt("No Ads", ads);
 		SceneManager.LoadScene (0);
 	}
 
