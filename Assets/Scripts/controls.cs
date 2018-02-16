@@ -104,10 +104,25 @@ public class controls : MonoBehaviour {
             if (Starting)
 				startUp ();
         }
-         if (!jumpStart)
+        /* if (!jumpStart)
 		{
 			m_Rigidbody.gravityScale = 2f;
-		}
+		}*/
+
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKey(KeyCode.Space)) && m_Rigidbody.velocity.y < 1f && OnGround)
+        {
+            m_Rigidbody.gravityScale = .5f;
+            OnGround = false;
+            m_Rigidbody.AddForce(m_JumpForce, ForceMode2D.Impulse);
+            anim.SetBool("jump", true);
+            if (Starting)
+                startUp();
+        }
+        if (Input.GetKeyUp(KeyCode.Space) || !Input.GetKey(KeyCode.Space))
+        {
+            m_Rigidbody.gravityScale = 2f;
+        }
+
         //this code makes it so the character doesn't bounce and sticks his landings
         if (OnGround && m_Rigidbody.velocity.y > 0)
         {

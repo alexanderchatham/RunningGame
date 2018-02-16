@@ -30,17 +30,17 @@ public class Sky : MonoBehaviour {
         if (sky1.transform.position.x <= endpoint.transform.position.x)
         {
             print("sky1 position is:" + sky1.transform.position);
-			sky1.transform.position = new Vector3(startpoint.transform.position.x, sky1.transform.position.y, -.25f);
+			sky1.transform.position = new Vector3(startpoint.transform.position.x, sky1.transform.position.y, 0f);
         }
         if (sky2.transform.position.x <= endpoint.transform.position.x)
         {
             print("sky2 position is:" + sky2.transform.position);
-			sky2.transform.position = new Vector3(startpoint.transform.position.x,sky1.transform.position.y, -.25f);
+			sky2.transform.position = new Vector3(startpoint.transform.position.x,sky1.transform.position.y, 0f);
         }
         if (sky3.transform.position.x <= endpoint.transform.position.x)
         {
             print("sky3 position is:" + sky3.transform.position);
-			sky3.transform.position = new Vector3(startpoint.transform.position.x,sky1.transform.position.y, -.25f);
+			sky3.transform.position = new Vector3(startpoint.transform.position.x,sky1.transform.position.y, 0f);
         }
     }
 }
