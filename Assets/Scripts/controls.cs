@@ -95,7 +95,7 @@ public class controls : MonoBehaviour {
     
 	public void jump()
     {
-		if ((Input.GetKeyDown (KeyCode.Space) || jumpStart) && OnGround && m_Rigidbody.velocity.y <= 0)
+		if ((Input.GetKeyDown (KeyCode.Space) || jumpStart) && OnGround && m_Rigidbody.velocity.y < 1f)
         {
             m_Rigidbody.gravityScale = .5f;
             OnGround = false;
@@ -205,15 +205,7 @@ public class controls : MonoBehaviour {
 
            
         }
-        if (coll.gameObject.tag == "ring")
-        {
-            print("hit ring");
-
-            PlayerStats.Scored(500);
-            Destroy(coll.gameObject.GetComponent<BoxCollider2D>());
-            coll.gameObject.GetComponentInParent<Animator>().SetBool("hit",true);
-
-        }
+      
         if (coll.gameObject.tag == "fireball")
         {
             print("hit fireball");
@@ -319,6 +311,15 @@ public class controls : MonoBehaviour {
             Coin coin = other.GetComponent<Coin>();
             coin.Collect();
 			PlayerStats.getCoin();
+        }
+        if (other.gameObject.tag == "ring")
+        {
+            print("hit ring");
+
+            PlayerStats.Scored(500);
+            Destroy(other.gameObject.GetComponent<BoxCollider2D>());
+            other.gameObject.GetComponentInParent<Animator>().SetBool("hit", true);
+
         }
     }
 

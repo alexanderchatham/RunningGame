@@ -22,6 +22,6 @@ public class Meteor : MonoBehaviour {
             pause -= Time.deltaTime;
             return;
         }
-        rb.transform.Translate(0, GameMaster.characterMoveSpeed/3, 0);
+        rb.transform.Translate(0, -GameMaster.groundMoveSpeed*2, 0);
 	}
 }
