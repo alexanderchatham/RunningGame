@@ -55,9 +55,16 @@ public class controls : MonoBehaviour {
 		tLeft = false;
     }
 
-
+    private void Update()
+    {
+        if (Starting)
+        {
+            jump();
+            move();
+        }
+    }
     // Update is called once per frame
-    void Update () {
+    void FixedUpdate () {
 		moving = false;
 		if (!dying)
 		{
@@ -76,25 +83,10 @@ public class controls : MonoBehaviour {
             
         }
         
-        
         if ( canDash == false && dashing == false)
         {
             canDash = true;
         }*/
-
-		//code that makes it so that runs the idle animation
-		if (OnGround  && moving  == false)
-        {
-            if(!allTheWayLeft)
-			anim.SetBool ("idle", true);
-        }
-
-		//this code makes it so the character doesn't bounce and sticks his landings
-        if (OnGround && m_Rigidbody.velocity.y > 0)
-        {
-            m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, 0);
-        }
-
 		//this code pushes the character back constantly
 		if(m_Rigidbody.velocity.x <= 0 && !allTheWayLeft && (!tRight||!Input.GetKeyDown (KeyCode.RightArrow)) && !onMovingPlatform)
         m_Rigidbody.transform.Translate(GameMaster.groundMoveSpeed, 0, 0);
@@ -103,18 +95,22 @@ public class controls : MonoBehaviour {
     
 	public void jump()
     {
-		if ((Input.GetKeyDown (KeyCode.Space) || jumpStart) && OnGround && m_Rigidbody.velocity.y <= 0)
+		if ((Input.GetKeyDown (KeyCode.Space) || jumpStart) && OnGround && m_Rigidbody.velocity.y < 1f)
         {
             m_Rigidbody.gravityScale = .5f;
-            m_Rigidbody.AddForce(m_JumpForce, ForceMode2D.Impulse);
             OnGround = false;
+            m_Rigidbody.AddForce(m_JumpForce, ForceMode2D.Impulse);
             anim.SetBool("jump", true);
             if (Starting)
 				startUp ();
         }
+        //this code makes it so the character doesn't bounce and sticks his landings
+        if (OnGround && m_Rigidbody.velocity.y > 0)
+        {
+            m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, 0);
+        }
 
-		
-		if (Input.GetKeyUp (KeyCode.Space) || !jumpStart)
+        if (Input.GetKeyUp (KeyCode.Space) || !jumpStart)
 		{
 			m_Rigidbody.gravityScale = 2f;
 		}
@@ -137,6 +133,12 @@ public class controls : MonoBehaviour {
             moveRight();
 			
 		}
+        //code that makes it so that runs the idle animation
+        if (OnGround && moving == false)
+        {
+            if (!allTheWayLeft)
+                anim.SetBool("idle", true);
+        }
     }
 
     public void setLeft()
@@ -203,6 +205,7 @@ public class controls : MonoBehaviour {
 
            
         }
+      
         if (coll.gameObject.tag == "fireball")
         {
             print("hit fireball");
@@ -227,12 +230,15 @@ public class controls : MonoBehaviour {
 		{
 			m_Rigidbody.gravityScale = 3f;
 		}
-		if (coll.gameObject.tag == "Plank" )
+        if (coll.gameObject.tag == "Plank")
         {
             print("hit plank");
-            OnGround = true;
-
-            anim.SetBool("jump", false);
+            
+                OnGround = true;
+                anim.SetBool("jump", false);
+            
+            if (coll.gameObject.GetComponent<DisappearingPlatform>())
+                coll.gameObject.GetComponent<Animator>().SetBool("disappear", true);
             dashing = false;
             canDash = true;
         }
@@ -305,6 +311,15 @@ public class controls : MonoBehaviour {
             Coin coin = other.GetComponent<Coin>();
             coin.Collect();
 			PlayerStats.getCoin();
+        }
+        if (other.gameObject.tag == "ring")
+        {
+            print("hit ring");
+
+            PlayerStats.Scored(500);
+            Destroy(other.gameObject.GetComponent<BoxCollider2D>());
+            other.gameObject.GetComponentInParent<Animator>().SetBool("hit", true);
+
         }
     }
 

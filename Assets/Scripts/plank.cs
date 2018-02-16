@@ -21,7 +21,7 @@ public class plank : MonoBehaviour {
  
         //coroutines for movement
     }
-    void Update () {
+    void FixedUpdate () {
 		if(ground.transform.position.x <= endPoint.transform.position.x)
         {
             Destroy(ground);

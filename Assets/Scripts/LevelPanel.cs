@@ -44,6 +44,7 @@ public class LevelPanel : MonoBehaviour {
 				print ("adding listener to : "+i);
 				numberButton.GetComponent<Button> ().onClick.AddListener (() => onClickLevelSelect (numberButton));
                 numberOfButtons++;
+                content.GetComponent<RectTransform>().sizeDelta = new Vector2(content.GetComponent<RectTransform>().sizeDelta.x, content.GetComponent<RectTransform>().sizeDelta.y + 120);
 			}
 		}
 		filled = true;

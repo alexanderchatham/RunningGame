@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Advertisements;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -12,7 +13,7 @@ public class GameMaster : MonoBehaviour {
 
 
     public static int Level = 0;
-	public static int MaxLevel = 11;
+	public static int MaxLevel = 18;
     public static float groundMoveSpeed = -0.00f;
 	public static float skyMoveSpeed = -0.00f;
 	public static float characterMoveSpeed = 0.075f;
@@ -32,6 +33,7 @@ public class GameMaster : MonoBehaviour {
             Levelnumber = currentLevel.Substring(currentLevel.Length - 2);
             print(Levelnumber);
             Level = int.Parse(Levelnumber);
+            PlayerPrefs.SetInt("Current Level", Level);
 			gameSpeed = PlayerPrefs.GetInt ("speed", 1);
             loadCharacter(PlayerPrefs.GetInt("Character",0));
         }
@@ -119,19 +121,23 @@ public class GameMaster : MonoBehaviour {
         characterMoveSpeed = initialCharacterSpeed * 1.25f;
     }
 
+ 
+
 	public void RestartGame()
 	{
 		
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 		Time.timeScale = 0;
 		GameMaster.EndGame();
-	}
+        runAd();
+    }
 
 	public void RestartGame(bool win)
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 0;
         GameMaster.EndGame();
+        runAd();
     }
 
     public void nextLevel()
@@ -140,7 +146,8 @@ public class GameMaster : MonoBehaviour {
 		if (Level < MaxLevel)
 		{
 			Level++;
-			print ("Next Level button. Level is: " + Level);
+            PlayerPrefs.SetInt("Current Level", Level);
+            print ("Next Level button. Level is: " + Level);
 			SceneManager.LoadScene (Level, LoadSceneMode.Single);
 			EndGame ();
 			PlayerStats.Save ();
@@ -156,21 +163,25 @@ public class GameMaster : MonoBehaviour {
         
         GameMaster.EndGame();
     }
-	public void menu()
-	{
-		
-		SceneManager.LoadScene("Menu", LoadSceneMode.Single);
-		EndGame ();
-		Time.timeScale = 1;
-		Level = 0;
-		PlayerStats.Load ();
-	}
+    public void menu()
+    {
+
+        SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+        EndGame();
+        Time.timeScale = 1;
+        Level = 0;
+        PlayerStats.Load();
+        runAd();
+    }
 	public void menu(bool win)
 	{
 		SceneManager.LoadScene("Menu", LoadSceneMode.Single);
 		EndGame ();
 		Time.timeScale = 1;
-		Level = 0;
+        if(Level + 1 <= MaxLevel && win)
+            PlayerPrefs.SetInt("Current Level", Level +1);
+        Level = 0;
+        runAd();
         PlayerStats.clear();
 		PlayerStats.Load ();
 
@@ -180,11 +191,21 @@ public class GameMaster : MonoBehaviour {
 		if (i <= MaxLevel)
 		{
 			Level = i;
-			SceneManager.LoadScene (i, LoadSceneMode.Single);
+            
+            SceneManager.LoadScene (i, LoadSceneMode.Single);
 			GameMaster.EndGame ();
 		}
 	}
-	public static void beatLevel(int i)
+    public void loadLevel()
+    {
+            SceneManager.LoadScene
+            (
+            PlayerPrefs.GetInt("Current Level", 1), LoadSceneMode.Single
+            );
+            GameMaster.EndGame();
+        
+    }
+    public static void beatLevel(int i)
 	{
 		if (i <= MaxLevel)
 		{
@@ -197,5 +218,34 @@ public class GameMaster : MonoBehaviour {
 				PlayerPrefs.SetInt ("Level " + i + " score", PlayerStats.Score);
 		}
 	}
-    
+
+    public void runAd()
+    {
+        int ad = PlayerPrefs.GetInt("Ad counter", 0);
+        if (ad <= 0)
+        {
+            ad = 3;
+            if(Advertisement.IsReady())
+                Advertisement.Show("", new ShowOptions(){ resultCallback = HandleAdResult});
+        }
+
+        PlayerPrefs.SetInt("Ad counter", ad - 1);
+    }
+
+    private void HandleAdResult(ShowResult result)
+    {
+        switch (result)
+        {
+            case ShowResult.Finished:
+                Debug.Log("Player Watched ad");
+                break;
+            case ShowResult.Skipped:
+                Debug.Log("Player did not fully watch the ad");
+                break;
+            case ShowResult.Failed:
+                Debug.Log("Player failed to launch the ad ?Internet?");
+                break;
+        }
+    }
+
 }

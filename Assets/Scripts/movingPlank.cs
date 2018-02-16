@@ -11,7 +11,7 @@ public class movingPlank : MonoBehaviour {
 	public bool down = false;
 
     // Update is called once per frame
-    void Update () {
+    void FixedUpdate () {
         if (moving == true)
         {
 			if (up)

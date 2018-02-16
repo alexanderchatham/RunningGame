@@ -9,10 +9,11 @@ public class Coin : MonoBehaviour {
     private void Start()
     {
         endPoint = GameObject.FindGameObjectWithTag("End");
+        coin = this.gameObject;
     }
 
     // Update is called once per frame
-    void Update () {
+    void FixedUpdate () {
         if (this.transform.position.x <= endPoint.transform.position.x)
         {
             Destroy(coin);
