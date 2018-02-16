@@ -21,12 +21,10 @@ public class IAPManager : MonoBehaviour, IStoreListener
     // when defining the Product Identifiers on the store. Except, for illustration purposes, the 
     // kProductIDSubscription - it has custom Apple and Google identifiers. We declare their store-
     // specific mapping to Unity Purchasing's AddProduct, below.
-    public static string kProductIDConsumable = "consumable";
     public static string PRODUCT_NO_ADS = "No Ads";
-    public static string kProductIDSubscription = "subscription";
     
 
-    void Start()
+    private void Start()
     {
         // If we haven't set up the Unity Purchasing reference
         if (m_StoreController == null)
@@ -178,6 +176,7 @@ public class IAPManager : MonoBehaviour, IStoreListener
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             // TODO: The non-consumable item has been successfully purchased, grant this item to the player.
             PlayerPrefs.SetInt("No Ads", 1);
+            Store.instance.disableAdButton();
         }
        
         // Or ... an unknown product has been purchased by this user. Fill in additional products here....

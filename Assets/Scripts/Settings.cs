@@ -11,6 +11,8 @@ public class Settings : MonoBehaviour {
     StartPanel SP;
 	public Text speedText;
 	public GameObject ConfirmationPanel;
+    public Text ConfirmationText;
+    public GameObject deleteYes;
 	public Slider slide;
 
     private void Awake()
@@ -22,7 +24,7 @@ public class Settings : MonoBehaviour {
     void Start()
     {
         SP = StartPanel.instance;
-		slide.value = PlayerPrefs.GetInt("speed", 0);
+		slide.value = PlayerPrefs.GetInt("speed", 1);
 		switch ((int)slide.value)
 		{
 			case 0:
@@ -77,14 +79,16 @@ public class Settings : MonoBehaviour {
 		}
 	}
 	public void DeleteData(){
-        int ads = PlayerPrefs.GetInt("No Ads", 0);
+       // int ads = PlayerPrefs.GetInt("No Ads", 0);
 		PlayerPrefs.DeleteAll ();
-        PlayerPrefs.SetInt("No Ads", ads);
+        //PlayerPrefs.SetInt("No Ads", ads);
 		SceneManager.LoadScene (0);
 	}
 
 	public void confirmation(){
-		ConfirmationPanel.SetActive (true);
+        ConfirmationText.text = "Are you sure you would like to delete all of your data? (Does not effect No Ads)";
+        ConfirmationPanel.SetActive (true);
+        deleteYes.SetActive(true);
 	}
 
 	public void confirmationHide(){

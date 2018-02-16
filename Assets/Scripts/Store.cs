@@ -14,6 +14,10 @@ public class Store : MonoBehaviour {
     public Button fire;
     public Button tree;
     public Button ice;
+    public Button noAds;
+    public GameObject ConfirmationPanel;
+    public GameObject adsYes;
+    public Text Confirmationtext;
 
     private void Awake()
 	{
@@ -27,6 +31,14 @@ public class Store : MonoBehaviour {
 		selectCharacter (PlayerPrefs.GetInt("Character",0));
         checkUnlocked();
 	}
+
+    public void confirmation()
+    {
+
+        Confirmationtext.text ="Are you sure you would like to purchase No Ads for $.99?";
+    ConfirmationPanel.SetActive(true);
+        adsYes.SetActive(true);
+    }
 
     public void selectCharacter(int i)
     {
@@ -147,6 +159,18 @@ public class Store : MonoBehaviour {
                 }
             }
         }
+        if(PlayerPrefs.GetInt("No Ads", 0) == 1)
+        {
+            noAds.interactable = false;
+            noAds.GetComponentInChildren<Text>().text = "";
+        }
+    }
+
+    public void disableAdButton()
+    {
+        noAds.interactable = false;
+        noAds.GetComponentInChildren<Text>().text = "";
+        ConfirmationPanel.SetActive(false);
     }
 
     void unlockPlayer(int i)

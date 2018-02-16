@@ -95,7 +95,8 @@ public class controls : MonoBehaviour {
     
 	public void jump()
     {
-		if ((Input.GetKeyDown (KeyCode.Space) || jumpStart) && OnGround && m_Rigidbody.velocity.y < 1f)
+#if Unity_IPHONE
+        if ((jumpStart) && OnGround && m_Rigidbody.velocity.y < 1f)
         {
             m_Rigidbody.gravityScale = .5f;
             OnGround = false;
@@ -104,16 +105,33 @@ public class controls : MonoBehaviour {
             if (Starting)
 				startUp ();
         }
+         if (!jumpStart)
+		{
+			m_Rigidbody.gravityScale = 2f;
+		}
+#endif
+#if UNITY_EDITOR
+        if ((Input.GetKeyDown(KeyCode.Space) ||Input.GetKey(KeyCode.Space) ) && m_Rigidbody.velocity.y < 1f && OnGround)
+        {
+            m_Rigidbody.gravityScale = .5f;
+            OnGround = false;
+            m_Rigidbody.AddForce(m_JumpForce, ForceMode2D.Impulse);
+            anim.SetBool("jump", true);
+            if (Starting)
+                startUp();
+        }
+        if (Input.GetKeyUp(KeyCode.Space) || !Input.GetKey(KeyCode.Space) )
+        {
+            m_Rigidbody.gravityScale = 2f;
+        }
+#endif
         //this code makes it so the character doesn't bounce and sticks his landings
         if (OnGround && m_Rigidbody.velocity.y > 0)
         {
             m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, 0);
         }
 
-        if (Input.GetKeyUp (KeyCode.Space) || !jumpStart)
-		{
-			m_Rigidbody.gravityScale = 2f;
-		}
+       
     }
 
 
