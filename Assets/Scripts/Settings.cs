@@ -77,7 +77,9 @@ public class Settings : MonoBehaviour {
 		}
 	}
 	public void DeleteData(){
+        int ads = PlayerPrefs.GetInt("No Ads", 0);
 		PlayerPrefs.DeleteAll ();
+        PlayerPrefs.SetInt("No Ads", ads);
 		SceneManager.LoadScene (0);
 	}
 

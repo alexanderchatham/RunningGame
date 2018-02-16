@@ -219,18 +219,20 @@ public class GameMaster : MonoBehaviour {
 		}
 	}
 
-    public void runAd()
-    {
+public void runAd()
+{
+    if (PlayerPrefs.GetInt("No Ads", 0) == 0) {
         int ad = PlayerPrefs.GetInt("Ad counter", 0);
         if (ad <= 0)
         {
             ad = 3;
-            if(Advertisement.IsReady())
-                Advertisement.Show("", new ShowOptions(){ resultCallback = HandleAdResult});
+            if (Advertisement.IsReady())
+                Advertisement.Show("", new ShowOptions() { resultCallback = HandleAdResult });
         }
 
         PlayerPrefs.SetInt("Ad counter", ad - 1);
     }
+}
 
     private void HandleAdResult(ShowResult result)
     {
