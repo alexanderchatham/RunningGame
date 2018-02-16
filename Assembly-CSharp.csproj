@@ -62,11 +62,14 @@
      <Compile Include="Assets\Scripts\Ground.cs" />
      <Compile Include="Assets\Scripts\Group.cs" />
      <Compile Include="Assets\Scripts\HoldCharacter.cs" />
+     <Compile Include="Assets\Scripts\IAPManager.cs" />
      <Compile Include="Assets\Scripts\LevelPanel.cs" />
      <Compile Include="Assets\Scripts\LevelSelectButton.cs" />
      <Compile Include="Assets\Scripts\LevelStartPanel.cs" />
      <Compile Include="Assets\Scripts\Meteor.cs" />
      <Compile Include="Assets\Scripts\movingPlank.cs" />
+     <Compile Include="Assets\Scripts\Music.cs" />
+     <Compile Include="Assets\Scripts\OnEditorDisable.cs" />
      <Compile Include="Assets\Scripts\PausePanel.cs" />
      <Compile Include="Assets\Scripts\plank.cs" />
      <Compile Include="Assets\Scripts\PlayerStats.cs" />
@@ -154,6 +157,36 @@
  <Reference Include="UnityEditor.OSXStandalone.Extensions">
  <HintPath>/Applications/Unity/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
  </Reference>
+ <Reference Include="Editor">
+ <HintPath>/Users/alexchatham/Developer/Unity/Hellscape/Assets/Plugins/UnityPurchasing/Bin/Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Purchasing.Common">
+ <HintPath>/Users/alexchatham/Developer/Unity/Hellscape/Assets/Plugins/UnityPurchasing/Bin/Purchasing.Common.dll</HintPath>
+ </Reference>
+ <Reference Include="Stores">
+ <HintPath>/Users/alexchatham/Developer/Unity/Hellscape/Assets/Plugins/UnityPurchasing/Bin/Stores.dll</HintPath>
+ </Reference>
+ <Reference Include="Apple">
+ <HintPath>/Users/alexchatham/Developer/Unity/Hellscape/Assets/Plugins/UnityPurchasing/Bin/Apple/Apple.dll</HintPath>
+ </Reference>
+ <Reference Include="Security">
+ <HintPath>/Users/alexchatham/Developer/Unity/Hellscape/Assets/Plugins/UnityPurchasing/Bin/Security/live/Security.dll</HintPath>
+ </Reference>
+ <Reference Include="FacebookStore">
+ <HintPath>/Users/alexchatham/Developer/Unity/Hellscape/Assets/Plugins/UnityPurchasing/Bin/Facebook/FacebookStore.dll</HintPath>
+ </Reference>
+ <Reference Include="Tizen">
+ <HintPath>/Users/alexchatham/Developer/Unity/Hellscape/Assets/Plugins/UnityPurchasing/Bin/Tizen/Tizen.dll</HintPath>
+ </Reference>
+ <Reference Include="winrt">
+ <HintPath>/Users/alexchatham/Developer/Unity/Hellscape/Assets/Plugins/UnityPurchasing/winrt/winrt.dll</HintPath>
+ </Reference>
+ <Reference Include="ChannelPurchase">
+ <HintPath>/Users/alexchatham/Developer/Unity/Hellscape/Assets/Plugins/UnityChannel/ChannelPurchase.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityStore">
+ <HintPath>/Users/alexchatham/Developer/Unity/Hellscape/Assets/Plugins/UnityChannel/UnityStore.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>/Users/alexchatham/Library/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
  </Reference>
@@ -175,6 +208,10 @@
  <Reference Include="UnityEngine.StandardEvents">
  <HintPath>/Users/alexchatham/Library/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{8BE452C1-9463-7C3E-CA3A-DC964C9FB1DB}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
