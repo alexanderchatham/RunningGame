@@ -16,7 +16,7 @@ public class GameMaster : MonoBehaviour {
 	public static int MaxLevel = 20;
     public static float groundMoveSpeed = -0.00f;
 	public static float skyMoveSpeed = -0.00f;
-	public static float characterMoveSpeed = 0.075f;
+	public static float characterMoveSpeed = 0.06f;
 	private string currentLevel;
 	private string Levelnumber;
 	public static int gameSpeed;

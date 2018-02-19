@@ -31,8 +31,9 @@ public class controls : MonoBehaviour {
 	public bool dying = false;
 	public bool winning = false;
     public bool onMovingPlatform;
-
-
+    public int doublejump;
+    public bool doublejumped = true;
+    public int numberofjumps = 0;
 
 
     void Start()
@@ -49,7 +50,7 @@ public class controls : MonoBehaviour {
         //Initialising the force which is used on GameObject in various ways
         m_JumpForce = new Vector3(0.0f, jumpStrength, 0.0f);
         m_DashForce = new Vector3(dashStrength, 0.0f, 0.0f);
-
+        doublejump = PlayerPrefs.GetInt("double jump",0);
 		jumpStart = false;
 		tRight = false;
 		tLeft = false;
@@ -92,12 +93,26 @@ public class controls : MonoBehaviour {
         m_Rigidbody.transform.Translate(GameMaster.groundMoveSpeed, 0, 0);
     }
 
+    public bool canDoubleJump()
+    {
+        if (doublejumped == false && doublejump == 1)
+        {
+            print("double jump");
+            return true;
+        }
+        else
+            return false;
+    }
+
     
 	public void jump()
     {
-        if ((jumpStart) && OnGround && m_Rigidbody.velocity.y < 1f)
+        if ((jumpStart) && ((m_Rigidbody.velocity.y < 1f && OnGround) || canDoubleJump()))
         {
             m_Rigidbody.gravityScale = .5f;
+            m_Rigidbody.velocity = new Vector2(0,0);
+            if (OnGround == false)
+                doublejumped = true;
             OnGround = false;
             m_Rigidbody.AddForce(m_JumpForce, ForceMode2D.Impulse);
             anim.SetBool("jump", true);
@@ -107,20 +122,28 @@ public class controls : MonoBehaviour {
         /* if (!jumpStart)
 		{
 			m_Rigidbody.gravityScale = 2f;
+            if(doublejump == 1 && numberofjumps < 2)
+            doublejumped = false;
 		}*/
 
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKey(KeyCode.Space)) && m_Rigidbody.velocity.y < 1f && OnGround)
+        if ((Input.GetKeyDown(KeyCode.Space) ||(Input.GetKey(KeyCode.Space) && numberofjumps < 1) ) && ((m_Rigidbody.velocity.y < 1f && OnGround) || canDoubleJump()))
         {
             m_Rigidbody.gravityScale = .5f;
+            m_Rigidbody.velocity = new Vector2(0, 0);
+            if (OnGround == false)
+                doublejumped = true;
             OnGround = false;
             m_Rigidbody.AddForce(m_JumpForce, ForceMode2D.Impulse);
             anim.SetBool("jump", true);
+            numberofjumps++;
             if (Starting)
                 startUp();
         }
         if (Input.GetKeyUp(KeyCode.Space) || !Input.GetKey(KeyCode.Space))
         {
             m_Rigidbody.gravityScale = 2f;
+            if(doublejump == 1 && numberofjumps < 2)
+            doublejumped = false;
         }
 
         //this code makes it so the character doesn't bounce and sticks his landings
@@ -204,6 +227,17 @@ public class controls : MonoBehaviour {
         allTheWayLeft = false;
     }
 
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Plank" && OnGround && m_Rigidbody.velocity.y < -0.1f)
+        {
+            print("walked off");
+            m_Rigidbody.velocity = new Vector2(0, m_Rigidbody.velocity.y);
+            OnGround = false;
+            doublejumped = false;
+        }
+    }
+
     void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.tag == "Ground")
@@ -251,8 +285,9 @@ public class controls : MonoBehaviour {
             print("hit plank");
             
                 OnGround = true;
+                doublejumped = false;
                 anim.SetBool("jump", false);
-            
+            numberofjumps = 0;
             if (coll.gameObject.GetComponent<DisappearingPlatform>())
                 coll.gameObject.GetComponent<Animator>().SetBool("disappear", true);
             dashing = false;

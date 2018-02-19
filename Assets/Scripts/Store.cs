@@ -15,6 +15,7 @@ public class Store : MonoBehaviour {
     public Button tree;
     public Button ice;
     public Button noAds;
+    public Button doubleJump;
     public GameObject ConfirmationPanel;
     public GameObject adsYes;
     public Text Confirmationtext;
@@ -164,6 +165,18 @@ public class Store : MonoBehaviour {
             noAds.interactable = false;
             noAds.GetComponentInChildren<Text>().text = "";
         }
+        if(PlayerPrefs.GetInt("double jump",0) == 1)
+        {
+            doubleJump.GetComponentInChildren<Text>().text = "Double Jump";
+            doubleJump.interactable = false;
+        }
+    }
+
+    public void buyDoubleJump()
+    {
+        doubleJump.GetComponentInChildren<Text>().text = "Double Jump";
+        PlayerPrefs.SetInt("double jump", 1);
+        doubleJump.interactable = false;
     }
 
     public void disableAdButton()
