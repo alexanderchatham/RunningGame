@@ -239,9 +239,11 @@ public class controls : MonoBehaviour {
         {
             print("walked off");
             m_Rigidbody.velocity = new Vector2(0, m_Rigidbody.velocity.y);
-            OnGround = false;
-            doublejumped = false;
-        }
+			if (doublejump == 0)
+				OnGround = false;
+			else
+				numberofjumps++;
+			}
     }
 
     void OnCollisionEnter2D(Collision2D coll)
