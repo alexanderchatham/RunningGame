@@ -51,6 +51,8 @@ public class controls : MonoBehaviour {
         m_JumpForce = new Vector3(0.0f, jumpStrength, 0.0f);
         m_DashForce = new Vector3(dashStrength, 0.0f, 0.0f);
         doublejump = PlayerPrefs.GetInt("double jump",0);
+		if (doublejump == 1)
+			print ("doublejump unlocked");
 		jumpStart = false;
 		tRight = false;
 		tLeft = false;
@@ -107,7 +109,8 @@ public class controls : MonoBehaviour {
     
 	public void jump()
     {
-        if ((jumpStart) && ((m_Rigidbody.velocity.y < 1f && OnGround) || canDoubleJump()))
+		
+		if (((jumpStart && numberofjumps < 1) ||(jumpStart && numberofjumps == 1)) && (m_Rigidbody.velocity.y < 1f && OnGround))
         {
             m_Rigidbody.gravityScale = .5f;
             m_Rigidbody.velocity = new Vector2(0,0);
@@ -116,16 +119,19 @@ public class controls : MonoBehaviour {
             OnGround = false;
             m_Rigidbody.AddForce(m_JumpForce, ForceMode2D.Impulse);
             anim.SetBool("jump", true);
+			numberofjumps++;
             if (Starting)
 				startUp ();
         }
-        /* if (!jumpStart)
+         if (!jumpStart)
 		{
 			m_Rigidbody.gravityScale = 2f;
-            if(doublejump == 1 && numberofjumps < 2)
-            doublejumped = false;
-		}*/
-
+			if (doublejump == 1 && numberofjumps == 1)
+			{
+				OnGround = true;
+			}
+		}
+/*
         if ((Input.GetKeyDown(KeyCode.Space) ||(Input.GetKey(KeyCode.Space) && numberofjumps < 1) ) && ((m_Rigidbody.velocity.y < 1f && OnGround) || canDoubleJump()))
         {
             m_Rigidbody.gravityScale = .5f;
@@ -145,7 +151,7 @@ public class controls : MonoBehaviour {
             if(doublejump == 1 && numberofjumps < 2)
             doublejumped = false;
         }
-
+*/
         //this code makes it so the character doesn't bounce and sticks his landings
         if (OnGround && m_Rigidbody.velocity.y > 0)
         {
