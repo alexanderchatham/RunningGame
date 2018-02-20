@@ -151,7 +151,7 @@ public class controls : MonoBehaviour {
             if(doublejump == 1 && numberofjumps < 2)
             doublejumped = false;
         }
-*/
+        */
         //this code makes it so the character doesn't bounce and sticks his landings
         if (OnGround && m_Rigidbody.velocity.y > 0)
         {
