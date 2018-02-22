@@ -221,7 +221,8 @@ public class GameMaster : MonoBehaviour {
 
 public void runAd()
 {
-    if (PlayerPrefs.GetInt("No Ads", 0) == 0) {
+        // change no ads default to 0 to enable ads
+    if (PlayerPrefs.GetInt("No Ads", 1) == 0) {
         int ad = PlayerPrefs.GetInt("Ad counter", 0);
         if (ad <= 0)
         {
