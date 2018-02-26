@@ -5,21 +5,33 @@ using UnityEngine;
 public class DisappearingPlatform : MonoBehaviour {
 
 	BoxCollider2D plank;
-    Animator anim;
+    bool Disappear = false;
+    Color color;
 	// Use this for initialization
 	void Start () {
 		plank = GetComponent<BoxCollider2D> ();
-        anim = GetComponent<Animator>();
-    }
-    
-
-    public void drop()
-    {
-        Destroy(plank);
     }
 
-    public void end()
+    private void FixedUpdate()
     {
-        Destroy(this.transform.parent.gameObject);
+        if (Disappear)
+        {
+            color = GetComponent<SpriteRenderer>().color;
+            color.a = color.a -.015f;
+            GetComponent<SpriteRenderer>().color = color;
+            if (color.a < .2f && plank)
+                Destroy(plank);
+            if (color.a == 0)
+                Destroy(this.transform.parent.gameObject);
+        }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.collider.tag == "Player")
+        {
+            Disappear = true;
+        }
+    }
+
 }

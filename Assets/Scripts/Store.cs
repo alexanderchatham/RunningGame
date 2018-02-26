@@ -167,16 +167,23 @@ public class Store : MonoBehaviour {
         }
         if(PlayerPrefs.GetInt("double jump",0) == 1)
         {
-            doubleJump.GetComponentInChildren<Text>().text = "Double Jump";
+            doubleJump.GetComponentInChildren<Text>().text = "Double Jump Purchased";
             doubleJump.interactable = false;
         }
     }
 
     public void buyDoubleJump()
     {
-        doubleJump.GetComponentInChildren<Text>().text = "Double Jump";
-        PlayerPrefs.SetInt("double jump", 1);
-        doubleJump.interactable = false;
+        int cost = 2000;
+        int coins = PlayerPrefs.GetInt("Coins", 0);
+        if (coins >= cost)
+        {
+            doubleJump.GetComponentInChildren<Text>().text = "Double Jump";
+            PlayerPrefs.SetInt("double jump", 1);
+            doubleJump.interactable = false;
+            coins = coins - 2000;
+            PlayerPrefs.SetInt("Coins", coins);
+        }
     }
 
     public void disableAdButton()

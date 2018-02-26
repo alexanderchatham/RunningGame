@@ -5,10 +5,36 @@ using UnityEngine;
 public class movingPlank : MonoBehaviour {
 
     public Transform movingPlatform;
+    SpriteRenderer sr;
     public float smooth;
-    public bool moving = false;
-	public bool up = false;
-	public bool down = false;
+    public bool moving;
+    public bool up;
+    public bool down;
+    Object[] sprites;
+
+    private void Start()
+    {
+        sr = GetComponent<SpriteRenderer>();
+        Destroy(GetComponent<Animator>());
+        
+        if (up)
+        {
+           sprites = Resources.LoadAll("movingplatformup");
+            deactivateSprite();
+           return;
+        }
+        if (down)
+        {
+           sprites = Resources.LoadAll("movingplatformdown");
+            deactivateSprite();
+            return;
+        }
+        else
+        {
+            sprites = Resources.LoadAll("movingplatformright"); 
+        }
+        deactivateSprite();
+    }
 
     // Update is called once per frame
     void FixedUpdate () {
@@ -35,13 +61,28 @@ public class movingPlank : MonoBehaviour {
     {
         moving = true;
         print("starting to move");
+        activateSprite();
     }
 
     public void stopMoving()
     {
         moving = false;
         print("stopping movement");
+        deactivateSprite();
     }
-    
-    
+
+
+    void activateSprite()
+    {
+
+
+        sr.sprite = (Sprite)sprites[2];
+    }
+
+    void deactivateSprite()
+    {
+
+        sr.sprite = (Sprite)sprites[1];
+    }
+
 }
