@@ -28,7 +28,14 @@ public class GameMaster : MonoBehaviour {
     public GameObject player;
     public void Start()
     {
-        if(SceneManager.GetActiveScene().name != "Menu"){
+        if (SceneManager.GetActiveScene().name == "Ending Level")
+        {
+            currentLevel = SceneManager.GetActiveScene().name;
+            print(currentLevel);
+            gameSpeed = PlayerPrefs.GetInt("speed", 1);
+            loadCharacter(PlayerPrefs.GetInt("Character", 0));
+        }
+        if (SceneManager.GetActiveScene().name != "Menu" && SceneManager.GetActiveScene().name != "Ending Level"){
             currentLevel = SceneManager.GetActiveScene().name;
             Levelnumber = currentLevel.Substring(currentLevel.Length - 2);
             print(Levelnumber);
@@ -37,6 +44,7 @@ public class GameMaster : MonoBehaviour {
 			gameSpeed = PlayerPrefs.GetInt ("speed", 1);
             loadCharacter(PlayerPrefs.GetInt("Character",0));
         }
+        
     }
 
     public void loadCharacter(int i)
@@ -67,6 +75,10 @@ public class GameMaster : MonoBehaviour {
                 print("loading character default");
                 break;
         }
+        if(currentLevel == "Ending Level")
+            player.GetComponent<controls>().lastlevel = true;
+        else
+            player.GetComponent<controls>().lastlevel = false;
     }
 
 	public static void GetSpeed(){
@@ -155,7 +167,7 @@ public class GameMaster : MonoBehaviour {
 		} else
 		{
 			print ("At Max Level");
-			SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
+			SceneManager.LoadScene ("Ending Level");
 			EndGame ();
 			PlayerStats.Save ();
             PlayerStats.clear();

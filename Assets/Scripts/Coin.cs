@@ -6,6 +6,7 @@ public class Coin : MonoBehaviour {
 
     public GameObject coin;
     private GameObject endPoint;
+    public bool stationary = true;
     private void Start()
     {
         endPoint = GameObject.FindGameObjectWithTag("End");
@@ -18,12 +19,19 @@ public class Coin : MonoBehaviour {
         {
             Destroy(coin);
         }
-      
-        this.transform.Translate(GameMaster.groundMoveSpeed, 0, 0);
+        if(stationary)
+            this.transform.Translate(GameMaster.groundMoveSpeed, 0, 0);
     }
     
     public void Collect()
     {
         Destroy(coin);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            Destroy(coin);
+        }
     }
 }

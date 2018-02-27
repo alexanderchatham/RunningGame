@@ -18,6 +18,7 @@ public class controls : MonoBehaviour {
 	public bool Alive = true;
 	public bool Gliding = false;
 	public bool Starting = true;
+    public bool lastlevel = false;
 	FlashingText ft;
     DeathPanel DP;
     WinPanel WP;
@@ -67,16 +68,17 @@ public class controls : MonoBehaviour {
         }
     }
     // Update is called once per frame
-    void FixedUpdate () {
-		moving = false;
-		if (!dying)
-		{
-			jump ();
-			move ();
-		}
+    void FixedUpdate()
+    {
+        moving = false;
+        if (!dying)
+        {
+            jump();
+            move();
+        }
 
-		//code for dashing 
-		/*
+        //code for dashing 
+        /*
         if (Input.GetKeyDown("x") && canDash == true && !OnGround)
         {
             canDash = false;
@@ -90,9 +92,12 @@ public class controls : MonoBehaviour {
         {
             canDash = true;
         }*/
-		//this code pushes the character back constantly
-		if(m_Rigidbody.velocity.x <= 0 && !allTheWayLeft && (!tRight||!Input.GetKeyDown (KeyCode.RightArrow)) && !onMovingPlatform)
-        m_Rigidbody.transform.Translate(GameMaster.groundMoveSpeed, 0, 0);
+        //this code pushes the character back constantly
+        if (!lastlevel)
+        {
+            if (m_Rigidbody.velocity.x <= 0 && !allTheWayLeft && (!tRight || !Input.GetKeyDown(KeyCode.RightArrow)) && !onMovingPlatform) 
+            m_Rigidbody.transform.Translate(GameMaster.groundMoveSpeed, 0, 0);
+        }
     }
 
     public bool canDoubleJump()
@@ -284,7 +289,13 @@ public class controls : MonoBehaviour {
 			anim.SetBool ("idle", false);
             allTheWayLeft = true;
 		}
-		if (coll.gameObject.tag == "Wall")
+        if (coll.gameObject.tag == "Coin")
+        {
+            Coin coin = coll.gameObject.GetComponent<Coin>();
+            coin.Collect();
+            PlayerStats.getCoin();
+        }
+        if (coll.gameObject.tag == "Wall")
 		{
 			m_Rigidbody.gravityScale = 3f;
 		}
@@ -296,8 +307,6 @@ public class controls : MonoBehaviour {
                 doublejumped = false;
                 anim.SetBool("jump", false);
             numberofjumps = 0;
-            if (coll.gameObject.GetComponent<DisappearingPlatform>())
-                coll.gameObject.GetComponent<Animator>().SetBool("disappear", true);
             dashing = false;
             canDash = true;
         }
@@ -380,8 +389,20 @@ public class controls : MonoBehaviour {
             other.gameObject.GetComponentInParent<Animator>().SetBool("hit", true);
 
         }
+        if (other.gameObject.tag == "Character Holder")
+        {
+            print("hit Character Holder");
+            onMovingPlatform = true;
+        }
     }
-
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Character Holder")
+        {
+            print("hit Character Holder");
+            onMovingPlatform = false;
+        }
+    }
     void dash()
     {
         m_Rigidbody.AddForce(m_DashForce, ForceMode2D.Impulse);
