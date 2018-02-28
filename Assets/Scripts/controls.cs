@@ -137,7 +137,7 @@ public class controls : MonoBehaviour {
 			}
 		}
 */
-        if ((Input.GetKeyDown(KeyCode.Space) ||(Input.GetKey(KeyCode.Space) && numberofjumps < 1) ) && ((m_Rigidbody.velocity.y < 1f && OnGround) || canDoubleJump()))
+        if ((Input.GetKeyDown(KeyCode.UpArrow) ||(Input.GetKey(KeyCode.UpArrow) && numberofjumps < 1) ) && ((m_Rigidbody.velocity.y < 1f && OnGround) || canDoubleJump()))
         {
             m_Rigidbody.gravityScale = .5f;
             m_Rigidbody.velocity = new Vector2(0, 0);
@@ -150,7 +150,7 @@ public class controls : MonoBehaviour {
             if (Starting)
                 startUp();
         }
-        if (Input.GetKeyUp(KeyCode.Space) || !Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.UpArrow) || !Input.GetKey(KeyCode.UpArrow))
         {
             m_Rigidbody.gravityScale = 2f;
             if(doublejump == 1 && numberofjumps < 2)
