@@ -261,7 +261,8 @@ public class controls : MonoBehaviour {
 			tRight = false;
 			tLeft = false;
 			dying = true;
-			GameMaster.EndGame ();
+            GameObject.FindGameObjectWithTag("FireballSfx").GetComponent<AudioSource>().Play();
+            GameMaster.EndGame ();
 			if(!winning)
 				PlayerStats.clear ();
 			anim.SetBool ("Dead", true);
@@ -272,6 +273,7 @@ public class controls : MonoBehaviour {
         if (coll.gameObject.tag == "fireball")
         {
             print("hit fireball");
+            GameObject.FindGameObjectWithTag("FireballSfx").GetComponent<AudioSource>().Play();
             OnGround = false;
             canDash = false;
             jumpStart = false;
@@ -383,7 +385,7 @@ public class controls : MonoBehaviour {
         if (other.gameObject.tag == "ring")
         {
             print("hit ring");
-
+            GameObject.FindGameObjectWithTag("RingSfx").GetComponent<AudioSource>().Play();
             PlayerStats.Scored(500);
             Destroy(other.gameObject.GetComponent<BoxCollider2D>());
             other.gameObject.GetComponentInParent<Animator>().SetBool("hit", true);

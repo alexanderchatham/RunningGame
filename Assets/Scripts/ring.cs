@@ -25,6 +25,7 @@ public class ring : MonoBehaviour {
 
     public void Collect()
     {
+        
         Destroy(Ring);
     }
 }

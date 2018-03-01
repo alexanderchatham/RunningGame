@@ -25,6 +25,7 @@ public class Coin : MonoBehaviour {
     
     public void Collect()
     {
+        GameObject.FindGameObjectWithTag("CoinSfx").GetComponent<AudioSource>().Play();
         Destroy(coin);
     }
     private void OnCollisionEnter2D(Collision2D collision)
