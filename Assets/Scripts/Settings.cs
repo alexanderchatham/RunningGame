@@ -11,11 +11,13 @@ public class Settings : MonoBehaviour {
     StartPanel SP;
 	public Text speedText;
     public Text volumeText;
+	public Text sfxText;
 	public GameObject ConfirmationPanel;
     public Text ConfirmationText;
     public GameObject deleteYes;
 	public Slider fslide;
     public Slider vslide;
+	public Slider sfxslide;
 
     private void Awake()
     {
@@ -98,6 +100,20 @@ public class Settings : MonoBehaviour {
         volumeText.text = "" + i * 5;
         InitializeVolume();
     }
+
+	public void InitializeSfxVolume()
+	{
+		int i = PlayerPrefs.GetInt("SfxVolume", 20);
+	}
+
+	public void SfxVolumeSelect(float speed)
+	{
+		int i = (int)speed;
+		print("Sfx Volume select: " + i);
+		PlayerPrefs.SetInt("SfxVolume", i);
+		volumeText.text = "" + i * 5;
+	}
+
     public void DeleteData(){
        int ads = PlayerPrefs.GetInt("No Ads", 0);
 		PlayerPrefs.DeleteAll ();
