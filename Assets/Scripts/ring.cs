@@ -25,7 +25,7 @@ public class ring : MonoBehaviour {
 
     public void Collect()
     {
-        
+        //frodo
         Destroy(Ring);
     }
 }

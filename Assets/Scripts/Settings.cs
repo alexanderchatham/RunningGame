@@ -48,6 +48,8 @@ public class Settings : MonoBehaviour {
 		}
         vslide.value = PlayerPrefs.GetInt("Volume", 20);
         VolumeSelect(PlayerPrefs.GetInt("Volume", 20));
+        sfxslide.value = PlayerPrefs.GetInt("SfxVolume", 20);
+        InitializeSfx();
     }
 
 
@@ -91,6 +93,7 @@ public class Settings : MonoBehaviour {
         int i = PlayerPrefs.GetInt("Volume", 20);
         GameObject.FindGameObjectWithTag("music").GetComponent<AudioSource>().volume = ((float)(i*5))/100;
     }
+   
 
     public void VolumeSelect(float speed)
     {
@@ -100,18 +103,20 @@ public class Settings : MonoBehaviour {
         volumeText.text = "" + i * 5;
         InitializeVolume();
     }
+    public void InitializeSfx()
+    {
+        int i = PlayerPrefs.GetInt("SfxVolume", 20);
+        GameObject.FindGameObjectWithTag("CoinSfx").GetComponent<AudioSource>().volume = ((float)(i * 5)) / 100;
+    }
 
-	public void InitializeSfxVolume()
-	{
-		int i = PlayerPrefs.GetInt("SfxVolume", 20);
-	}
-
-	public void SfxVolumeSelect(float speed)
+    public void SfxVolumeSelect(float speed)
 	{
 		int i = (int)speed;
-		print("Sfx Volume select: " + i);
 		PlayerPrefs.SetInt("SfxVolume", i);
-		volumeText.text = "" + i * 5;
+		print("Sfx Volume select: " + i);
+        GameObject.FindGameObjectWithTag("CoinSfx").GetComponent<AudioSource>().volume =((float)(i*5)/100f);
+        GameObject.FindGameObjectWithTag("CoinSfx").GetComponent<AudioSource>().Play();
+		sfxText.text = "" + i * 5;
 	}
 
     public void DeleteData(){

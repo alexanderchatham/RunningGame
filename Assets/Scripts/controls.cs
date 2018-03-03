@@ -114,7 +114,7 @@ public class controls : MonoBehaviour {
     
 	public void jump()
     {
-		
+		/*
 		if (((jumpStart && numberofjumps < 1) ||(jumpStart && numberofjumps == 1)) && (m_Rigidbody.velocity.y < 1f && OnGround))
         {
             m_Rigidbody.gravityScale = .5f;
@@ -136,7 +136,7 @@ public class controls : MonoBehaviour {
 				OnGround = true;
 			}
 		}
-/*
+/*/
         if ((Input.GetKeyDown(KeyCode.UpArrow) ||(Input.GetKey(KeyCode.UpArrow) && numberofjumps < 1) ) && ((m_Rigidbody.velocity.y < 1f && OnGround) || canDoubleJump()))
         {
             m_Rigidbody.gravityScale = .5f;
@@ -156,7 +156,7 @@ public class controls : MonoBehaviour {
             if(doublejump == 1 && numberofjumps < 2)
             doublejumped = false;
         }
-        */
+        
         //this code makes it so the character doesn't bounce and sticks his landings
         if (OnGround && m_Rigidbody.velocity.y > 0)
         {
