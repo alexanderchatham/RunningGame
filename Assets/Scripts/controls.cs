@@ -36,10 +36,14 @@ public class controls : MonoBehaviour {
     public bool doublejumped = true;
     public int numberofjumps = 0;
 
+    bool editor = false;
 
     void Start()
     {
-		Time.timeScale = 0;
+#if UNITY_EDITOR
+        editor = true;
+#endif
+        Time.timeScale = 0;
         //You get the Rigidbody component you attach to the GameObject
         m_Rigidbody = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator> ();
@@ -114,49 +118,52 @@ public class controls : MonoBehaviour {
     
 	public void jump()
     {
-		/*
-		if (((jumpStart && numberofjumps < 1) ||(jumpStart && numberofjumps == 1)) && (m_Rigidbody.velocity.y < 1f && OnGround))
+        if (!editor)
         {
-            m_Rigidbody.gravityScale = .5f;
-            m_Rigidbody.velocity = new Vector2(0,0);
-            if (OnGround == false)
-                doublejumped = true;
-            OnGround = false;
-            m_Rigidbody.AddForce(m_JumpForce, ForceMode2D.Impulse);
-            anim.SetBool("jump", true);
-			numberofjumps++;
-            if (Starting)
-				startUp ();
+            if (((jumpStart && numberofjumps < 1) || (jumpStart && numberofjumps == 1)) && (m_Rigidbody.velocity.y < 1f && OnGround))
+            {
+                m_Rigidbody.gravityScale = .5f;
+                m_Rigidbody.velocity = new Vector2(0, 0);
+                if (OnGround == false)
+                    doublejumped = true;
+                OnGround = false;
+                m_Rigidbody.AddForce(m_JumpForce, ForceMode2D.Impulse);
+                anim.SetBool("jump", true);
+                numberofjumps++;
+                if (Starting)
+                    startUp();
+            }
+            if (!jumpStart)
+            {
+                m_Rigidbody.gravityScale = 2f;
+                if (doublejump == 1 && numberofjumps == 1)
+                {
+                    OnGround = true;
+                }
+            }
         }
-         if (!jumpStart)
-		{
-			m_Rigidbody.gravityScale = 2f;
-			if (doublejump == 1 && numberofjumps == 1)
-			{
-				OnGround = true;
-			}
-		}
-/*/
-        if ((Input.GetKeyDown(KeyCode.UpArrow) ||(Input.GetKey(KeyCode.UpArrow) && numberofjumps < 1) ) && ((m_Rigidbody.velocity.y < 1f && OnGround) || canDoubleJump()))
+        else
         {
-            m_Rigidbody.gravityScale = .5f;
-            m_Rigidbody.velocity = new Vector2(0, 0);
-            if (OnGround == false)
-                doublejumped = true;
-            OnGround = false;
-            m_Rigidbody.AddForce(m_JumpForce, ForceMode2D.Impulse);
-            anim.SetBool("jump", true);
-            numberofjumps++;
-            if (Starting)
-                startUp();
+            if ((Input.GetKeyDown(KeyCode.UpArrow) || (Input.GetKey(KeyCode.UpArrow) && numberofjumps < 1)) && ((m_Rigidbody.velocity.y < 1f && OnGround) || canDoubleJump()))
+            {
+                m_Rigidbody.gravityScale = .5f;
+                m_Rigidbody.velocity = new Vector2(0, 0);
+                if (OnGround == false)
+                    doublejumped = true;
+                OnGround = false;
+                m_Rigidbody.AddForce(m_JumpForce, ForceMode2D.Impulse);
+                anim.SetBool("jump", true);
+                numberofjumps++;
+                if (Starting)
+                    startUp();
+            }
+            if (Input.GetKeyUp(KeyCode.UpArrow) || !Input.GetKey(KeyCode.UpArrow))
+            {
+                m_Rigidbody.gravityScale = 2f;
+                if (doublejump == 1 && numberofjumps < 2)
+                    doublejumped = false;
+            }
         }
-        if (Input.GetKeyUp(KeyCode.UpArrow) || !Input.GetKey(KeyCode.UpArrow))
-        {
-            m_Rigidbody.gravityScale = 2f;
-            if(doublejump == 1 && numberofjumps < 2)
-            doublejumped = false;
-        }
-        
         //this code makes it so the character doesn't bounce and sticks his landings
         if (OnGround && m_Rigidbody.velocity.y > 0)
         {

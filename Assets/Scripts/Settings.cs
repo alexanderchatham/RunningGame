@@ -13,11 +13,16 @@ public class Settings : MonoBehaviour {
     public Text volumeText;
 	public Text sfxText;
 	public GameObject ConfirmationPanel;
+    public GameObject aboutmepanel;
     public Text ConfirmationText;
     public GameObject deleteYes;
 	public Slider fslide;
     public Slider vslide;
 	public Slider sfxslide;
+    public int buffer = 1;
+
+    public string ANDROID_RATE_URL;
+    public string IOS_RATE_URL;
 
     private void Awake()
     {
@@ -27,6 +32,8 @@ public class Settings : MonoBehaviour {
 
     void Start()
     {
+        ANDROID_RATE_URL = "market://details?id=" + Application.productName;
+        IOS_RATE_URL = "itms-apps://itunes.apple.com/app/id" + Application.productName;
         SP = StartPanel.instance;
 		fslide.value = PlayerPrefs.GetInt("speed", 1);
 		switch ((int)fslide.value)
@@ -115,7 +122,10 @@ public class Settings : MonoBehaviour {
 		PlayerPrefs.SetInt("SfxVolume", i);
 		print("Sfx Volume select: " + i);
         GameObject.FindGameObjectWithTag("CoinSfx").GetComponent<AudioSource>().volume =((float)(i*5)/100f);
-        GameObject.FindGameObjectWithTag("CoinSfx").GetComponent<AudioSource>().Play();
+        if (buffer > 0)
+            buffer--;
+        else
+            GameObject.FindGameObjectWithTag("CoinSfx").GetComponent<AudioSource>().Play();
 		sfxText.text = "" + i * 5;
 	}
 
@@ -131,6 +141,25 @@ public class Settings : MonoBehaviour {
         ConfirmationPanel.SetActive (true);
         deleteYes.SetActive(true);
 	}
+
+    public void aboutme()
+    {
+        aboutmepanel.SetActive(true);
+    }
+
+    public void aboutmehide()
+    {
+        aboutmepanel.SetActive(false);
+    }
+
+    public void RateButton()
+    {
+#if UNITY_ANDROID
+        Application.OpenURL(ANDROID_RATE_URL);
+#elif UNITY_IOS
+        Application.OpenURL(IOS_RATE_URL);
+#endif
+    }
 
 	public void confirmationHide(){
 		ConfirmationPanel.SetActive (false);
