@@ -362,7 +362,7 @@ public class controls : MonoBehaviour {
 		GameMaster.EndGame ();
 		WP.show();
 		UIP.hide ();
-		anim.SetBool ("idle", false);
+		anim.SetBool ("idle", true);
 		GameMaster.beatLevel (GameMaster.Level);
 		PlayerStats.Save ();
 

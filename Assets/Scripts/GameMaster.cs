@@ -26,8 +26,10 @@ public class GameMaster : MonoBehaviour {
     public GameObject IceGuy;
     public GameObject startingPlayer;
     public GameObject player;
+	static WinPanel winp;
     public void Start()
     {
+		winp = WinPanel.instance;
         if (SceneManager.GetActiveScene().name == "Ending Level")
         {
             currentLevel = SceneManager.GetActiveScene().name;
@@ -223,11 +225,22 @@ public class GameMaster : MonoBehaviour {
 		{
 			PlayerPrefs.SetInt("Level " + i, 1);
 			print ("coins is " + PlayerStats.Coins);
+			winp.setCoins (PlayerStats.Coins);
 			print ("score is " + PlayerStats.Score);
-			if(PlayerPrefs.GetInt("Level " + i +" coins",0) < PlayerStats.Coins)
-				PlayerPrefs.SetInt("Level " + i +" coins",PlayerStats.Coins);
-			if(PlayerPrefs.GetInt("Level " + i +" score",0) < PlayerStats.Score)
+			winp.setScore (PlayerStats.Score);
+			if (PlayerPrefs.GetInt ("Level " + i + " coins", 0) < PlayerStats.Coins)
+			{
+				PlayerPrefs.SetInt ("Level " + i + " coins", PlayerStats.Coins);
+				winp.setBestCoins (PlayerStats.Coins);
+			}
+			else
+				winp.setBestCoins (PlayerPrefs.GetInt ("Level " + i + " coins", 0));
+			if (PlayerPrefs.GetInt ("Level " + i + " score", 0) < PlayerStats.Score)
+			{
 				PlayerPrefs.SetInt ("Level " + i + " score", PlayerStats.Score);
+				winp.setHighscore (PlayerStats.Score);
+			} else
+				winp.setHighscore (PlayerPrefs.GetInt ("Level " + i + " score", 0));
 		}
 	}
 

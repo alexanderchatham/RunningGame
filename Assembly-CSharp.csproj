@@ -53,6 +53,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\background.cs" />
      <Compile Include="Assets\Scripts\Coin.cs" />
+     <Compile Include="Assets\Scripts\CoinShooter.cs" />
      <Compile Include="Assets\Scripts\controls.cs" />
      <Compile Include="Assets\Scripts\DeathPanel.cs" />
      <Compile Include="Assets\Scripts\DisappearingPlatform.cs" />
@@ -75,6 +76,7 @@
      <Compile Include="Assets\Scripts\PlayerStats.cs" />
      <Compile Include="Assets\Scripts\ring.cs" />
      <Compile Include="Assets\Scripts\Settings.cs" />
+     <Compile Include="Assets\Scripts\SfxVolumesetter.cs" />
      <Compile Include="Assets\Scripts\Sky.cs" />
      <Compile Include="Assets\Scripts\StartPanel.cs" />
      <Compile Include="Assets\Scripts\Store.cs" />
