@@ -35,6 +35,7 @@ public class controls : MonoBehaviour {
     public int doublejump;
     public bool doublejumped = true;
     public int numberofjumps = 0;
+	bool columnhit = false;
 
     bool editor = false;
 
@@ -321,21 +322,33 @@ public class controls : MonoBehaviour {
         }
 		if (coll.gameObject.tag == "Column1")
 		{
-			print("hit Column1");
-			PlayerStats.Scored (300);
-            win ();
+			if (!columnhit)
+			{
+				print ("hit Column1");
+				PlayerStats.Scored (300);
+				win ();
+				columnhit = true;
+			}
 		}
 		if (coll.gameObject.tag == "Column2")
 		{
-			print("hit Column2");
-			PlayerStats.Scored (500);
-            win ();
+			if (!columnhit)
+			{
+				print ("hit Column2");
+				PlayerStats.Scored (500);
+				win ();
+				columnhit = true;
+			}
 		}
 		if (coll.gameObject.tag == "Column3")
 		{
-			print("hit Column3");
-			PlayerStats.Scored (1000);
-            win ();
+			if (!columnhit)
+			{
+				print ("hit Column3");
+				PlayerStats.Scored (1000);
+				win ();
+				columnhit = true;
+			}
 		}
      
     }

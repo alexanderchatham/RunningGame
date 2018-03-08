@@ -174,14 +174,14 @@ public class Store : MonoBehaviour {
 
     public void buyDoubleJump()
     {
-        int cost = 2000;
+        int cost = 1000;
         int coins = PlayerPrefs.GetInt("Coins", 0);
         if (coins >= cost)
         {
             doubleJump.GetComponentInChildren<Text>().text = "Double Jump";
             PlayerPrefs.SetInt("double jump", 1);
             doubleJump.interactable = false;
-            coins = coins - 2000;
+			coins = coins - cost;
             PlayerPrefs.SetInt("Coins", coins);
         }
     }
