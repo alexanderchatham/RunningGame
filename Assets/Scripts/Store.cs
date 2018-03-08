@@ -182,6 +182,7 @@ public class Store : MonoBehaviour {
             PlayerPrefs.SetInt("double jump", 1);
             doubleJump.interactable = false;
 			coins = coins - cost;
+			numberOfCoins.text = "" + coins;
             PlayerPrefs.SetInt("Coins", coins);
         }
     }
