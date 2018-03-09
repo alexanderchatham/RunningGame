@@ -21,7 +21,7 @@ public class IAPManager : MonoBehaviour, IStoreListener
     // when defining the Product Identifiers on the store. Except, for illustration purposes, the 
     // kProductIDSubscription - it has custom Apple and Google identifiers. We declare their store-
     // specific mapping to Unity Purchasing's AddProduct, below.
-    public static string PRODUCT_NO_ADS = "No Ads";
+    public static string PRODUCT_NO_ADS = "No_Ads";
     
 
     private void Start()
