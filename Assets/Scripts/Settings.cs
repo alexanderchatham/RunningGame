@@ -32,8 +32,8 @@ public class Settings : MonoBehaviour {
 
     void Start()
     {
-        ANDROID_RATE_URL = "market://details?id=" + Application.productName;
-        IOS_RATE_URL = "itms-apps://itunes.apple.com/app/id" + Application.productName;
+        ANDROID_RATE_URL = "market://details?id=com.AlexChatham.Hellscape";
+        IOS_RATE_URL = "itms-apps://itunes.apple.com/app/id1356756930";
         SP = StartPanel.instance;
 		fslide.value = PlayerPrefs.GetInt("speed", 1);
 		switch ((int)fslide.value)
@@ -130,7 +130,7 @@ public class Settings : MonoBehaviour {
 	}
 
     public void DeleteData(){
-       int ads = PlayerPrefs.GetInt("No Ads", 0);
+        int ads = PlayerPrefs.GetInt("No Ads", 0);
 		PlayerPrefs.DeleteAll ();
         PlayerPrefs.SetInt("No Ads", ads);
 		SceneManager.LoadScene (0);

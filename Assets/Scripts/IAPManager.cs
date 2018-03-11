@@ -82,6 +82,7 @@ public class IAPManager : MonoBehaviour, IStoreListener
             // system's products collection.
             Product product = m_StoreController.products.WithID(productId);
 
+            Debug.Log(product);
             // If the look up found a product for this device's store and that product is ready to be sold ... 
             if (product != null && product.availableToPurchase)
             {
