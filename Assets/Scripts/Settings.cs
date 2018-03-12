@@ -33,7 +33,7 @@ public class Settings : MonoBehaviour {
     void Start()
     {
         ANDROID_RATE_URL = "market://details?id=com.AlexChatham.Hellscape";
-        IOS_RATE_URL = "itms-apps://itunes.apple.com/app/id1356756930";
+		IOS_RATE_URL = "https://itunes.apple.com/us/app/apple-store/id1356756930?mt=8";
         SP = StartPanel.instance;
 		fslide.value = PlayerPrefs.GetInt("speed", 1);
 		switch ((int)fslide.value)
