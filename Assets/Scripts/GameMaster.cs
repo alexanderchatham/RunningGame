@@ -26,6 +26,7 @@ public class GameMaster : MonoBehaviour {
     public GameObject IceGuy;
     public GameObject startingPlayer;
     public GameObject player;
+	public static GameObject portalplayer;
 	static WinPanel winp;
     public void Start()
     {
@@ -134,6 +135,16 @@ public class GameMaster : MonoBehaviour {
         skyMoveSpeed = initialSkySpeed * 1.75f;
         characterMoveSpeed = initialCharacterSpeed * 1.25f;
     }
+	public static void Double()
+	{
+		groundMoveSpeed = groundMoveSpeed * 5;
+		skyMoveSpeed = skyMoveSpeed * 5;
+	}
+	public static void NegDouble()
+	{
+		groundMoveSpeed = groundMoveSpeed * -5;
+		skyMoveSpeed = skyMoveSpeed * -5;
+	}
 
  
 
@@ -277,4 +288,17 @@ public void runAd()
         }
     }
 
+	public static void portalmove(GameObject a, GameObject b){
+		
+	
+		Vector3 currentlocation = a.transform.position;
+		if (a.transform.position.x < b.transform.position.x)
+		{
+			Double ();
+		} else
+		{
+			NegDouble ();
+		}
+	
+	}
 }

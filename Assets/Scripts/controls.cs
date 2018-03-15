@@ -36,6 +36,7 @@ public class controls : MonoBehaviour {
     public bool doublejumped = true;
     public int numberofjumps = 0;
 	bool columnhit = false;
+	bool destroyer = false;
 
     bool editor = false;
 
@@ -261,6 +262,7 @@ public class controls : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D coll)
     {
+		
         if (coll.gameObject.tag == "Ground")
         {
 			OnGround = false;
@@ -275,8 +277,12 @@ public class controls : MonoBehaviour {
 				PlayerStats.clear ();
 			anim.SetBool ("Dead", true);
 
-           
+			destroyer = false;
         }
+		if (destroyer)
+		{
+			Destroy(coll.gameObject.GetComponent<BoxCollider2D> ());
+		}
       
         if (coll.gameObject.tag == "fireball")
         {
@@ -291,7 +297,11 @@ public class controls : MonoBehaviour {
             GameMaster.EndGame();
             if (!winning)
                 PlayerStats.clear();
-            anim.SetBool("Dead", true);
+            anim.SetBool("trap", true);
+			m_Rigidbody.velocity = new Vector2(0, 0);
+			m_Rigidbody.AddForce(m_JumpForce, ForceMode2D.Impulse);
+			Destroy(coll.gameObject.GetComponent<CircleCollider2D> ());
+			destroyer = true;
         }
 		if (coll.gameObject.tag == "Back")
 		{
@@ -416,6 +426,22 @@ public class controls : MonoBehaviour {
             print("hit Character Holder");
             onMovingPlatform = true;
         }
+		if (other.gameObject.tag == "Portal")
+		{
+			string ident = other.gameObject.GetComponentInChildren<portal> ().identity;
+			GameObject[] exits = GameObject.FindGameObjectsWithTag ("Portal Exit");
+			GameObject exit = GameObject.FindGameObjectWithTag ("Portal Exit");
+			foreach(GameObject i in exits)
+			{
+				if (i.GetComponentInChildren<portal> ().identity == ident)
+					exit = i;
+			}
+			exit.GetComponent<PortalExit> ().a = true;
+			exit.GetComponent<PortalExit> ().target = this.transform;
+			exit.GetComponent<PortalExit> ().player = this.gameObject;
+			GameMaster.portalmove (other.gameObject,exit);
+			this.gameObject.SetActive (false);
+		}
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
