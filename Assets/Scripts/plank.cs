@@ -22,10 +22,7 @@ public class plank : MonoBehaviour {
         //coroutines for movement
     }
     void FixedUpdate () {
-		if(ground.transform.position.x <= endPoint.transform.position.x)
-        {
-            Destroy(ground);
-        }
+	
 		this.transform.Translate(GameMaster.groundMoveSpeed,0,0);
 	}
 }

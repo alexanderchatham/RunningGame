@@ -10,13 +10,13 @@ public class PortalExit : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 			
-		if (a && this.gameObject.transform.position.x > (target.position.x - .1f) && this.gameObject.transform.position.x < (target.position.x + .1f))
+		if (a && this.gameObject.transform.position.x > (target.position.x - .5f) && this.gameObject.transform.position.x < (target.position.x + .5f))
 		{
 			a = false;
 			player.SetActive (true);
 			GameMaster.GetSpeed ();
 			Vector3 pos = this.gameObject.transform.position;
-			player.GetComponent<Rigidbody2D>().transform.SetPositionAndRotation(pos,Quaternion.Euler (0, 0, 0));
+			player.GetComponent<Rigidbody2D>().transform.SetPositionAndRotation(new Vector3(pos.x,pos.y, -1f),Quaternion.Euler (0, 0, 0));
 		}
 	}
 }
