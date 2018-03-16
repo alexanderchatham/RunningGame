@@ -15,6 +15,8 @@ public class PortalExit : MonoBehaviour {
 			a = false;
 			player.SetActive (true);
 			GameMaster.GetSpeed ();
+            if (GameMaster.reversed)
+                GameMaster.reverse(true);
 			Vector3 pos = this.gameObject.transform.position;
 			player.GetComponent<Rigidbody2D>().transform.SetPositionAndRotation(new Vector3(pos.x,pos.y, -1f),Quaternion.Euler (0, 0, 0));
 		}

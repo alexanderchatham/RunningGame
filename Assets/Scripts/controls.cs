@@ -300,6 +300,7 @@ public class controls : MonoBehaviour {
             anim.SetBool("trap", true);
 			m_Rigidbody.velocity = new Vector2(0, 0);
 			m_Rigidbody.AddForce(m_JumpForce, ForceMode2D.Impulse);
+            m_Rigidbody.gravityScale = 2;
 			Destroy(coll.gameObject.GetComponent<CircleCollider2D> ());
 			destroyer = true;
         }
@@ -311,9 +312,12 @@ public class controls : MonoBehaviour {
 		}
         if (coll.gameObject.tag == "Coin")
         {
-            Coin coin = coll.gameObject.GetComponent<Coin>();
-            coin.Collect();
-            PlayerStats.getCoin();
+            if (!dying)
+            {
+                Coin coin = coll.gameObject.GetComponent<Coin>();
+                coin.Collect();
+                PlayerStats.getCoin();
+            }
         }
         if (coll.gameObject.tag == "Wall")
 		{
@@ -376,6 +380,7 @@ public class controls : MonoBehaviour {
         GameMaster.EndGame ();
 		DP.show();
 		UIP.hide ();
+        Destroy(this.gameObject);
 	}
 
 	public void win()
@@ -442,6 +447,15 @@ public class controls : MonoBehaviour {
 			GameMaster.portalmove (other.gameObject,exit);
 			this.gameObject.SetActive (false);
 		}
+        if (other.gameObject.tag == "Reverse")
+        {
+            if (!other.gameObject.GetComponent<Reverse>().used)
+            {
+                Reverse r = other.gameObject.GetComponent<Reverse>();
+                other.gameObject.GetComponent<SpriteRenderer>().sprite = r.pressed;
+                GameMaster.reverse(r.rewind);
+            }
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {

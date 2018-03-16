@@ -13,10 +13,11 @@ public class GameMaster : MonoBehaviour {
 
 
     public static int Level = 0;
-	public static int MaxLevel = 22;
+	public static int MaxLevel = 25;
     public static float groundMoveSpeed = -0.00f;
 	public static float skyMoveSpeed = -0.00f;
 	public static float characterMoveSpeed = 0.06f;
+    public static bool reversed;
 	private string currentLevel;
 	private string Levelnumber;
 	public static int gameSpeed;
@@ -135,16 +136,32 @@ public class GameMaster : MonoBehaviour {
         skyMoveSpeed = initialSkySpeed * 1.75f;
         characterMoveSpeed = initialCharacterSpeed * 1.25f;
     }
-	public static void Double()
-	{
-		groundMoveSpeed = groundMoveSpeed * 5;
-		skyMoveSpeed = skyMoveSpeed * 5;
-	}
+    public static void Double()
+    {
+        if (!reversed)
+        {
+            groundMoveSpeed = groundMoveSpeed * 5;
+            skyMoveSpeed = skyMoveSpeed * 15;
+        }
+        else
+        {
+            groundMoveSpeed = groundMoveSpeed * -5;
+            skyMoveSpeed = skyMoveSpeed * -15;
+        }
+    }
 	public static void NegDouble()
 	{
-		groundMoveSpeed = groundMoveSpeed * -5;
-		skyMoveSpeed = skyMoveSpeed * -5;
-	}
+        if (!reversed)
+        {
+            groundMoveSpeed = groundMoveSpeed * -5;
+            skyMoveSpeed = skyMoveSpeed * -15;
+        }
+        else
+        {
+            groundMoveSpeed = groundMoveSpeed * 5;
+            skyMoveSpeed = skyMoveSpeed * 15;
+        }
+    }
 
  
 
@@ -255,7 +272,7 @@ public class GameMaster : MonoBehaviour {
 		}
 	}
 
-public void runAd()
+    public void runAd()
 {
         // change no ads default to 0 to enable ads
     if (PlayerPrefs.GetInt("No Ads", 0) == 0) {
@@ -301,4 +318,23 @@ public void runAd()
 		}
 	
 	}
+
+    public static void Negative()
+    {
+        groundMoveSpeed = groundMoveSpeed * -1;
+        skyMoveSpeed = skyMoveSpeed * -1;
+    }
+    public static void reverse(bool a)
+    {
+        if (a)
+        {
+            Negative();
+            reversed = true;
+        }
+        else
+        {
+            GetSpeed();
+            reversed = false;
+        }
+    }
 }

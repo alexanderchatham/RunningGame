@@ -13,15 +13,7 @@ public class ring : MonoBehaviour {
         endPoint = GameObject.FindGameObjectWithTag("End");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (this.transform.position.x <= endPoint.transform.position.x)
-        {
-            Destroy(Ring);
-        }
-        
-    }
+
 
     public void Collect()
     {
