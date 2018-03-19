@@ -76,10 +76,12 @@
      <Compile Include="Assets\Scripts\PlayerStats.cs" />
      <Compile Include="Assets\Scripts\portal.cs" />
      <Compile Include="Assets\Scripts\PortalExit.cs" />
+     <Compile Include="Assets\Scripts\Reverse.cs" />
      <Compile Include="Assets\Scripts\ring.cs" />
      <Compile Include="Assets\Scripts\Settings.cs" />
      <Compile Include="Assets\Scripts\SfxVolumesetter.cs" />
      <Compile Include="Assets\Scripts\Sky.cs" />
+     <Compile Include="Assets\Scripts\spaceanimator.cs" />
      <Compile Include="Assets\Scripts\StartPanel.cs" />
      <Compile Include="Assets\Scripts\Store.cs" />
      <Compile Include="Assets\Scripts\TitleScreen.cs" />
