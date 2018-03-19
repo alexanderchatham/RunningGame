@@ -15,7 +15,8 @@ public class Coin : MonoBehaviour {
 
     // Update is called once per frame
     void FixedUpdate () {
-     
+        if (this.transform.position.y < -5f)
+            Destroy(this.gameObject);
         if(stationary)
             this.transform.Translate(GameMaster.groundMoveSpeed, 0, 0);
     }

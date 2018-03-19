@@ -37,7 +37,21 @@ public class movingPlank : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void FixedUpdate () {
+    void FixedUpdate() {
+
+        if (GameMaster.reversed) { 
+            if (sr.flipY != true && (up || down))
+                sr.flipY = true;
+            else if (GameMaster.reversed && sr.flipX != true)
+                sr.flipX = true;
+        }
+        if (!GameMaster.reversed)
+        {
+            if (sr.flipY == true)
+                sr.flipY = false;
+            else if (sr.flipX == true)
+                sr.flipX = false;
+        }
         if (moving == true)
         {
 			if (up)

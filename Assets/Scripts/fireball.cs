@@ -44,6 +44,7 @@ public class fireball : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision)
     {
         rb.velocity.Set(0,0);
+        print("fireball hit"+collision.gameObject);
         rb.gameObject.GetComponent<CircleCollider2D>().enabled = false;
         
     }

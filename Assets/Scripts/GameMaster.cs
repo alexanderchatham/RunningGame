@@ -13,11 +13,11 @@ public class GameMaster : MonoBehaviour {
 
 
     public static int Level = 0;
-	public static int MaxLevel = 25;
+	public static int MaxLevel = 30;
     public static float groundMoveSpeed = -0.00f;
 	public static float skyMoveSpeed = -0.00f;
 	public static float characterMoveSpeed = 0.06f;
-    public static bool reversed;
+    public static bool reversed = false;
 	private string currentLevel;
 	private string Levelnumber;
 	public static int gameSpeed;
@@ -31,6 +31,7 @@ public class GameMaster : MonoBehaviour {
 	static WinPanel winp;
     public void Start()
     {
+        reversed = false;
 		winp = WinPanel.instance;
         if (SceneManager.GetActiveScene().name == "Ending Level")
         {

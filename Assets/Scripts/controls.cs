@@ -431,7 +431,7 @@ public class controls : MonoBehaviour {
             print("hit Character Holder");
             onMovingPlatform = true;
         }
-		if (other.gameObject.tag == "Portal")
+		if (other.gameObject.tag == "Portal" && !dying)
 		{
 			string ident = other.gameObject.GetComponentInChildren<portal> ().identity;
 			GameObject[] exits = GameObject.FindGameObjectsWithTag ("Portal Exit");
@@ -453,7 +453,9 @@ public class controls : MonoBehaviour {
             {
                 Reverse r = other.gameObject.GetComponent<Reverse>();
                 other.gameObject.GetComponent<SpriteRenderer>().sprite = r.pressed;
-                GameMaster.reverse(r.rewind);
+                other.gameObject.GetComponent<Reverse>().used = true;
+                if(GameMaster.reversed != r.rewind)
+                    GameMaster.reverse(r.rewind);
             }
         }
     }
