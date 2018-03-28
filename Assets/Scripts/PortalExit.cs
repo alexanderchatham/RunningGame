@@ -10,7 +10,7 @@ public class PortalExit : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 			
-		if (a && this.gameObject.transform.position.x > (target.position.x - .5f) && this.gameObject.transform.position.x < (target.position.x + .5f))
+		if (a && this.gameObject.transform.position.x > (target.position.x - 1f) && this.gameObject.transform.position.x < (target.position.x + 1f))
 		{
 			a = false;
 			player.SetActive (true);

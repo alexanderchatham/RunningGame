@@ -10,7 +10,7 @@ public class GameMaster : MonoBehaviour {
     public const float initialGroundSpeed = -0.06f;
     public const float initialSkySpeed = -0.02f;
     public const float initialCharacterSpeed = 0.2f;
-
+    public bool followingcameralevel = false;
 
     public static int Level = 0;
 	public static int MaxLevel = 30;
@@ -84,6 +84,8 @@ public class GameMaster : MonoBehaviour {
             player.GetComponent<controls>().lastlevel = true;
         else
             player.GetComponent<controls>().lastlevel = false;
+        player.transform.parent = null;
+        Destroy(startingPlayer);
     }
 
 	public static void GetSpeed(){

@@ -45,6 +45,10 @@ public class controls : MonoBehaviour {
 #if UNITY_EDITOR
         editor = true;
 #endif
+        if (GameObject.FindGameObjectWithTag("MainCamera").GetComponent<camerafollow>())
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<camerafollow>().player = this.gameObject;
+        if (GameMaster.Level > 30)
+            lastlevel = true;
         Time.timeScale = 0;
         //You get the Rigidbody component you attach to the GameObject
         m_Rigidbody = GetComponent<Rigidbody2D>();
@@ -150,11 +154,11 @@ public class controls : MonoBehaviour {
             {
                 m_Rigidbody.gravityScale = .5f;
                 m_Rigidbody.velocity = new Vector2(0, 0);
+                m_Rigidbody.AddForce(m_JumpForce, ForceMode2D.Impulse);
+                anim.SetBool("jump", true);
                 if (OnGround == false)
                     doublejumped = true;
                 OnGround = false;
-                m_Rigidbody.AddForce(m_JumpForce, ForceMode2D.Impulse);
-                anim.SetBool("jump", true);
                 numberofjumps++;
                 if (Starting)
                     startUp();
@@ -229,7 +233,8 @@ public class controls : MonoBehaviour {
     public void moveLeft()
     {
         anim.SetBool("idle", false);
-
+        if (Starting)
+            startUp();
         m_Rigidbody.velocity = new Vector3(0, m_Rigidbody.velocity.y);
         m_Rigidbody.transform.Translate(-GameMaster.characterMoveSpeed, 0, 0);
         moving = true;

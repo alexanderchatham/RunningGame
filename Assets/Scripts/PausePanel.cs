@@ -32,6 +32,7 @@ public class PausePanel : MonoBehaviour {
 		Panel.SetActive(false);
 		Time.timeScale = 1;
 		GameMaster.GetSpeed ();
+        GameMaster.reverse(GameMaster.reversed);
 		UIP.show ();
 	}
 }
