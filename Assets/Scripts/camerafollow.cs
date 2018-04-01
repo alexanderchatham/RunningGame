@@ -10,6 +10,7 @@ public class camerafollow : MonoBehaviour {
     public float upperbound = 12.64f;
     private bool smooth = true;
     public float smoothSpeed = 0.125f;
+    public float lowerbound = 0;
     private Vector3 offset = new Vector3(0,3f,-6.5f);
     private void Start()
     {
@@ -20,7 +21,7 @@ public class camerafollow : MonoBehaviour {
     private void LateUpdate()
     {
         Vector3 desiredPosition = player.transform.position + offset;
-        if ( desiredPosition.x > startPosition && desiredPosition.x < rightmostPosition && desiredPosition.y < upperbound) {
+        if ( desiredPosition.x > startPosition && desiredPosition.x < rightmostPosition && desiredPosition.y < upperbound && desiredPosition.y > lowerbound) {
             if (smooth)
                 transform.position = Vector3.MoveTowards(transform.position, desiredPosition, smoothSpeed);
             else
@@ -28,7 +29,7 @@ public class camerafollow : MonoBehaviour {
         }
         else
 
-        { if (desiredPosition.y < upperbound)
+        { if (desiredPosition.y < upperbound && desiredPosition.y > lowerbound)
             {
                 desiredPosition = new Vector3(this.gameObject.transform.position.x, desiredPosition.y, desiredPosition.z);
                 transform.position = Vector3.MoveTowards(transform.position, desiredPosition, smoothSpeed);
@@ -39,5 +40,6 @@ public class camerafollow : MonoBehaviour {
                 transform.position = Vector3.MoveTowards(transform.position, desiredPosition, smoothSpeed);
             }
         }
+        
     }
 }
