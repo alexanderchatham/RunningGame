@@ -19,27 +19,29 @@ public class camerafollow : MonoBehaviour {
     }
 
     private void LateUpdate()
-    {
-        Vector3 desiredPosition = player.transform.position + offset;
-        if ( desiredPosition.x > startPosition && desiredPosition.x < rightmostPosition && desiredPosition.y < upperbound && desiredPosition.y > lowerbound) {
-            if (smooth)
-                transform.position = Vector3.MoveTowards(transform.position, desiredPosition, smoothSpeed);
-            else
-                transform.position = desiredPosition;
-        }
-        else
-
-        { if (desiredPosition.y < upperbound && desiredPosition.y > lowerbound)
-            {
-                desiredPosition = new Vector3(this.gameObject.transform.position.x, desiredPosition.y, desiredPosition.z);
-                transform.position = Vector3.MoveTowards(transform.position, desiredPosition, smoothSpeed);
-            }
-          else if (desiredPosition.x > startPosition && desiredPosition.x < rightmostPosition)
-            {
-                desiredPosition = new Vector3(desiredPosition.x, this.gameObject.transform.position.y, desiredPosition.z);
-                transform.position = Vector3.MoveTowards(transform.position, desiredPosition, smoothSpeed);
-            }
-        }
+	{
+		if (player)
+		{
+			Vector3 desiredPosition = player.transform.position + offset;
+			if (desiredPosition.x > startPosition && desiredPosition.x < rightmostPosition && desiredPosition.y < upperbound && desiredPosition.y > lowerbound)
+			{
+				if (smooth)
+					transform.position = Vector3.MoveTowards (transform.position, desiredPosition, smoothSpeed);
+				else
+					transform.position = desiredPosition;
+			} else
+			{
+				if (desiredPosition.y < upperbound && desiredPosition.y > lowerbound)
+				{
+					desiredPosition = new Vector3 (this.gameObject.transform.position.x, desiredPosition.y, desiredPosition.z);
+					transform.position = Vector3.MoveTowards (transform.position, desiredPosition, smoothSpeed);
+				} else if (desiredPosition.x > startPosition && desiredPosition.x < rightmostPosition)
+				{
+					desiredPosition = new Vector3 (desiredPosition.x, this.gameObject.transform.position.y, desiredPosition.z);
+					transform.position = Vector3.MoveTowards (transform.position, desiredPosition, smoothSpeed);
+				}
+			}
         
-    }
+		}
+	}
 }

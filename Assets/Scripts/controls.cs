@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class controls : MonoBehaviour {
     
     Vector3 m_JumpForce;
+	Vector3 m_BoostForce;
     Vector3 m_DashForce;
     public float jumpStrength = 10f;
     public float dashStrength = 7f;
@@ -265,6 +266,18 @@ public class controls : MonoBehaviour {
 			}
     }
 
+	public void boostJump()
+	{
+		print("boostJump");
+		m_Rigidbody.velocity = new Vector2(0f,0f);
+		m_Rigidbody.AddForce(m_JumpForce, ForceMode2D.Impulse);
+		doublejumped = false;
+		anim.SetBool("jump", false);
+		numberofjumps = 0;
+		dashing = false;
+		canDash = true;
+	}
+
     void OnCollisionEnter2D(Collision2D coll)
     {
 		
@@ -276,7 +289,8 @@ public class controls : MonoBehaviour {
 			tRight = false;
 			tLeft = false;
 			dying = true;
-            GameObject.FindGameObjectWithTag("FireballSfx").GetComponent<AudioSource>().Play();
+			if(GameObject.FindGameObjectWithTag("FireballSfx"))
+            	GameObject.FindGameObjectWithTag("FireballSfx").GetComponent<AudioSource>().Play();
             GameMaster.EndGame ();
 			if(!winning)
 				PlayerStats.clear ();
@@ -288,10 +302,11 @@ public class controls : MonoBehaviour {
 		{
 			Destroy(coll.gameObject.GetComponent<BoxCollider2D> ());
 		}
-      
+
         if (coll.gameObject.tag == "fireball")
         {
             print("hit fireball");
+			if(GameObject.FindGameObjectWithTag("FireballSfx"))
             GameObject.FindGameObjectWithTag("FireballSfx").GetComponent<AudioSource>().Play();
             OnGround = false;
             canDash = false;
@@ -306,6 +321,7 @@ public class controls : MonoBehaviour {
 			m_Rigidbody.velocity = new Vector2(0, 0);
 			m_Rigidbody.AddForce(m_JumpForce, ForceMode2D.Impulse);
             m_Rigidbody.gravityScale = 2;
+			Destroy(coll.gameObject.GetComponent<BoxCollider2D> ());
 			Destroy(coll.gameObject.GetComponent<CircleCollider2D> ());
 			destroyer = true;
         }

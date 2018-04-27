@@ -51,12 +51,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\animateonhit.cs" />
      <Compile Include="Assets\Scripts\background.cs" />
+     <Compile Include="Assets\Scripts\camerafollow.cs" />
      <Compile Include="Assets\Scripts\Coin.cs" />
      <Compile Include="Assets\Scripts\CoinShooter.cs" />
      <Compile Include="Assets\Scripts\controls.cs" />
      <Compile Include="Assets\Scripts\DeathPanel.cs" />
      <Compile Include="Assets\Scripts\DisappearingPlatform.cs" />
+     <Compile Include="Assets\Scripts\enemy.cs" />
+     <Compile Include="Assets\Scripts\EnemyAI.cs" />
+     <Compile Include="Assets\Scripts\EnemyDestroy.cs" />
      <Compile Include="Assets\Scripts\fireball.cs" />
      <Compile Include="Assets\Scripts\FlashingText.cs" />
      <Compile Include="Assets\Scripts\GameMaster.cs" />
@@ -64,6 +69,7 @@
      <Compile Include="Assets\Scripts\Group.cs" />
      <Compile Include="Assets\Scripts\HoldCharacter.cs" />
      <Compile Include="Assets\Scripts\IAPManager.cs" />
+     <Compile Include="Assets\Scripts\killplayer.cs" />
      <Compile Include="Assets\Scripts\LevelPanel.cs" />
      <Compile Include="Assets\Scripts\LevelSelectButton.cs" />
      <Compile Include="Assets\Scripts\LevelStartPanel.cs" />
@@ -72,6 +78,7 @@
      <Compile Include="Assets\Scripts\Music.cs" />
      <Compile Include="Assets\Scripts\OnEditorDisable.cs" />
      <Compile Include="Assets\Scripts\PausePanel.cs" />
+     <Compile Include="Assets\Scripts\physicsonhit.cs" />
      <Compile Include="Assets\Scripts\plank.cs" />
      <Compile Include="Assets\Scripts\PlayerStats.cs" />
      <Compile Include="Assets\Scripts\portal.cs" />
