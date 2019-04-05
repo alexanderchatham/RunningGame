@@ -13,7 +13,7 @@ public class GameMaster : MonoBehaviour {
     public bool followingcameralevel = false;
 
     public static int Level = 0;
-	public static int MaxLevel = 33;
+	public static int MaxLevel = 35;
     public static float groundMoveSpeed = -0.00f;
 	public static float skyMoveSpeed = -0.00f;
 	public static float characterMoveSpeed = 0.06f;
