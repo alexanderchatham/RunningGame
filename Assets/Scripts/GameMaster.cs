@@ -277,36 +277,10 @@ public class GameMaster : MonoBehaviour {
 
     public void runAd()
 {
-        // change no ads default to 0 to enable ads
-    if (PlayerPrefs.GetInt("No Ads", 0) == 0) {
-        int ad = PlayerPrefs.GetInt("Ad counter", 0);
-        if (ad <= 0)
-        {
-				print ("showing ad");
-            ad = 3;
-            if (Advertisement.IsReady())
-                Advertisement.Show("", new ShowOptions() { resultCallback = HandleAdResult });
-        }
-
-        PlayerPrefs.SetInt("Ad counter", ad - 1);
-    }
+        //no moar ads
 }
 
-    private void HandleAdResult(ShowResult result)
-    {
-        switch (result)
-        {
-            case ShowResult.Finished:
-                Debug.Log("Player Watched ad");
-                break;
-            case ShowResult.Skipped:
-                Debug.Log("Player did not fully watch the ad");
-                break;
-            case ShowResult.Failed:
-                Debug.Log("Player failed to launch the ad ?Internet?");
-                break;
-        }
-    }
+  
 
 	public static void portalmove(GameObject a, GameObject b){
 		
